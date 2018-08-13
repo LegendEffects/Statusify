@@ -1,0 +1,129 @@
+/* HEADER */
+
+.page--header {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    text-align: center;
+    margin-bottom: 50px;
+    background-image: linear-gradient(323deg, #36D1DC 5%, #5B86E5);
+}
+.page--header--image {
+    align-self: center;
+    height: 150px;
+    width: auto;
+}
+.page--header--text {
+    font-size: 3.5rem;
+    font-weight: 800;
+    align-self: center;
+    color: #fff;
+    line-height: 300px;
+}
+
+/* PAGE CONTAINER */
+.page--container {
+    width: 90%;
+    max-width: 850px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .page--container {
+        margin: auto;
+    }
+}
+
+/* STATUS INDICATORS */
+.status--major {
+    background: #e74c3c;
+}
+.status--partial {
+    background: #e67e22;
+}
+.status--operational {
+    background: #2ecc71;
+}
+.status--major--c {
+    color: #e74c3c;
+}
+.status--partial--c {
+    color: #e67e22;
+}
+.status--operational--c {
+    color: #2ecc71;
+}
+
+
+.status--current--container {
+    color: #fff;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem 1rem;;
+    font-weight: 300;
+    margin-bottom: 50px;
+}
+
+.monitor--container {
+    border-radius: 5px;
+    border: 1px solid #E0E0E0;
+    padding: 10px;
+}
+.monitor--data--container {
+    width: 100%;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #737F8D;
+}
+.monitor--data--title {
+    display: inline-block;
+}
+.monitor--data--status {
+    float: right;
+    display: inline-block;
+    font-size: .875rem;
+    font-weight: lighter;
+}
+.monitor--data--percentile--container {
+    width: 100%;
+    text-align: center;
+}
+.monitor--data--indicator--block {
+    padding: 3px 15px;
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 12px;
+    line-height: 25px;
+    color: #fff;
+}
+.monitor--data--base--container {
+    width: 100%;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+.monitor--data--base--data {
+    opacity: .5;
+    color: #99aab5;
+    flex: 0 0 auto;
+    font-size: .875rem;
+    position: relative;
+    line-height: 1.5rem;
+    flex: 1;
+    text-align: center;
+}
+.monitor--data--base--spacer {
+    background: #99aab5;
+    opacity: 0.3;
+    height: 1px;
+    flex: 1;
+    margin: .75rem 2rem 0 2rem;
+}
+.monitor--data--base--center {
+    position: absolute;
+}
