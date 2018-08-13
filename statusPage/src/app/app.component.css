@@ -1,3 +1,9 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
 /* HEADER */
 
 .page--header {
@@ -70,6 +76,7 @@
     border-radius: 5px;
     border: 1px solid #E0E0E0;
     padding: 10px;
+    margin-bottom: 30px;
 }
 .monitor--data--container {
     width: 100%;
@@ -126,4 +133,11 @@
 }
 .monitor--data--base--center {
     position: absolute;
+}
+
+@media only screen and (max-width: 768px) {
+    .monitor--data--indicator--block {
+        padding: 3px 7px;
+        font-size: 10px;
+    }
 }
