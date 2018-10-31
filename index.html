@@ -1,0 +1,40 @@
+<!--
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>StatusPage</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="dist/stylesheet.css" rel="stylesheet">
+
+    <script>
+        let settings = {
+            'refreshInterval': 300,
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="loader"><img class="loader--gif" src="dist/img/loader.gif" /></div>
+    <div class="page--header">
+        <span class="page--header--text">LegendEffects</span>
+    </div>
+    <div class="page--container">
+        <div id="status-global">
+        </div>
+
+        <div id="status-monitors"></div>
+        <span id="timeLeft"></span>
+    </div>
+</body>
+
+<script src="dist/library/jquery-3.3.1.min.js"></script>
+<script src="dist/js/util.js"></script>
+<script src="dist/js/status.js"></script>
+
+</html>
