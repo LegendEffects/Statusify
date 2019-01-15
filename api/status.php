@@ -21,7 +21,7 @@
     curl_close($curl);
 
     if ($err) {
-        echo "cURL Error #:" . $err;
+        echo json_encode(["status"=>false, "message"=>"Error fetching status."]);
     } else {
         echo $response;
     }
