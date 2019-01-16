@@ -19,23 +19,52 @@
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header
     <div id="loader"><img class="loader--gif" src="dist/img/loader.gif" /></div>
-    <div class="page--header">
-        <span class="page--header--text">LegendEffects</span>
-    </div>
-    <div class="page--container" id="vueApp-status">
-        <div id="status-global">
-            <div class="status--current--container status--{lowerStatus}">{{global.message}}</div>
+    -->
+    <div id="vueApp-status">
+        <div v-cloak>
+            <div class="page--header">
+                <span style="position: absolute; color: #fff; top: 2%; left: 2%; text-align: right">
+                    Refreshing in: <span v-if="global.timeleft === 1">{{global.timeleft}} Second</span><span v-else>{{global.timeleft}} Seconds</span>
+                </span>
+                <span class="page--header--text">LegendEffects</span>
+            </div>
+
+            <div class="page--container">
+                <div id="status-global">
+                    <div class="status--current--container" :class="'status--'+global.status">{{global.message}}</div>
+                </div>
+
+                <div id="status-monitors">
+                    <div v-for="monitor in reqFeedback.psp.monitors">
+                        <div id="{id}" class="monitor--container">
+                            <div class="monitor--data--container">
+                                <span class="monitor--data--title">{{monitor.friendly_name}}</span>
+                                <span class="monitor--data--status" :class="'status--'+parseStatus(monitor.statusLabel).toLowerCase()+'--c'">{{parseStatus(monitor.oneWeekRange.label)}}</span>
+                            </div>
+                            <div class="monitor--data--percentile--container">
+                                <span v-for="range in monitor.customuptimeranges" class="monitor--data--indicator--block" :class="'status--'+parseSeverity(range.ratio).toLowerCase()">{{range.ratio}}%</span>
+                            </div>
+                            <div class="monitor--data--base--container">
+                                <div class="monitor--data--base--data">6 Days Ago</div>
+                                <div class="monitor--data--base--spacer"></div>
+
+                                <div class="monitor--data--base--data monitor--data--base--center">{{monitor.oneWeekRange.ratio}}%</div>
+
+                                <div class="monitor--data--base--spacer"></div>
+                                <div class="monitor--data--base--data">Today</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div id="status-monitors"></div>
-
-        <span id="timeLeft">{{global.timeleft}}</span>
     </div>
 </body>
 
 <script src="dist/js/vue.js"></script>
+<script src="dist/js/util.js"></script>
 <script src="dist/js/newlib.js"></script>
 
 </html>

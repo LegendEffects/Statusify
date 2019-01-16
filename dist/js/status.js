@@ -39,8 +39,6 @@ function parseStatus(status) {
     switch(status) {
         case 0:
             return 'Paused';
-        case 1:
-            return 'Unknown';
         case 2:
             return 'Operational';
         case 8:
@@ -49,10 +47,10 @@ function parseStatus(status) {
             return 'Major';
         case 'success':
             return 'Operational';
-        case 'empty':
-            return 'Unknown';
         case 'warning':
             return 'Partial';
+        default:
+            return 'Unknown';
     }
 }
 function parseSeverity(ratio) {
