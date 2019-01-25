@@ -32,7 +32,7 @@
 
                 <div id="status-monitors">
                     <div v-for="monitor in reqFeedback.psp.monitors">
-                        <div id="{id}" class="monitor--container">
+                        <div class="monitor--container">
                             <div class="monitor--data--container">
                                 <span class="monitor--data--title">{{monitor.friendly_name}}</span>
                                 <span class="monitor--data--status" :class="'status--'+parseStatus(monitor.statusLabel).toLowerCase()+'--c'">{{parseStatus(monitor.oneWeekRange.label)}}</span>
