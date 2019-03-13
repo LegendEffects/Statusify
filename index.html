@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>StatusPage</title>
+    <title>Status | LegendEffects</title>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="dist/stylesheet.css" rel="stylesheet">
@@ -34,17 +34,17 @@
                     <div v-for="monitor in reqFeedback.psp.monitors">
                         <div class="monitor--container">
                             <div class="monitor--data--container">
-                                <span class="monitor--data--title">{{monitor.friendly_name}}</span>
-                                <span class="monitor--data--status" :class="'status--'+parseStatus(monitor.statusLabel).toLowerCase()+'--c'">{{parseStatus(monitor.oneWeekRange.label)}}</span>
+                                <span class="monitor--data--title">{{monitor.name}}</span>
+                                <span class="monitor--data--status" :class="'status--'+parseStatus(monitor.statusClass).toLowerCase()+'--c'">{{parseStatus(monitor.weeklyRatio.label)}}</span>
                             </div>
                             <div class="monitor--data--percentile--container">
-                                <span v-for="range in monitor.customuptimeranges" class="monitor--data--indicator--block" :class="'status--'+parseSeverity(range.ratio).toLowerCase()">{{range.ratio}}%</span>
+                                <span v-for="range in monitor.dailyRatios" class="monitor--data--indicator--block" :class="'status--'+parseSeverity(range.ratio).toLowerCase()">{{range.ratio}}%</span>
                             </div>
                             <div class="monitor--data--base--container">
                                 <div class="monitor--data--base--data">6 Days Ago</div>
                                 <div class="monitor--data--base--spacer"></div>
 
-                                <div class="monitor--data--base--data monitor--data--base--center">{{monitor.oneWeekRange.ratio}}%</div>
+                                <div class="monitor--data--base--data monitor--data--base--center">{{monitor.weeklyRatio.ratio}}%</div>
 
                                 <div class="monitor--data--base--spacer"></div>
                                 <div class="monitor--data--base--data">Today</div>

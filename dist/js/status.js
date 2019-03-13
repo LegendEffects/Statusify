@@ -10,6 +10,8 @@ let app = new Vue({
         reqFeedback: {
             psp: {
                 monitors: [],
+                statistics: [],
+                days: []
             }
         }
     },
@@ -55,8 +57,8 @@ let app = new Vue({
                 data = JSON.parse(data);
                 app.reqFeedback = data;
 
-                let amountActive = data.psp.monitorCount - data.psp.pspStats.counts.paused;
-                let percentAlive = 100 - ((amountActive - data.psp.pspStats.counts.up) / amountActive) * 100;
+                let amountActive = data.psp.totalMonitors - data.statistics.counts.paused;
+                let percentAlive = 100 - ((amountActive - data.statistics.counts.up) / amountActive) * 100;
 
                 app.global.status = app.parseSeverity(percentAlive).toLowerCase();
                 if(percentAlive < 90) {
