@@ -52,6 +52,14 @@
                         </div>
                     </div>
                 </div>
+                <div id="status-recentDown" v-if="reqFeedback.psp.latestDownTimeStr.length > 0">
+                    <div class="monitor--data--downtime">
+                        <div class="monitor--container--titlebar status--unknown">Recent Downtime</div>
+                        <div class="monitor--container monitor--data--downtime--mod">
+                            <span class="monitor--data--downtime--main">{{reqFeedback.psp.latestDownTimeStr}}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

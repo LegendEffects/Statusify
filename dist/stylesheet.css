@@ -159,7 +159,31 @@ html, body {
 .monitor--data--base--center {
     position: absolute;
 }
+.monitor--data--downtime--mod {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.monitor--data--downtime {
+    padding-bottom: .3rem;
+    padding-top: .3rem;
+}
+.monitor--data--downtime--title {
+    display: inline-block;
+    padding-bottom: 5px;
+}
+.monitor--data--downtime--main {
+    font-size: .875rem;
+    display: block;
+}
 
+.monitor--container--titlebar {
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    color: #fff;
+    padding: 10px;
+}
 @media only screen and (max-width: 768px) {
     .monitor--data--indicator--block {
         padding: 3px 7px;

@@ -10,6 +10,7 @@ let app = new Vue({
         reqFeedback: {
             psp: {
                 monitors: [],
+                latestDownTimeStr: ''
             }
         }
     },
