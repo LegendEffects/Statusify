@@ -1,0 +1,7 @@
+<?php
+
+$config = [
+	'urlKey' => '<statusPageKey>'
+]
+
+?>
