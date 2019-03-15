@@ -1,3 +1,27 @@
+const baseSettings = {
+    highcharts: {
+        title: {
+            text: ''
+        },
+        chart: {
+            renderTo: ''
+        },
+        xAxis: {
+            type: 'datetime'
+        },
+        yAxis: {
+            title: ''
+        },
+        series: [{
+            data: [],
+            name: 'Milliseconds'
+        }],
+        credits: {
+            enabled: false
+        }
+    }
+};
+
 let app = new Vue({
     el: '#vueApp-status',
     data: {
@@ -12,7 +36,8 @@ let app = new Vue({
                 monitors: [],
                 latestDownTimeStr: ''
             }
-        }
+        },
+        cache: {},
     },
     methods: {
         parseStatus(status) {
@@ -69,7 +94,33 @@ let app = new Vue({
                 }
                 app.global.loader.active = false;
             })
-        }
+        },
+
+        revealExtra(id) {
+            document.getElementById(id).childNodes[2].classList.toggle('show');
+
+            if(app.cache[id] === undefined) {
+                ajax.post('api/monitor.php', {monitorID: id}, function(data) {
+                    data = JSON.parse(data).psp;
+                    app.cache[id] = data;
+
+                    let response = data.monitors[0].response_times;
+                    response = Object.entries(response).map(([key, v]) => ([response[key].datetime*1000, response[key].value])).reverse();
+
+                    let settings = Object.assign(baseSettings.highcharts, {
+                        series: [{
+                            data: response,
+                            name: 'Latency (ms)'
+                        }],
+                        chart: {
+                            renderTo: 'chart-'+id
+                        }
+                    });
+
+                    app.cache[id].chart = new Highcharts.chart(settings);
+                });
+            }
+        },
     },
     created() {
         setInterval(this.refresh, 1000);

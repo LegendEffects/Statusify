@@ -1,12 +1,12 @@
 <?php
     if(isset($_POST['monitorID']) && !empty($_POST['monitorID'])) {
-        $monitor = htmlspecialchars((int) $_POST['monitorID'])
+        $monitor = htmlspecialchars((int) $_POST['monitorID']);
         
         $curl = curl_init();
         include('config.php');
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://stats.uptimerobot.com/api/status-page/".$config['urlKey']."/".$monitor,
+            CURLOPT_URL => "https://stats.uptimerobot.com/api/monitor-page/".$config['urlKey']."/".$monitor,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -24,7 +24,7 @@
 
         curl_close($curl);
     } else {
-        $err = "Missing POST parameter."
+        $err = "Missing POST parameter.";
     }
 
 

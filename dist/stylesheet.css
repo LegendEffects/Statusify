@@ -100,8 +100,10 @@ html, body {
 .monitor--container {
     border-radius: 5px;
     border: 1px solid #E0E0E0;
-    padding: 10px;
     margin-bottom: 30px;
+}
+.monitor--container--pad {
+    padding: 10px;
 }
 .monitor--data--container {
     width: 100%;
@@ -159,6 +161,13 @@ html, body {
 .monitor--data--base--center {
     position: absolute;
 }
+.monitor--data--showExtra {
+    background: #E0E0E0;
+    font-size: 1.4rem;
+    padding-left: 10px;
+    color: #535353;
+}
+
 .monitor--data--downtime--mod {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -184,6 +193,23 @@ html, body {
     color: #fff;
     padding: 10px;
 }
+
+.monitor--extraInfo--container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1s cubic-bezier(0, 1, 0, 1);
+    border-top: solid 1px #E0E0E0;
+}
+.monitor--extraInfo--container.show {
+    display: block;
+    max-height: 99em;
+    transition: max-height 1s ease-in-out;
+}
+.monitor--extraInfo--container .contain {
+    padding: 10px;
+    padding-top: 20px;
+}
+
 @media only screen and (max-width: 768px) {
     .monitor--data--indicator--block {
         padding: 3px 7px;
@@ -191,3 +217,35 @@ html, body {
     }
 }
 
+.circle:before {
+    content: ' \25CF';
+    font-size: 75px;
+}
+.circle.status--success--c:before {
+    color: #2ecc71;
+}
+.circle.status--danger--c:before {
+    color: #e74c3c;
+}
+
+.eventTable table {
+    width: 100%;
+    border: 1px solid #E0E0E0;
+}
+.eventTable th {
+    padding: 20px;
+    text-align: left;
+    border-left: 1px solid #E0E0E0;
+    border-bottom: 1px solid #E0E0E0;
+}
+.eventTable td:first-of-type, .eventTable th:first-of-type {
+    text-align: center;
+}
+.eventTable td {
+    padding: 10px 20px;
+    border-left: 1px solid #E0E0E0;
+}
+
+.eventTable table th:first-of-type, .eventTable table td:first-of-type {
+    border-left: 0;
+}
