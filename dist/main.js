@@ -19,13 +19,13 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-9f4f1756", __vue__options__)
+    hotAPI.createRecord("data-v-1d08752b", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-9f4f1756", __vue__options__)
+    hotAPI.rerender("data-v-1d08752b", __vue__options__)
   }
 })()}
 },{"vue":"vue","vue-hot-reload-api":36}],2:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".banner[data-v-1c597647] {\r\n    width: 100%;\r\n    height: 300px;\r\n    background-size: cover;\r\n    text-align: center;\r\n    margin-bottom: 50px;\r\n    background-image: linear-gradient(323deg, #36D1DC 5%, #5B86E5);\r\n}\r\n.cornerInfo[data-v-1c597647] {\r\n    position: absolute;\r\n    top: 2%;\r\n    left: 2%;\r\n    font-size: 1.2rem;\r\n    color: #fff;\r\n}\r\n.title[data-v-1c597647] {\r\n    text-align: center;\r\n    line-height: 300px;\r\n    font-size: 3rem;\r\n    color: #fff;\r\n    font-weight: 800;\r\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".banner[data-v-f37e46a0] {\n    width: 100%;\n    height: 300px;\n    background-size: cover;\n    text-align: center;\n    margin-bottom: 50px;\n    background-image: linear-gradient(323deg, #36D1DC 5%, #5B86E5);\n}\n.cornerInfo[data-v-f37e46a0] {\n    position: absolute;\n    top: 2%;\n    left: 2%;\n    font-size: 1.2rem;\n    color: #fff;\n}\n.title[data-v-f37e46a0] {\n    text-align: center;\n    line-height: 300px;\n    font-size: 3rem;\n    color: #fff;\n    font-weight: 800;\n}")
 ;(function(){
 'use strict';
 
@@ -42,16 +42,16 @@ var __vue__options__ = (typeof module.exports === "function"? module.exports.opt
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"banner"},[_c('span',{staticClass:"cornerInfo"},[_vm._v(_vm._s(_vm.cornertext))]),_vm._v(" "),_c('span',{staticClass:"title"},[_vm._v(_vm._s(_vm.title))])])}
 __vue__options__.staticRenderFns = []
-__vue__options__._scopeId = "data-v-1c597647"
+__vue__options__._scopeId = "data-v-f37e46a0"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1c597647", __vue__options__)
+    hotAPI.createRecord("data-v-f37e46a0", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-1c597647", __vue__options__)
+    hotAPI.rerender("data-v-f37e46a0", __vue__options__)
   }
 })()}
 },{"vue":"vue","vue-hot-reload-api":36,"vueify/lib/insert-css":38}],3:[function(require,module,exports){
@@ -79,7 +79,7 @@ module.exports = {
 };
 
 },{"../pages/index.vue":39,"../pages/monitor.vue":40,"./header.vue":2,"./monitor/data.vue":4,"./monitor/monitor.vue":5,"./statusBox.vue":6,"vue":"vue"}],4:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-271d77a6] {\r\n    width: 100%;\r\n    font-size: 1rem;\r\n    line-height: 1.5rem;\r\n    color: #737F8D;\r\n}\r\n.title[data-v-271d77a6] {\r\n    display: inline-block;\r\n}\r\n.status[data-v-271d77a6] {\r\n    float: right;\r\n    display: inline-block;\r\n    font-size: .875rem;\r\n    font-weight: lighter;\r\n}\r\n.percentile--container[data-v-271d77a6] {\r\n    width: 100%;\r\n    text-align: center;\r\n}\r\n.indicator--block[data-v-271d77a6] {\r\n    padding: 3px 15px;\r\n    margin-right: 5px;\r\n    margin-left: 5px;\r\n    font-size: 12px;\r\n    line-height: 25px;\r\n    color: #fff;\r\n}\r\n.base--container[data-v-271d77a6] {\r\n    width: 100%;\r\n    display: flex;\r\n    position: relative;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    align-content: center;\r\n    justify-content: center;\r\n}\r\n.base--data[data-v-271d77a6] {\r\n    opacity: .5;\r\n    color: #99aab5;\r\n    flex: 0 0 auto;\r\n    font-size: .875rem;\r\n    position: relative;\r\n    line-height: 1.5rem;\r\n    flex: 1;\r\n    text-align: center;\r\n}\r\n.base--spacer[data-v-271d77a6] {\r\n    background: #99aab5;\r\n    opacity: 0.3;\r\n    height: 1px;\r\n    flex: 1;\r\n    margin: .75rem 2rem 0 2rem;\r\n}\r\n.base--center[data-v-271d77a6] {\r\n    position: absolute;\r\n}\r\n.data--showExtra[data-v-271d77a6] {\r\n    background: #E0E0E0;\r\n    font-size: 1.4rem;\r\n    padding-left: 10px;\r\n    color: #535353;\r\n}\r\n\r\n.data--downtime--mod[data-v-271d77a6] {\r\n    border-top-left-radius: 0;\r\n    border-top-right-radius: 0;\r\n}\r\n.data--downtime[data-v-271d77a6] {\r\n    padding-bottom: .3rem;\r\n    padding-top: .3rem;\r\n}\r\n.data--downtime--title[data-v-271d77a6] {\r\n    display: inline-block;\r\n    padding-bottom: 5px;\r\n}\r\n.data--downtime--main[data-v-271d77a6] {\r\n    font-size: .875rem;\r\n    display: block;\r\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-b471afbc] {\n    width: 100%;\n    font-size: 1rem;\n    line-height: 1.5rem;\n    color: #737F8D;\n}\n.title[data-v-b471afbc] {\n    display: inline-block;\n}\n.status[data-v-b471afbc] {\n    float: right;\n    display: inline-block;\n    font-size: .875rem;\n    font-weight: lighter;\n}\n.percentile--container[data-v-b471afbc] {\n    width: 100%;\n    text-align: center;\n}\n.indicator--block[data-v-b471afbc] {\n    padding: 3px 15px;\n    margin-right: 5px;\n    margin-left: 5px;\n    font-size: 12px;\n    line-height: 25px;\n    color: #fff;\n}\n.base--container[data-v-b471afbc] {\n    width: 100%;\n    display: flex;\n    position: relative;\n    flex-direction: row;\n    align-items: center;\n    align-content: center;\n    justify-content: center;\n}\n.base--data[data-v-b471afbc] {\n    opacity: .5;\n    color: #99aab5;\n    flex: 0 0 auto;\n    font-size: .875rem;\n    position: relative;\n    line-height: 1.5rem;\n    flex: 1;\n    text-align: center;\n}\n.base--spacer[data-v-b471afbc] {\n    background: #99aab5;\n    opacity: 0.3;\n    height: 1px;\n    flex: 1;\n    margin: .75rem 2rem 0 2rem;\n}\n.base--center[data-v-b471afbc] {\n    position: absolute;\n}\n.data--showExtra[data-v-b471afbc] {\n    background: #E0E0E0;\n    font-size: 1.4rem;\n    padding-left: 10px;\n    color: #535353;\n}\n\n.data--downtime--mod[data-v-b471afbc] {\n    border-top-left-radius: 0;\n    border-top-right-radius: 0;\n}\n.data--downtime[data-v-b471afbc] {\n    padding-bottom: .3rem;\n    padding-top: .3rem;\n}\n.data--downtime--title[data-v-b471afbc] {\n    display: inline-block;\n    padding-bottom: 5px;\n}\n.data--downtime--main[data-v-b471afbc] {\n    font-size: .875rem;\n    display: block;\n}")
 ;(function(){
 'use strict';
 
@@ -100,20 +100,20 @@ var __vue__options__ = (typeof module.exports === "function"? module.exports.opt
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"container"},[_c('span',{staticClass:"title"},[_vm._v(_vm._s(_vm.monitor.name))]),_vm._v(" "),_c('span',{staticClass:"status",class:'status-'+_vm.parseStatus(_vm.monitor.statusClass).toLowerCase()+'--c'},[_vm._v(_vm._s(_vm.parseStatus(_vm.monitor.weeklyRatio.label)))])]),_vm._v(" "),_c('div',{staticClass:"percentile--container"},_vm._l((_vm.monitor.dailyRatios),function(range){return _c('span',{key:range.ID,staticClass:"indicator--block",class:'status-'+_vm.parseSeverity(range.ratio).toLowerCase()},[_vm._v(_vm._s(range.ratio)+"%")])}),0),_vm._v(" "),_c('div',{staticClass:"base--container"},[_c('div',{staticClass:"base--data"},[_vm._v("6 Days Ago")]),_vm._v(" "),_c('div',{staticClass:"base--spacer"}),_vm._v(" "),_c('div',{staticClass:"base--data base--center"},[_vm._v(_vm._s(_vm.monitor.weeklyRatio.ratio)+"%")]),_vm._v(" "),_c('div',{staticClass:"base--spacer"}),_vm._v(" "),_c('div',{staticClass:"base--data"},[_vm._v("Today")])])])}
 __vue__options__.staticRenderFns = []
-__vue__options__._scopeId = "data-v-271d77a6"
+__vue__options__._scopeId = "data-v-b471afbc"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-271d77a6", __vue__options__)
+    hotAPI.createRecord("data-v-b471afbc", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-271d77a6", __vue__options__)
+    hotAPI.rerender("data-v-b471afbc", __vue__options__)
   }
 })()}
 },{"../../util":41,"vue":"vue","vue-hot-reload-api":36,"vueify/lib/insert-css":38}],5:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-b336a3e4] {\n    border-radius: 5px;\n    border: 1px solid #E0E0E0;\n    margin-bottom: 30px;\n}\n.container[data-v-b336a3e4]:hover {\n    cursor: pointer;\n}\n\n.addPadding[data-v-b336a3e4] {\n    padding: 10px;\n}\n\n.container--titlebar[data-v-b336a3e4] {\n    border-radius: 5px;\n    border-bottom-left-radius: 0;\n    border-bottom-right-radius: 0;\n\n    color: #fff;\n    padding: 10px;\n}\n\n.extraInfo--container[data-v-b336a3e4] {\n    max-height: 0;\n    overflow: hidden;\n    transition: max-height 1s cubic-bezier(0, 1, 0, 1);\n    border-top: solid 1px #E0E0E0;\n}\n.extraInfo--container.show[data-v-b336a3e4] {\n    display: block;\n    max-height: 99em;\n    transition: max-height 1s ease-in-out;\n}\n.extraInfo--container .contain[data-v-b336a3e4] {\n    padding: 10px;\n    padding-top: 20px;\n}\n\n@media only screen and (max-width: 768px) {\n    .data--indicator--block[data-v-b336a3e4] {\n        padding: 3px 7px;\n        font-size: 10px;\n    }\n}\n\n.circle[data-v-b336a3e4]:before {\n    content: ' \\25CF';\n    font-size: 75px;\n}\n.circle.status--success--c[data-v-b336a3e4]:before {\n    color: #2ecc71;\n}\n.circle.status--danger--c[data-v-b336a3e4]:before {\n    color: #e74c3c;\n}\n\n.eventTable table[data-v-b336a3e4] {\n    width: 100%;\n    border: 1px solid #E0E0E0;\n}\n.eventTable th[data-v-b336a3e4] {\n    padding: 20px;\n    text-align: left;\n    border-left: 1px solid #E0E0E0;\n    border-bottom: 1px solid #E0E0E0;\n}\n.eventTable td[data-v-b336a3e4]:first-of-type, .eventTable th[data-v-b336a3e4]:first-of-type {\n    text-align: center;\n}\n.eventTable td[data-v-b336a3e4] {\n    padding: 10px 20px;\n    border-left: 1px solid #E0E0E0;\n}\n\n.eventTable table th[data-v-b336a3e4]:first-of-type, .eventTable table td[data-v-b336a3e4]:first-of-type {\n    border-left: 0;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-e95547dc] {\n    border-radius: 5px;\n    border: 1px solid #E0E0E0;\n    margin-bottom: 30px;\n}\n.container[data-v-e95547dc]:hover {\n    cursor: pointer;\n}\n\n.addPadding[data-v-e95547dc] {\n    padding: 10px;\n}\n\n.container--titlebar[data-v-e95547dc] {\n    border-radius: 5px;\n    border-bottom-left-radius: 0;\n    border-bottom-right-radius: 0;\n\n    color: #fff;\n    padding: 10px;\n}\n\n.extraInfo--container[data-v-e95547dc] {\n    max-height: 0;\n    overflow: hidden;\n    transition: max-height 1s cubic-bezier(0, 1, 0, 1);\n    border-top: solid 1px #E0E0E0;\n}\n.extraInfo--container.show[data-v-e95547dc] {\n    display: block;\n    max-height: 99em;\n    transition: max-height 1s ease-in-out;\n}\n.extraInfo--container .contain[data-v-e95547dc] {\n    padding: 10px;\n    padding-top: 20px;\n}\n\n@media only screen and (max-width: 768px) {\n    .data--indicator--block[data-v-e95547dc] {\n        padding: 3px 7px;\n        font-size: 10px;\n    }\n}\n\n.circle[data-v-e95547dc]:before {\n    content: ' \\25CF';\n    font-size: 75px;\n}\n.circle.status--success--c[data-v-e95547dc]:before {\n    color: #2ecc71;\n}\n.circle.status--danger--c[data-v-e95547dc]:before {\n    color: #e74c3c;\n}\n\n.eventTable table[data-v-e95547dc] {\n    width: 100%;\n    border: 1px solid #E0E0E0;\n}\n.eventTable th[data-v-e95547dc] {\n    padding: 20px;\n    text-align: left;\n    border-left: 1px solid #E0E0E0;\n    border-bottom: 1px solid #E0E0E0;\n}\n.eventTable td[data-v-e95547dc]:first-of-type, .eventTable th[data-v-e95547dc]:first-of-type {\n    text-align: center;\n}\n.eventTable td[data-v-e95547dc] {\n    padding: 10px 20px;\n    border-left: 1px solid #E0E0E0;\n}\n\n.eventTable table th[data-v-e95547dc]:first-of-type, .eventTable table td[data-v-e95547dc]:first-of-type {\n    border-left: 0;\n}")
 ;(function(){
 'use strict';
 
@@ -128,22 +128,22 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('div',{staticClass:"container--pad"},[_c('monitor-data',{attrs:{"monitor":_vm.monitor}})],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('div',{staticClass:"addPadding"},[_c('monitor-data',{attrs:{"monitor":_vm.monitor}})],1)])}
 __vue__options__.staticRenderFns = []
-__vue__options__._scopeId = "data-v-b336a3e4"
+__vue__options__._scopeId = "data-v-e95547dc"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b336a3e4", __vue__options__)
+    hotAPI.createRecord("data-v-e95547dc", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-b336a3e4", __vue__options__)
+    hotAPI.rerender("data-v-e95547dc", __vue__options__)
   }
 })()}
 },{"vue":"vue","vue-hot-reload-api":36,"vueify/lib/insert-css":38}],6:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".status[data-v-6e9c08a2] {\r\n    color: #fff;\r\n    font-size: 1.3rem;\r\n    border-radius: 10px;\r\n    padding: 1.1rem 1.25rem 1rem;\r\n    font-weight: 300;\r\n    margin-bottom: 50px;\r\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".status[data-v-200edeb4] {\n    color: #fff;\n    font-size: 1.3rem;\n    border-radius: 10px;\n    padding: 1.1rem 1.25rem 1rem;\n    font-weight: 300;\n    margin-bottom: 50px;\n}")
 ;(function(){
 'use strict';
 
@@ -161,16 +161,16 @@ var __vue__options__ = (typeof module.exports === "function"? module.exports.opt
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"status",class:'status-'+_vm.state},[_c('span',{staticClass:"message"},[_vm._v(_vm._s(_vm.message))])])}
 __vue__options__.staticRenderFns = []
-__vue__options__._scopeId = "data-v-6e9c08a2"
+__vue__options__._scopeId = "data-v-200edeb4"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6e9c08a2", __vue__options__)
+    hotAPI.createRecord("data-v-200edeb4", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-6e9c08a2", __vue__options__)
+    hotAPI.rerender("data-v-200edeb4", __vue__options__)
   }
 })()}
 },{"vue":"vue","vue-hot-reload-api":36,"vueify/lib/insert-css":38}],7:[function(require,module,exports){
@@ -4969,18 +4969,27 @@ exports.default = {
     name: 'page_index',
     data: function data() {
         return {
-            'status': null,
-            'error': false
+            status: {
+                state: 'unknown',
+                message: 'Loading...'
+            },
+            response: null,
+            error: false
         };
     },
     mounted: function mounted() {
+        document.title = document.getElementById('title').value;
+
         _axios2.default.get('temp/getMonitors.php').then(function (response) {
-            this.status = response.data;
+            this.response = response.data;
             console.log(this.status);
         }.bind(this)).catch(function (error) {
             this.error = true;
             console.error("There was an error while collecting the status of this page.");
             console.error(error);
+
+            this.status.state = "major";
+            this.status.message = "There was an error while collecting the statuses.";
         }.bind(this));
     }
 };
@@ -4988,16 +4997,16 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('page-header',{attrs:{"title":"LegendEffects","cornertext":""}}),_vm._v(" "),(_vm.status !== null)?_c('div',{staticClass:"page"},[_c('status',{attrs:{"state":"major","message":"test"}}),_vm._v(" "),_c('monitor',{attrs:{"monitor":_vm.status.psp.monitors[0]}})],1):_vm._e()],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('page-header',{attrs:{"title":"LegendEffects","cornertext":""}}),_vm._v(" "),_c('div',{staticClass:"page"},[_c('status',{attrs:{"state":_vm.status.state,"message":_vm.status.message}}),_vm._v(" "),(_vm.response !== null)?_c('div',_vm._l((_vm.response.psp.monitors),function(monitor){return _c('monitor',{key:monitor.ID,attrs:{"monitor":monitor}})}),1):_vm._e()],1)],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-18bc386e", __vue__options__)
+    hotAPI.createRecord("data-v-548fbe5e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-18bc386e", __vue__options__)
+    hotAPI.reload("data-v-548fbe5e", __vue__options__)
   }
 })()}
 },{"axios":8,"vue":"vue","vue-hot-reload-api":36}],40:[function(require,module,exports){
@@ -5019,9 +5028,9 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2796d7f6", __vue__options__)
+    hotAPI.createRecord("data-v-d58b98ce", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-2796d7f6", __vue__options__)
+    hotAPI.rerender("data-v-d58b98ce", __vue__options__)
   }
 })()}
 },{"vue":"vue","vue-hot-reload-api":36}],41:[function(require,module,exports){

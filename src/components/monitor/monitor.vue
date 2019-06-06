@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="container--pad">
+        <div class="addPadding">
             <monitor-data :monitor="monitor"></monitor-data>
         </div>
         <!-- <div class="extraInfo--container data--container">
