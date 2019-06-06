@@ -2,7 +2,6 @@
     <div>
         <page-header title="LegendEffects" cornertext=""></page-header>
 
-
         <div class="page">
             <div v-if="response !== null">
                 <status :state="status.state" :message="status.message"></status>
