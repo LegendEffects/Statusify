@@ -26,7 +26,9 @@ export default {
         error: false,
     }},
     mounted() {
-        document.title = document.getElementById('title').value;
+        let titleEl = document.getElementById('title');
+        document.title = titleEl.value;
+        titleEl.remove();
 
         axios.get('temp/getMonitors.php')
         .then(function(response) {

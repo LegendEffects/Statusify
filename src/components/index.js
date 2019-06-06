@@ -6,7 +6,8 @@ module.exports = {
         status: Vue.component('status', require('./statusBox.vue')),
         monitor: {
             main: Vue.component('monitor', require('./monitor/monitor.vue')),
-            data: Vue.component('monitor-data', require('./monitor/data.vue'))
+            data: Vue.component('monitor-data', require('./monitor/data.vue')),
+            extra: Vue.component('monitor-extra-info', require('./monitor/extraInfo.vue')),
         }
     },
     pages: {

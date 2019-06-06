@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import highchartsVue from 'highcharts-vue';
 
 Vue.use(VueRouter);
+Vue.use(highchartsVue);
 
 const components = require('./components');
 
