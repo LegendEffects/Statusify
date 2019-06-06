@@ -25,8 +25,9 @@ export default {
     position: absolute;
     top: 2%;
     left: 2%;
-    font-size: 1.2rem;
+    font-size: .95rem;
     color: #fff;
+    font-variant-numeric: tabular-nums;
 }
 .title {
     text-align: center;

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <page-header :title="title" cornertext=""></page-header>
+        <page-header :title="title" :cornertext="'Refreshing in: '+secondsLeft + ' seconds'"></page-header>
 
         <div class="page">
             <div v-if="response !== null">
@@ -30,6 +30,9 @@ export default {
         response: null,
         error: false,
         title: null,
+
+        interval: 300,
+        secondsLeft: 300,
     }},
     mounted() {
         let titleEl = document.getElementById('title');
@@ -39,41 +42,52 @@ export default {
         let headerEl = document.getElementById('header');
         this.title = headerEl.value;
         headerEl.remove();
+        
+        this.getStatus();
+        setInterval(this.attemptRefresh, 1000);
+    },
+    methods: {
+        getStatus() {
+            axios.get('temp/getMonitors.php')
+            .then(function(response) {
+                this.response = response.data;
+                
+                console.log(this.status);
 
+                let activeCount = this.response.psp.totalMonitors - this.response.statistics.counts.paused;
+                let percentAlive = 100 - ((activeCount - this.response.statistics.counts.up) / activeCount) * 100;
 
-        axios.get('temp/getMonitors.php')
-        .then(function(response) {
-            this.response = response.data;
-            console.log(this.status);
+                this.status.state = this.parseSeverity(percentAlive).toLowerCase();
+                switch(percentAlive) {
+                    case percentAlive < 90:
+                        this.status.message = 'Major Outage';
+                        break;
+                    case percentAlive < 100:
+                        this.status.message = 'Partial Outage';
+                        break;
+                    default:
+                        this.status.message = 'All Systems Operational';
+                }
 
-            let activeCount = this.response.psp.totalMonitors - this.response.statistics.counts.paused;
-            let percentAlive = 100 - ((activeCount - this.response.statistics.counts.up) / activeCount) * 100;
+            }.bind(this))
+            .catch(function(error) {
+                this.error = true;
+                
+                console.error("There was an error while collecting the status of this page.");
+                console.error(error);
 
-            this.status.state = this.parseSeverity(percentAlive).toLowerCase();
-            switch(percentAlive) {
-                case percentAlive < 90:
-                    this.status.message = 'Major Outage';
-                    break;
-                case percentAlive < 100:
-                    this.status.message = 'Partial Outage';
-                    break;
-                default:
-                    this.status.message = 'All Systems Operational';
+                this.status.state = "major";
+                this.status.message = "There was an error while collecting the statuses.";
+            }.bind(this));
+        },
+        attemptRefresh() {
+            if(this.secondsLeft === 0) {
+                this.getStatus();
+                this.secondsLeft = this.interval;
+            } else {
+                this.secondsLeft--;
             }
-
-        }.bind(this))
-        .catch(function(error) {
-            this.error = true;
-            console.error("There was an error while collecting the status of this page.");
-            console.error(error);
-
-            this.status.state = "major";
-            this.status.message = "There was an error while collecting the statuses.";
-        }.bind(this));
+        }
     }
 }
 </script>
-
-<style>
-    
-</style>

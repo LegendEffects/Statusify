@@ -1,5 +1,5 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".banner[data-v-f37e46a0] {\n    width: 100%;\n    height: 300px;\n    background-size: cover;\n    text-align: center;\n    margin-bottom: 50px;\n    background-image: linear-gradient(323deg, #36D1DC 5%, #5B86E5);\n}\n.cornerInfo[data-v-f37e46a0] {\n    position: absolute;\n    top: 2%;\n    left: 2%;\n    font-size: 1.2rem;\n    color: #fff;\n}\n.title[data-v-f37e46a0] {\n    text-align: center;\n    line-height: 300px;\n    font-size: 3rem;\n    color: #fff;\n    font-weight: 800;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".banner[data-v-f37e46a0] {\n    width: 100%;\n    height: 300px;\n    background-size: cover;\n    text-align: center;\n    margin-bottom: 50px;\n    background-image: linear-gradient(323deg, #36D1DC 5%, #5B86E5);\n}\n.cornerInfo[data-v-f37e46a0] {\n    position: absolute;\n    top: 2%;\n    left: 2%;\n    font-size: .95rem;\n    color: #fff;\n    font-variant-numeric: tabular-nums;\n}\n.title[data-v-f37e46a0] {\n    text-align: center;\n    line-height: 300px;\n    font-size: 3rem;\n    color: #fff;\n    font-weight: 800;\n}")
 ;(function(){
 'use strict';
 
@@ -2866,7 +2866,10 @@ exports.default = {
             },
             response: null,
             error: false,
-            title: null
+            title: null,
+
+            interval: 300,
+            secondsLeft: 300
         };
     },
     mounted: function mounted() {
@@ -2878,39 +2881,56 @@ exports.default = {
         this.title = headerEl.value;
         headerEl.remove();
 
-        _axios2.default.get('temp/getMonitors.php').then(function (response) {
-            this.response = response.data;
-            console.log(this.status);
+        this.getStatus();
+        setInterval(this.attemptRefresh, 1000);
+    },
 
-            var activeCount = this.response.psp.totalMonitors - this.response.statistics.counts.paused;
-            var percentAlive = 100 - (activeCount - this.response.statistics.counts.up) / activeCount * 100;
+    methods: {
+        getStatus: function getStatus() {
+            _axios2.default.get('temp/getMonitors.php').then(function (response) {
+                this.response = response.data;
 
-            this.status.state = this.parseSeverity(percentAlive).toLowerCase();
-            switch (percentAlive) {
-                case percentAlive < 90:
-                    this.status.message = 'Major Outage';
-                    break;
-                case percentAlive < 100:
-                    this.status.message = 'Partial Outage';
-                    break;
-                default:
-                    this.status.message = 'All Systems Operational';
+                console.log(this.status);
+
+                var activeCount = this.response.psp.totalMonitors - this.response.statistics.counts.paused;
+                var percentAlive = 100 - (activeCount - this.response.statistics.counts.up) / activeCount * 100;
+
+                this.status.state = this.parseSeverity(percentAlive).toLowerCase();
+                switch (percentAlive) {
+                    case percentAlive < 90:
+                        this.status.message = 'Major Outage';
+                        break;
+                    case percentAlive < 100:
+                        this.status.message = 'Partial Outage';
+                        break;
+                    default:
+                        this.status.message = 'All Systems Operational';
+                }
+            }.bind(this)).catch(function (error) {
+                this.error = true;
+
+                console.error("There was an error while collecting the status of this page.");
+                console.error(error);
+
+                this.status.state = "major";
+                this.status.message = "There was an error while collecting the statuses.";
+            }.bind(this));
+        },
+        attemptRefresh: function attemptRefresh() {
+            if (this.secondsLeft === 0) {
+                this.getStatus();
+                this.secondsLeft = this.interval;
+            } else {
+                this.secondsLeft--;
             }
-        }.bind(this)).catch(function (error) {
-            this.error = true;
-            console.error("There was an error while collecting the status of this page.");
-            console.error(error);
-
-            this.status.state = "major";
-            this.status.message = "There was an error while collecting the statuses.";
-        }.bind(this));
+        }
     }
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('page-header',{attrs:{"title":_vm.title,"cornertext":""}}),_vm._v(" "),_c('div',{staticClass:"page"},[(_vm.response !== null)?_c('div',[_c('status',{attrs:{"state":_vm.status.state,"message":_vm.status.message}}),_vm._v(" "),_vm._l((_vm.response.psp.monitors),function(monitor){return _c('monitor',{key:monitor.ID,attrs:{"monitor":monitor}})})],2):_c('div',{staticClass:"spinner"},[_c('div',{staticClass:"rect1"}),_vm._v(" "),_c('div',{staticClass:"rect2"}),_vm._v(" "),_c('div',{staticClass:"rect3"}),_vm._v(" "),_c('div',{staticClass:"rect4"}),_vm._v(" "),_c('div',{staticClass:"rect5"})])])],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('page-header',{attrs:{"title":_vm.title,"cornertext":'Refreshing in: '+_vm.secondsLeft + ' seconds'}}),_vm._v(" "),_c('div',{staticClass:"page"},[(_vm.response !== null)?_c('div',[_c('status',{attrs:{"state":_vm.status.state,"message":_vm.status.message}}),_vm._v(" "),_vm._l((_vm.response.psp.monitors),function(monitor){return _c('monitor',{key:monitor.ID,attrs:{"monitor":monitor}})})],2):_c('div',{staticClass:"spinner"},[_c('div',{staticClass:"rect1"}),_vm._v(" "),_c('div',{staticClass:"rect2"}),_vm._v(" "),_c('div',{staticClass:"rect3"}),_vm._v(" "),_c('div',{staticClass:"rect4"}),_vm._v(" "),_c('div',{staticClass:"rect5"})])])],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
