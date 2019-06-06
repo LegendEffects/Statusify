@@ -5579,6 +5579,21 @@ exports.default = {
         _axios2.default.get('temp/getMonitors.php').then(function (response) {
             this.response = response.data;
             console.log(this.status);
+
+            var activeCount = this.response.psp.totalMonitors - this.response.statistics.counts.paused;
+            var percentAlive = 100 - (activeCount - this.response.statistics.counts.up) / activeCount * 100;
+
+            this.status.state = this.parseSeverity(percentAlive).toLowerCase();
+            switch (percentAlive) {
+                case percentAlive < 90:
+                    this.status.message = 'Major Outage';
+                    break;
+                case percentAlive < 100:
+                    this.status.message = 'Partial Outage';
+                    break;
+                default:
+                    this.status.message = 'All Systems Operational';
+            }
         }.bind(this)).catch(function (error) {
             this.error = true;
             console.error("There was an error while collecting the status of this page.");
@@ -5593,7 +5608,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('page-header',{attrs:{"title":"LegendEffects","cornertext":""}}),_vm._v(" "),_c('div',{staticClass:"page"},[_c('status',{attrs:{"state":_vm.status.state,"message":_vm.status.message}}),_vm._v(" "),(_vm.response !== null)?_c('div',_vm._l((_vm.response.psp.monitors),function(monitor){return _c('monitor',{key:monitor.ID,attrs:{"monitor":monitor}})}),1):_vm._e()],1)],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('page-header',{attrs:{"title":"LegendEffects","cornertext":""}}),_vm._v(" "),_c('div',{staticClass:"page"},[(_vm.response !== null)?_c('div',[_c('status',{attrs:{"state":_vm.status.state,"message":_vm.status.message}}),_vm._v(" "),_vm._l((_vm.response.psp.monitors),function(monitor){return _c('monitor',{key:monitor.ID,attrs:{"monitor":monitor}})})],2):_c('div',{staticClass:"spinner"},[_c('div',{staticClass:"rect1"}),_vm._v(" "),_c('div',{staticClass:"rect2"}),_vm._v(" "),_c('div',{staticClass:"rect3"}),_vm._v(" "),_c('div',{staticClass:"rect4"}),_vm._v(" "),_c('div',{staticClass:"rect5"})])])],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
