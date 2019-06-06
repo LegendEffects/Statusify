@@ -5,31 +5,8 @@ require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c=
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _axios = require('axios');
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 exports.default = {
-    name: 'App',
-    data: function data() {
-        return {
-            'status': null,
-            'error': false
-        };
-    },
-    mounted: function mounted() {
-        _axios2.default.get('temp/getMonitors.php').then(function (response) {
-            this.status = response;
-            console.log(response);
-        }.bind(this)).catch(function (error) {
-            this.error = true;
-            console.error("There was an error while collecting the status of this page.");
-            console.error(error);
-        }.bind(this));
-    }
+    name: 'App'
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
@@ -44,10 +21,40 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-9f4f1756", __vue__options__)
   } else {
-    hotAPI.reload("data-v-9f4f1756", __vue__options__)
+    hotAPI.rerender("data-v-9f4f1756", __vue__options__)
   }
 })()}
-},{"axios":4,"vue":"vue","vue-hot-reload-api":32}],2:[function(require,module,exports){
+},{"vue":"vue","vue-hot-reload-api":36}],2:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".banner[data-v-1c597647] {\r\n    width: 100%;\r\n    height: 300px;\r\n    background-size: cover;\r\n    text-align: center;\r\n    margin-bottom: 50px;\r\n    background-image: linear-gradient(323deg, #36D1DC 5%, #5B86E5);\r\n}\r\n.cornerInfo[data-v-1c597647] {\r\n    position: absolute;\r\n    top: 2%;\r\n    left: 2%;\r\n    font-size: 1.2rem;\r\n    color: #fff;\r\n}\r\n.title[data-v-1c597647] {\r\n    text-align: center;\r\n    line-height: 300px;\r\n    font-size: 3rem;\r\n    color: #fff;\r\n    font-weight: 800;\r\n}")
+;(function(){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    name: 'page-header',
+    props: ['title', 'cornertext']
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"banner"},[_c('span',{staticClass:"cornerInfo"},[_vm._v(_vm._s(_vm.cornertext))]),_vm._v(" "),_c('span',{staticClass:"title"},[_vm._v(_vm._s(_vm.title))])])}
+__vue__options__.staticRenderFns = []
+__vue__options__._scopeId = "data-v-1c597647"
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1c597647", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-1c597647", __vue__options__)
+  }
+})()}
+},{"vue":"vue","vue-hot-reload-api":36,"vueify/lib/insert-css":38}],3:[function(require,module,exports){
 'use strict';
 
 var _vue = require('vue');
@@ -57,14 +64,116 @@ var _vue2 = _interopRequireDefault(_vue);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
-    components: {},
+    components: {
+        header: _vue2.default.component('page-header', require('./header.vue')),
+        status: _vue2.default.component('status', require('./statusBox.vue')),
+        monitor: {
+            main: _vue2.default.component('monitor', require('./monitor/monitor.vue')),
+            data: _vue2.default.component('monitor-data', require('./monitor/data.vue'))
+        }
+    },
     pages: {
         list: _vue2.default.component('page_index', require('../pages/index.vue')),
         monitor: _vue2.default.component('page_monitor', require('../pages/monitor.vue'))
     }
 };
 
-},{"../pages/index.vue":34,"../pages/monitor.vue":35,"vue":"vue"}],3:[function(require,module,exports){
+},{"../pages/index.vue":39,"../pages/monitor.vue":40,"./header.vue":2,"./monitor/data.vue":4,"./monitor/monitor.vue":5,"./statusBox.vue":6,"vue":"vue"}],4:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-271d77a6] {\r\n    width: 100%;\r\n    font-size: 1rem;\r\n    line-height: 1.5rem;\r\n    color: #737F8D;\r\n}\r\n.title[data-v-271d77a6] {\r\n    display: inline-block;\r\n}\r\n.status[data-v-271d77a6] {\r\n    float: right;\r\n    display: inline-block;\r\n    font-size: .875rem;\r\n    font-weight: lighter;\r\n}\r\n.percentile--container[data-v-271d77a6] {\r\n    width: 100%;\r\n    text-align: center;\r\n}\r\n.indicator--block[data-v-271d77a6] {\r\n    padding: 3px 15px;\r\n    margin-right: 5px;\r\n    margin-left: 5px;\r\n    font-size: 12px;\r\n    line-height: 25px;\r\n    color: #fff;\r\n}\r\n.base--container[data-v-271d77a6] {\r\n    width: 100%;\r\n    display: flex;\r\n    position: relative;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    align-content: center;\r\n    justify-content: center;\r\n}\r\n.base--data[data-v-271d77a6] {\r\n    opacity: .5;\r\n    color: #99aab5;\r\n    flex: 0 0 auto;\r\n    font-size: .875rem;\r\n    position: relative;\r\n    line-height: 1.5rem;\r\n    flex: 1;\r\n    text-align: center;\r\n}\r\n.base--spacer[data-v-271d77a6] {\r\n    background: #99aab5;\r\n    opacity: 0.3;\r\n    height: 1px;\r\n    flex: 1;\r\n    margin: .75rem 2rem 0 2rem;\r\n}\r\n.base--center[data-v-271d77a6] {\r\n    position: absolute;\r\n}\r\n.data--showExtra[data-v-271d77a6] {\r\n    background: #E0E0E0;\r\n    font-size: 1.4rem;\r\n    padding-left: 10px;\r\n    color: #535353;\r\n}\r\n\r\n.data--downtime--mod[data-v-271d77a6] {\r\n    border-top-left-radius: 0;\r\n    border-top-right-radius: 0;\r\n}\r\n.data--downtime[data-v-271d77a6] {\r\n    padding-bottom: .3rem;\r\n    padding-top: .3rem;\r\n}\r\n.data--downtime--title[data-v-271d77a6] {\r\n    display: inline-block;\r\n    padding-bottom: 5px;\r\n}\r\n.data--downtime--main[data-v-271d77a6] {\r\n    font-size: .875rem;\r\n    display: block;\r\n}")
+;(function(){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+
+var utils = require('../../util');
+exports.default = {
+    mixins: [utils],
+    name: 'monitor-data',
+    props: ['monitor']
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"container"},[_c('span',{staticClass:"title"},[_vm._v(_vm._s(_vm.monitor.name))]),_vm._v(" "),_c('span',{staticClass:"status",class:'status-'+_vm.parseStatus(_vm.monitor.statusClass).toLowerCase()+'--c'},[_vm._v(_vm._s(_vm.parseStatus(_vm.monitor.weeklyRatio.label)))])]),_vm._v(" "),_c('div',{staticClass:"percentile--container"},_vm._l((_vm.monitor.dailyRatios),function(range){return _c('span',{key:range.ID,staticClass:"indicator--block",class:'status-'+_vm.parseSeverity(range.ratio).toLowerCase()},[_vm._v(_vm._s(range.ratio)+"%")])}),0),_vm._v(" "),_c('div',{staticClass:"base--container"},[_c('div',{staticClass:"base--data"},[_vm._v("6 Days Ago")]),_vm._v(" "),_c('div',{staticClass:"base--spacer"}),_vm._v(" "),_c('div',{staticClass:"base--data base--center"},[_vm._v(_vm._s(_vm.monitor.weeklyRatio.ratio)+"%")]),_vm._v(" "),_c('div',{staticClass:"base--spacer"}),_vm._v(" "),_c('div',{staticClass:"base--data"},[_vm._v("Today")])])])}
+__vue__options__.staticRenderFns = []
+__vue__options__._scopeId = "data-v-271d77a6"
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-271d77a6", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-271d77a6", __vue__options__)
+  }
+})()}
+},{"../../util":41,"vue":"vue","vue-hot-reload-api":36,"vueify/lib/insert-css":38}],5:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-b336a3e4] {\n    border-radius: 5px;\n    border: 1px solid #E0E0E0;\n    margin-bottom: 30px;\n}\n.container[data-v-b336a3e4]:hover {\n    cursor: pointer;\n}\n\n.addPadding[data-v-b336a3e4] {\n    padding: 10px;\n}\n\n.container--titlebar[data-v-b336a3e4] {\n    border-radius: 5px;\n    border-bottom-left-radius: 0;\n    border-bottom-right-radius: 0;\n\n    color: #fff;\n    padding: 10px;\n}\n\n.extraInfo--container[data-v-b336a3e4] {\n    max-height: 0;\n    overflow: hidden;\n    transition: max-height 1s cubic-bezier(0, 1, 0, 1);\n    border-top: solid 1px #E0E0E0;\n}\n.extraInfo--container.show[data-v-b336a3e4] {\n    display: block;\n    max-height: 99em;\n    transition: max-height 1s ease-in-out;\n}\n.extraInfo--container .contain[data-v-b336a3e4] {\n    padding: 10px;\n    padding-top: 20px;\n}\n\n@media only screen and (max-width: 768px) {\n    .data--indicator--block[data-v-b336a3e4] {\n        padding: 3px 7px;\n        font-size: 10px;\n    }\n}\n\n.circle[data-v-b336a3e4]:before {\n    content: ' \\25CF';\n    font-size: 75px;\n}\n.circle.status--success--c[data-v-b336a3e4]:before {\n    color: #2ecc71;\n}\n.circle.status--danger--c[data-v-b336a3e4]:before {\n    color: #e74c3c;\n}\n\n.eventTable table[data-v-b336a3e4] {\n    width: 100%;\n    border: 1px solid #E0E0E0;\n}\n.eventTable th[data-v-b336a3e4] {\n    padding: 20px;\n    text-align: left;\n    border-left: 1px solid #E0E0E0;\n    border-bottom: 1px solid #E0E0E0;\n}\n.eventTable td[data-v-b336a3e4]:first-of-type, .eventTable th[data-v-b336a3e4]:first-of-type {\n    text-align: center;\n}\n.eventTable td[data-v-b336a3e4] {\n    padding: 10px 20px;\n    border-left: 1px solid #E0E0E0;\n}\n\n.eventTable table th[data-v-b336a3e4]:first-of-type, .eventTable table td[data-v-b336a3e4]:first-of-type {\n    border-left: 0;\n}")
+;(function(){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    name: 'monitor',
+    props: ['monitor']
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('div',{staticClass:"container--pad"},[_c('monitor-data',{attrs:{"monitor":_vm.monitor}})],1)])}
+__vue__options__.staticRenderFns = []
+__vue__options__._scopeId = "data-v-b336a3e4"
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-b336a3e4", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-b336a3e4", __vue__options__)
+  }
+})()}
+},{"vue":"vue","vue-hot-reload-api":36,"vueify/lib/insert-css":38}],6:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".status[data-v-6e9c08a2] {\r\n    color: #fff;\r\n    font-size: 1.3rem;\r\n    border-radius: 10px;\r\n    padding: 1.1rem 1.25rem 1rem;\r\n    font-weight: 300;\r\n    margin-bottom: 50px;\r\n}")
+;(function(){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    name: 'status-box',
+    props: ['message', 'state']
+
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"status",class:'status-'+_vm.state},[_c('span',{staticClass:"message"},[_vm._v(_vm._s(_vm.message))])])}
+__vue__options__.staticRenderFns = []
+__vue__options__._scopeId = "data-v-6e9c08a2"
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6e9c08a2", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-6e9c08a2", __vue__options__)
+  }
+})()}
+},{"vue":"vue","vue-hot-reload-api":36,"vueify/lib/insert-css":38}],7:[function(require,module,exports){
 'use strict';
 
 var _vue = require('vue');
@@ -94,9 +203,9 @@ new _vue2.default({
     }
 }).$mount('#app');
 
-},{"./app.vue":1,"./components":2,"vue":"vue","vue-router":33}],4:[function(require,module,exports){
+},{"./app.vue":1,"./components":3,"vue":"vue","vue-router":37}],8:[function(require,module,exports){
 module.exports = require('./lib/axios');
-},{"./lib/axios":6}],5:[function(require,module,exports){
+},{"./lib/axios":10}],9:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -272,7 +381,7 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-},{"../core/createError":12,"./../core/settle":16,"./../helpers/buildURL":20,"./../helpers/cookies":22,"./../helpers/isURLSameOrigin":24,"./../helpers/parseHeaders":26,"./../utils":28}],6:[function(require,module,exports){
+},{"../core/createError":16,"./../core/settle":20,"./../helpers/buildURL":24,"./../helpers/cookies":26,"./../helpers/isURLSameOrigin":28,"./../helpers/parseHeaders":30,"./../utils":32}],10:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -327,7 +436,7 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./cancel/Cancel":7,"./cancel/CancelToken":8,"./cancel/isCancel":9,"./core/Axios":10,"./core/mergeConfig":15,"./defaults":18,"./helpers/bind":19,"./helpers/spread":27,"./utils":28}],7:[function(require,module,exports){
+},{"./cancel/Cancel":11,"./cancel/CancelToken":12,"./cancel/isCancel":13,"./core/Axios":14,"./core/mergeConfig":19,"./defaults":22,"./helpers/bind":23,"./helpers/spread":31,"./utils":32}],11:[function(require,module,exports){
 'use strict';
 
 /**
@@ -348,7 +457,7 @@ Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
 
-},{}],8:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 var Cancel = require('./Cancel');
@@ -407,14 +516,14 @@ CancelToken.source = function source() {
 
 module.exports = CancelToken;
 
-},{"./Cancel":7}],9:[function(require,module,exports){
+},{"./Cancel":11}],13:[function(require,module,exports){
 'use strict';
 
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-},{}],10:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -502,7 +611,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = Axios;
 
-},{"../helpers/buildURL":20,"./../utils":28,"./InterceptorManager":11,"./dispatchRequest":13,"./mergeConfig":15}],11:[function(require,module,exports){
+},{"../helpers/buildURL":24,"./../utils":32,"./InterceptorManager":15,"./dispatchRequest":17,"./mergeConfig":19}],15:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -556,7 +665,7 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 
 module.exports = InterceptorManager;
 
-},{"./../utils":28}],12:[function(require,module,exports){
+},{"./../utils":32}],16:[function(require,module,exports){
 'use strict';
 
 var enhanceError = require('./enhanceError');
@@ -576,7 +685,7 @@ module.exports = function createError(message, config, code, request, response) 
   return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":14}],13:[function(require,module,exports){
+},{"./enhanceError":18}],17:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -664,7 +773,7 @@ module.exports = function dispatchRequest(config) {
   });
 };
 
-},{"../cancel/isCancel":9,"../defaults":18,"./../helpers/combineURLs":21,"./../helpers/isAbsoluteURL":23,"./../utils":28,"./transformData":17}],14:[function(require,module,exports){
+},{"../cancel/isCancel":13,"../defaults":22,"./../helpers/combineURLs":25,"./../helpers/isAbsoluteURL":27,"./../utils":32,"./transformData":21}],18:[function(require,module,exports){
 'use strict';
 
 /**
@@ -708,7 +817,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   return error;
 };
 
-},{}],15:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -761,7 +870,7 @@ module.exports = function mergeConfig(config1, config2) {
   return config;
 };
 
-},{"../utils":28}],16:[function(require,module,exports){
+},{"../utils":32}],20:[function(require,module,exports){
 'use strict';
 
 var createError = require('./createError');
@@ -788,7 +897,7 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-},{"./createError":12}],17:[function(require,module,exports){
+},{"./createError":16}],21:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -810,7 +919,7 @@ module.exports = function transformData(data, headers, fns) {
   return data;
 };
 
-},{"./../utils":28}],18:[function(require,module,exports){
+},{"./../utils":32}],22:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -912,7 +1021,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this,require('_process'))
-},{"./adapters/http":5,"./adapters/xhr":5,"./helpers/normalizeHeaderName":25,"./utils":28,"_process":30}],19:[function(require,module,exports){
+},{"./adapters/http":9,"./adapters/xhr":9,"./helpers/normalizeHeaderName":29,"./utils":32,"_process":34}],23:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -925,7 +1034,7 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
-},{}],20:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -998,7 +1107,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-},{"./../utils":28}],21:[function(require,module,exports){
+},{"./../utils":32}],25:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1014,7 +1123,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
     : baseURL;
 };
 
-},{}],22:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1069,7 +1178,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":28}],23:[function(require,module,exports){
+},{"./../utils":32}],27:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1085,7 +1194,7 @@ module.exports = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
 
-},{}],24:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1155,7 +1264,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":28}],25:[function(require,module,exports){
+},{"./../utils":32}],29:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -1169,7 +1278,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   });
 };
 
-},{"../utils":28}],26:[function(require,module,exports){
+},{"../utils":32}],30:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1224,7 +1333,7 @@ module.exports = function parseHeaders(headers) {
   return parsed;
 };
 
-},{"./../utils":28}],27:[function(require,module,exports){
+},{"./../utils":32}],31:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1253,7 +1362,7 @@ module.exports = function spread(callback) {
   };
 };
 
-},{}],28:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 
 var bind = require('./helpers/bind');
@@ -1589,7 +1698,7 @@ module.exports = {
   trim: trim
 };
 
-},{"./helpers/bind":19,"is-buffer":29}],29:[function(require,module,exports){
+},{"./helpers/bind":23,"is-buffer":33}],33:[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -1602,7 +1711,7 @@ module.exports = function isBuffer (obj) {
     typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
 }
 
-},{}],30:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -1788,7 +1897,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],31:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 (function (setImmediate,clearImmediate){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -1867,7 +1976,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":30,"timers":31}],32:[function(require,module,exports){
+},{"process/browser.js":34,"timers":35}],36:[function(require,module,exports){
 var Vue // late bind
 var version
 var map = Object.create(null)
@@ -2140,7 +2249,7 @@ function patchScopedSlots (instance) {
   }
 }
 
-},{}],33:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 (function (process){
 /*!
   * vue-router v3.0.6
@@ -4817,22 +4926,69 @@ if (inBrowser && window.Vue) {
 module.exports = VueRouter;
 
 }).call(this,require('_process'))
-},{"_process":30}],34:[function(require,module,exports){
+},{"_process":34}],38:[function(require,module,exports){
+var inserted = exports.cache = {}
+
+function noop () {}
+
+exports.insert = function (css) {
+  if (inserted[css]) return noop
+  inserted[css] = true
+
+  var elem = document.createElement('style')
+  elem.setAttribute('type', 'text/css')
+
+  if ('textContent' in elem) {
+    elem.textContent = css
+  } else {
+    elem.styleSheet.cssText = css
+  }
+
+  document.getElementsByTagName('head')[0].appendChild(elem)
+  return function () {
+    document.getElementsByTagName('head')[0].removeChild(elem)
+    inserted[css] = false
+  }
+}
+
+},{}],39:[function(require,module,exports){
 ;(function(){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = {
-    name: 'page_index'
 
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    name: 'page_index',
+    data: function data() {
+        return {
+            'status': null,
+            'error': false
+        };
+    },
+    mounted: function mounted() {
+        _axios2.default.get('temp/getMonitors.php').then(function (response) {
+            this.status = response.data;
+            console.log(this.status);
+        }.bind(this)).catch(function (error) {
+            this.error = true;
+            console.error("There was an error while collecting the status of this page.");
+            console.error(error);
+        }.bind(this));
+    }
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._v("\n    HomePage\n")])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('page-header',{attrs:{"title":"LegendEffects","cornertext":""}}),_vm._v(" "),(_vm.status !== null)?_c('div',{staticClass:"page"},[_c('status',{attrs:{"state":"major","message":"test"}}),_vm._v(" "),_c('monitor',{attrs:{"monitor":_vm.status.psp.monitors[0]}})],1):_vm._e()],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -4844,7 +5000,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-18bc386e", __vue__options__)
   }
 })()}
-},{"vue":"vue","vue-hot-reload-api":32}],35:[function(require,module,exports){
+},{"axios":8,"vue":"vue","vue-hot-reload-api":36}],40:[function(require,module,exports){
 ;(function(){
 "use strict";
 
@@ -4868,7 +5024,48 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-2796d7f6", __vue__options__)
   }
 })()}
-},{"vue":"vue","vue-hot-reload-api":32}],"vue":[function(require,module,exports){
+},{"vue":"vue","vue-hot-reload-api":36}],41:[function(require,module,exports){
+'use strict';
+
+var _vue = require('vue');
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = _vue2.default.mixin({
+    methods: {
+        parseStatus: function parseStatus(status) {
+            switch (status) {
+                case 0:
+                    return 'Paused';
+                case 2:
+                    return 'Operational';
+                case 8:
+                    return 'Partial';
+                case 9:
+                    return 'Major';
+                case 'success':
+                    return 'Operational';
+                case 'warning':
+                    return 'Partial';
+                default:
+                    return 'Unknown';
+            }
+        },
+        parseSeverity: function parseSeverity(input) {
+            if (input < 80) {
+                return 'Major';
+            } else if (input < 100) {
+                return 'Partial';
+            } else {
+                return 'Operational';
+            }
+        }
+    }
+});
+
+},{"vue":"vue"}],"vue":[function(require,module,exports){
 (function (global,setImmediate){
 'use strict';
 
@@ -15626,4 +15823,4 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("timers").setImmediate)
-},{"timers":31}]},{},[3]);
+},{"timers":35}]},{},[7]);
