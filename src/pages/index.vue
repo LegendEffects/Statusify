@@ -1,6 +1,6 @@
 <template>
     <div>
-        <page-header title="LegendEffects" cornertext=""></page-header>
+        <page-header :title="title" cornertext=""></page-header>
 
         <div class="page">
             <div v-if="response !== null">
@@ -29,11 +29,17 @@ export default {
         },
         response: null,
         error: false,
+        title: null,
     }},
     mounted() {
         let titleEl = document.getElementById('title');
         document.title = titleEl.value;
         titleEl.remove();
+
+        let headerEl = document.getElementById('header');
+        this.title = headerEl.value;
+        headerEl.remove();
+
 
         axios.get('temp/getMonitors.php')
         .then(function(response) {

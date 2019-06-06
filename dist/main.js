@@ -2865,13 +2865,18 @@ exports.default = {
                 message: 'Loading...'
             },
             response: null,
-            error: false
+            error: false,
+            title: null
         };
     },
     mounted: function mounted() {
         var titleEl = document.getElementById('title');
         document.title = titleEl.value;
         titleEl.remove();
+
+        var headerEl = document.getElementById('header');
+        this.title = headerEl.value;
+        headerEl.remove();
 
         _axios2.default.get('temp/getMonitors.php').then(function (response) {
             this.response = response.data;
@@ -2905,7 +2910,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('page-header',{attrs:{"title":"LegendEffects","cornertext":""}}),_vm._v(" "),_c('div',{staticClass:"page"},[(_vm.response !== null)?_c('div',[_c('status',{attrs:{"state":_vm.status.state,"message":_vm.status.message}}),_vm._v(" "),_vm._l((_vm.response.psp.monitors),function(monitor){return _c('monitor',{key:monitor.ID,attrs:{"monitor":monitor}})})],2):_c('div',{staticClass:"spinner"},[_c('div',{staticClass:"rect1"}),_vm._v(" "),_c('div',{staticClass:"rect2"}),_vm._v(" "),_c('div',{staticClass:"rect3"}),_vm._v(" "),_c('div',{staticClass:"rect4"}),_vm._v(" "),_c('div',{staticClass:"rect5"})])])],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('page-header',{attrs:{"title":_vm.title,"cornertext":""}}),_vm._v(" "),_c('div',{staticClass:"page"},[(_vm.response !== null)?_c('div',[_c('status',{attrs:{"state":_vm.status.state,"message":_vm.status.message}}),_vm._v(" "),_vm._l((_vm.response.psp.monitors),function(monitor){return _c('monitor',{key:monitor.ID,attrs:{"monitor":monitor}})})],2):_c('div',{staticClass:"spinner"},[_c('div',{staticClass:"rect1"}),_vm._v(" "),_c('div',{staticClass:"rect2"}),_vm._v(" "),_c('div',{staticClass:"rect3"}),_vm._v(" "),_c('div',{staticClass:"rect4"}),_vm._v(" "),_c('div',{staticClass:"rect5"})])])],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -2914,7 +2919,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-548fbe5e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-548fbe5e", __vue__options__)
+    hotAPI.reload("data-v-548fbe5e", __vue__options__)
   }
 })()}
 },{"axios":8,"vue":"vue","vue-hot-reload-api":38}],41:[function(require,module,exports){
