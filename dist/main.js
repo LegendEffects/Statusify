@@ -208,7 +208,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"extraInfo--container data--container"},[(_vm.response)?_c('div',[_c('div',{staticClass:"contain"},[_c('span',{staticClass:"data--title"},[_vm._v(_vm._s(_vm.monitor.type.toUpperCase()))]),_vm._v(" "),_c('highcharts',{staticStyle:{"width":"100%","height":"200px","margin-top":"20px"},attrs:{"options":_vm.chart}}),_vm._v(" "),_c('div',{staticClass:"latestLog eventTable"},[_c('table',[_vm._m(0),_vm._v(" "),_c('tbody',_vm._l((_vm.response.monitor.logs),function(log){return _c('tr',{key:log.ID},[_c('td',[_c('span',{staticClass:"circle",class:'status-'+log.class+'--c'})]),_c('td',[_vm._v(_vm._s(log.date))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(log.reason))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(log.duration))])])}),0)])])],1)]):_c('div',[_vm._v("\n        Loading...\n    ")])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"extraInfo--container data--container"},[(_vm.response)?_c('div',[_c('div',{staticClass:"contain"},[_c('span',{staticClass:"data--title"},[_vm._v(_vm._s(_vm.monitor.type.toUpperCase()))]),_vm._v(" "),_c('highcharts',{staticStyle:{"width":"100%","height":"200px","margin-top":"20px"},attrs:{"options":_vm.chart}}),_vm._v(" "),_c('div',{staticClass:"latestLog eventTable"},[_c('table',[_vm._m(0),_vm._v(" "),_c('tbody',_vm._l((_vm.response.monitor.logs),function(log){return _c('tr',{key:log.ID},[_c('td',[_c('span',{staticClass:"circle",class:'status-'+log.class+'--c'})]),_c('td',[_vm._v(_vm._s(log.date))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(log.reason))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(log.duration))])])}),0)])])],1)]):_c('div',{staticClass:"spinner"},[_c('div',{staticClass:"rect1"}),_vm._v(" "),_c('div',{staticClass:"rect2"}),_vm._v(" "),_c('div',{staticClass:"rect3"}),_vm._v(" "),_c('div',{staticClass:"rect4"}),_vm._v(" "),_c('div',{staticClass:"rect5"})])])}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('thead',[_c('tr',[_c('th',[_vm._v("Event")]),_vm._v(" "),_c('th',[_vm._v("Date")]),_vm._v(" "),_c('th',[_vm._v("Reason")]),_vm._v(" "),_c('th',[_vm._v("Duration")])])])}]
 __vue__options__._scopeId = "data-v-0f795996"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -5617,7 +5617,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-548fbe5e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-548fbe5e", __vue__options__)
+    hotAPI.rerender("data-v-548fbe5e", __vue__options__)
   }
 })()}
 },{"axios":9,"vue":"vue","vue-hot-reload-api":39}],43:[function(require,module,exports){
