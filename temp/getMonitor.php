@@ -1,4 +1,21 @@
 <?php
+if(!isset($_GET['m']) && !empty($_GET['m'])) {
+  header('Content-Type: application/json');
+  echo json_encode(["status" => false, "error" => "Missing monitor parameter (m)."]);
+  exit();
+}
+
+$stripped = preg_replace("/[^0-9]/", "", $_GET['m']);
+if(file_exists('cache/monitors/'.$stripped.'.json')) {
+  $cache = json_decode(file_get_contents('cache/monitors/'.$stripped.'.json'), true);
+  if($cache['timestamp'] > time()-300) {
+    header('FromCache: True');
+    header('Content-Type: application/json');
+    echo $cache['data'];
+    exit();
+  }
+}
+
 
 $curl = curl_init();
  
@@ -23,8 +40,11 @@ $err = curl_error($curl);
 curl_close($curl);
  
 if ($err) {
-  echo "cURL Error #:" . $err;
+  header('Content-Type: application/json');
+  echo json_encode(["status" => "error", "error" => $err]);
 } else {
+  file_put_contents("cache/monitors/".$stripped.".json", json_encode(["timestamp" => time(), "data" => $response]));
+
   header('Content-Type: application/json');
   echo $response;
 }
