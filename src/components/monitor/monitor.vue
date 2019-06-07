@@ -1,6 +1,6 @@
 <template>
-    <div class="container" @click="toggleExtras">
-        <div class="addPadding">
+    <div class="container">
+        <div class="addPadding clickable" @click="toggleExtras">
             <monitor-data :monitor="monitor"></monitor-data>
         </div>
         <monitor-extra-info :monitor="monitor" v-if="previouslyToggledExtra" v-show="showExtra"></monitor-extra-info>
@@ -30,7 +30,7 @@ export default {
         border: 1px solid #E0E0E0;
         margin-bottom: 30px;
     }
-    .container:hover {
+    .clickable:hover {
         cursor: pointer;
     }
 

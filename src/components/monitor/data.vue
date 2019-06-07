@@ -2,7 +2,7 @@
     <div>
         <div class="container">
             <span class="title">{{monitor.name}}</span>
-            <span class="status" :class="'status-'+parseStatus(monitor.statusClass).toLowerCase()+'--c'">{{parseStatus(monitor.weeklyRatio.label)}}</span>
+            <span class="status" :class="'status-'+parseStatus(monitor.weeklyRatio.label).toLowerCase()+'--c'">{{parseSeverity(monitor.weeklyRatio.ratio)}}</span>
         </div>
         <div class="percentile--container">
             <span v-for="range in monitor.dailyRatios" :key="range.ID" :class="'status-'+parseSeverity(range.ratio).toLowerCase()" class="indicator--block">{{range.ratio}}%</span>

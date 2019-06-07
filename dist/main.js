@@ -72,7 +72,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"container"},[_c('span',{staticClass:"title"},[_vm._v(_vm._s(_vm.monitor.name))]),_vm._v(" "),_c('span',{staticClass:"status",class:'status-'+_vm.parseStatus(_vm.monitor.statusClass).toLowerCase()+'--c'},[_vm._v(_vm._s(_vm.parseStatus(_vm.monitor.weeklyRatio.label)))])]),_vm._v(" "),_c('div',{staticClass:"percentile--container"},_vm._l((_vm.monitor.dailyRatios),function(range){return _c('span',{key:range.ID,staticClass:"indicator--block",class:'status-'+_vm.parseSeverity(range.ratio).toLowerCase()},[_vm._v(_vm._s(range.ratio)+"%")])}),0),_vm._v(" "),_c('div',{staticClass:"base--container"},[_c('div',{staticClass:"base--data"},[_vm._v("6 Days Ago")]),_vm._v(" "),_c('div',{staticClass:"base--spacer"}),_vm._v(" "),_c('div',{staticClass:"base--data base--center"},[_vm._v(_vm._s(_vm.monitor.weeklyRatio.ratio)+"%")]),_vm._v(" "),_c('div',{staticClass:"base--spacer"}),_vm._v(" "),_c('div',{staticClass:"base--data"},[_vm._v("Today")])])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"container"},[_c('span',{staticClass:"title"},[_vm._v(_vm._s(_vm.monitor.name))]),_vm._v(" "),_c('span',{staticClass:"status",class:'status-'+_vm.parseStatus(_vm.monitor.weeklyRatio.label).toLowerCase()+'--c'},[_vm._v(_vm._s(_vm.parseSeverity(_vm.monitor.weeklyRatio.ratio)))])]),_vm._v(" "),_c('div',{staticClass:"percentile--container"},_vm._l((_vm.monitor.dailyRatios),function(range){return _c('span',{key:range.ID,staticClass:"indicator--block",class:'status-'+_vm.parseSeverity(range.ratio).toLowerCase()},[_vm._v(_vm._s(range.ratio)+"%")])}),0),_vm._v(" "),_c('div',{staticClass:"base--container"},[_c('div',{staticClass:"base--data"},[_vm._v("6 Days Ago")]),_vm._v(" "),_c('div',{staticClass:"base--spacer"}),_vm._v(" "),_c('div',{staticClass:"base--data base--center"},[_vm._v(_vm._s(_vm.monitor.weeklyRatio.ratio)+"%")]),_vm._v(" "),_c('div',{staticClass:"base--spacer"}),_vm._v(" "),_c('div',{staticClass:"base--data"},[_vm._v("Today")])])])}
 __vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-b471afbc"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -196,7 +196,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"axios":8,"highcharts-vue":34,"vue":"vue","vue-hot-reload-api":38,"vueify/lib/insert-css":39}],5:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-e95547dc] {\n    border-radius: 5px;\n    border: 1px solid #E0E0E0;\n    margin-bottom: 30px;\n}\n.container[data-v-e95547dc]:hover {\n    cursor: pointer;\n}\n\n.addPadding[data-v-e95547dc] {\n    padding: 10px;\n}\n\n.container--titlebar[data-v-e95547dc] {\n    border-radius: 5px;\n    border-bottom-left-radius: 0;\n    border-bottom-right-radius: 0;\n\n    color: #fff;\n    padding: 10px;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-e95547dc] {\n    border-radius: 5px;\n    border: 1px solid #E0E0E0;\n    margin-bottom: 30px;\n}\n.clickable[data-v-e95547dc]:hover {\n    cursor: pointer;\n}\n\n.addPadding[data-v-e95547dc] {\n    padding: 10px;\n}\n\n.container--titlebar[data-v-e95547dc] {\n    border-radius: 5px;\n    border-bottom-left-radius: 0;\n    border-bottom-right-radius: 0;\n\n    color: #fff;\n    padding: 10px;\n}")
 ;(function(){
 'use strict';
 
@@ -223,7 +223,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container",on:{"click":_vm.toggleExtras}},[_c('div',{staticClass:"addPadding"},[_c('monitor-data',{attrs:{"monitor":_vm.monitor}})],1),_vm._v(" "),(_vm.previouslyToggledExtra)?_c('monitor-extra-info',{directives:[{name:"show",rawName:"v-show",value:(_vm.showExtra),expression:"showExtra"}],attrs:{"monitor":_vm.monitor}}):_vm._e()],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('div',{staticClass:"addPadding clickable",on:{"click":_vm.toggleExtras}},[_c('monitor-data',{attrs:{"monitor":_vm.monitor}})],1),_vm._v(" "),(_vm.previouslyToggledExtra)?_c('monitor-extra-info',{directives:[{name:"show",rawName:"v-show",value:(_vm.showExtra),expression:"showExtra"}],attrs:{"monitor":_vm.monitor}}):_vm._e()],1)}
 __vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-e95547dc"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -2939,7 +2939,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-548fbe5e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-548fbe5e", __vue__options__)
+    hotAPI.rerender("data-v-548fbe5e", __vue__options__)
   }
 })()}
 },{"axios":8,"vue":"vue","vue-hot-reload-api":38}],41:[function(require,module,exports){
