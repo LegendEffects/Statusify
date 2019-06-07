@@ -1,6 +1,14 @@
 <template>
-    <div class="banner">
-        <span class="cornerInfo">{{cornertext}}</span>
+    <div class="component--header banner">
+        <div class="cornerInfo">
+            {{cornertext}}
+            <div class="theme">
+                <select @change="themeChange" v-model="theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+            </div>
+        </div>
         <span class="title">{{title}}</span>
     </div>
 </template>
@@ -9,31 +17,28 @@
 export default {
     name: 'page-header',
     props: ['title', 'cornertext'],
+    data: () => {return {
+        theme: window.localStorage.getItem('theme'),
+    }},
+    methods: {
+        themeChange(event) {
+            localStorage.setItem('theme', event.srcElement.value);
+            this.addCss('./dist/'+localStorage.getItem('theme')+'.css');
+        },
+
+        addCss(fileName) {
+            let oldStyle = document.getElementById('themeImport');
+            if(oldStyle) oldStyle.remove();
+
+            let link = document.createElement("link");
+        
+            link.type = "text/css";
+            link.rel = "stylesheet";
+            link.href = fileName;
+            link.id = "themeImport";
+        
+            document.head.appendChild(link);
+        }
+    }
 }
 </script>
-
-<style scoped>
-.banner {
-    width: 100%;
-    height: 300px;
-    background-size: cover;
-    text-align: center;
-    margin-bottom: 50px;
-    background-image: linear-gradient(323deg, #36D1DC 5%, #5B86E5);
-}
-.cornerInfo {
-    position: absolute;
-    top: 2%;
-    left: 2%;
-    font-size: .95rem;
-    color: #fff;
-    font-variant-numeric: tabular-nums;
-}
-.title {
-    text-align: center;
-    line-height: 300px;
-    font-size: 3rem;
-    color: #fff;
-    font-weight: 800;
-}
-</style>

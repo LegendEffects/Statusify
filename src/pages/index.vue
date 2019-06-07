@@ -33,6 +33,7 @@ export default {
 
         interval: 300,
         secondsLeft: 300,
+        theme: null,
     }},
     mounted() {
         let titleEl = document.getElementById('title');

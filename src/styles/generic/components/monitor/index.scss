@@ -1,0 +1,28 @@
+.component--monitor {
+    .container {
+        border-radius: 5px;
+        border: 1px solid $accent;
+        margin-bottom: 30px;
+        background: $secondary;
+    }
+    .clickable:hover {
+        cursor: pointer;
+    }
+
+    .addPadding {
+        padding: 10px;
+    }
+
+    .container--titlebar {
+        border-radius: 5px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+
+        color: #fff;
+        padding: 10px;
+    }
+}
+
+
+@import './data.scss';
+@import './extra.scss';

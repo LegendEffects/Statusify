@@ -1,0 +1,187 @@
+.component--header.banner {
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  text-align: center;
+  margin-bottom: 50px;
+  background-image: linear-gradient(323deg, #36D1DC 5%, #5B86E5); }
+
+.component--header .cornerInfo {
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  font-size: .95rem;
+  color: #fff;
+  font-variant-numeric: tabular-nums; }
+
+.component--header .theme {
+  text-align: left; }
+
+.component--header .title {
+  text-align: center;
+  line-height: 300px;
+  font-size: 3rem;
+  color: #fff;
+  font-weight: 800; }
+
+.component--status .status {
+  color: #fff;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  padding: 1.1rem 1.25rem 1rem;
+  font-weight: 300;
+  margin-bottom: 50px; }
+
+.component--monitor .container {
+  border-radius: 5px;
+  border: 1px solid #E0E0E0;
+  margin-bottom: 30px;
+  background: #fff; }
+
+.component--monitor .clickable:hover {
+  cursor: pointer; }
+
+.component--monitor .addPadding {
+  padding: 10px; }
+
+.component--monitor .container--titlebar {
+  border-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  color: #fff;
+  padding: 10px; }
+
+.component--monitor-data .container {
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #737F8D;
+  border: none; }
+
+.component--monitor-data .title {
+  display: inline-block; }
+
+.component--monitor-data .status {
+  float: right;
+  display: block;
+  font-size: .875rem;
+  font-weight: lighter; }
+
+.component--monitor-data .percentile--container {
+  width: 100%;
+  text-align: center; }
+
+.component--monitor-data .indicator--block {
+  padding: 3px 15px;
+  margin-right: 5px;
+  margin-left: 5px;
+  font-size: 12px;
+  line-height: 25px;
+  color: #fff; }
+
+.component--monitor-data .base--container {
+  width: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: center; }
+
+.component--monitor-data .base--data {
+  opacity: .5;
+  color: #737F8D;
+  flex: 0 0 auto;
+  font-size: .875rem;
+  position: relative;
+  line-height: 1.5rem;
+  flex: 1;
+  text-align: center; }
+
+.component--monitor-data .base--spacer {
+  background: #737F8D;
+  opacity: 0.3;
+  height: 1px;
+  flex: 1;
+  margin: .75rem 2rem 0 2rem; }
+
+.component--monitor-data .base--center {
+  position: absolute; }
+
+.component--monitor-data .data--showExtra {
+  background: #E0E0E0;
+  font-size: 1.4rem;
+  padding-left: 10px;
+  color: #535353; }
+
+.component--monitor-data .data--downtime--mod {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; }
+
+.component--monitor-data .data--downtime {
+  padding-bottom: .3rem;
+  padding-top: .3rem; }
+
+.component--monitor-data .data--downtime--title {
+  display: inline-block;
+  padding-bottom: 5px; }
+
+.component--monitor-data .data--downtime--main {
+  font-size: .875rem;
+  display: block; }
+
+@media only screen and (max-width: 768px) {
+  .component--monitor-data .indicator--block {
+    padding: 3px 7px;
+    font-size: 10px; } }
+
+.component--monitor-extra .extraInfo--container {
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #737F8D;
+  overflow: hidden;
+  transition: max-height 1s cubic-bezier(0, 1, 0, 1);
+  border-top: solid 1px #E0E0E0; }
+
+.component--monitor-extra .extraInfo--container.show {
+  display: block;
+  max-height: 99em;
+  transition: max-height 1s ease-in-out; }
+
+.component--monitor-extra .extraInfo--container .contain {
+  padding: 10px;
+  padding-top: 20px; }
+
+.component--monitor-extra .title {
+  display: inline-block; }
+
+.component--monitor-extra .circle:before {
+  content: ' \25CF';
+  font-size: 75px; }
+
+.component--monitor-extra .circle.status--success--c:before {
+  color: #2ecc71; }
+
+.component--monitor-extra .circle.status--danger--c:before {
+  color: #e74c3c; }
+
+.component--monitor-extra .eventTable table {
+  width: 100%;
+  border: 1px solid #E0E0E0; }
+
+.component--monitor-extra .eventTable th {
+  padding: 20px;
+  text-align: left;
+  border-left: 1px solid #E0E0E0;
+  border-bottom: 1px solid #E0E0E0; }
+
+.component--monitor-extra .eventTable td:first-of-type, .component--monitor-extra .eventTable th:first-of-type {
+  text-align: center; }
+
+.component--monitor-extra .eventTable td {
+  padding: 10px 20px;
+  border-left: 1px solid #E0E0E0; }
+
+.component--monitor-extra .eventTable table th:first-of-type, .component--monitor-extra .eventTable table td:first-of-type {
+  border-left: 0; }

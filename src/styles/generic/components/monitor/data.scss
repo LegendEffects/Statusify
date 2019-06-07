@@ -1,0 +1,89 @@
+.component--monitor-data {
+    .container {
+        width: 100%;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        color: $contrast;
+        border: none;
+    }
+    .title {
+        display: inline-block;
+    }
+    .status {
+        float: right;
+        display: block;
+        font-size: .875rem;
+        font-weight: lighter;
+    }
+    .percentile--container {
+        width: 100%;
+        text-align: center;
+    }
+    .indicator--block {
+        padding: 3px 15px;
+        margin-right: 5px;
+        margin-left: 5px;
+        font-size: 12px;
+        line-height: 25px;
+        color: #fff;
+    }
+    .base--container {
+        width: 100%;
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+    }
+    .base--data {
+        opacity: .5;
+        color: $contrast;
+        flex: 0 0 auto;
+        font-size: .875rem;
+        position: relative;
+        line-height: 1.5rem;
+        flex: 1;
+        text-align: center;
+    }
+    .base--spacer {
+        background: $contrast;
+        opacity: 0.3;
+        height: 1px;
+        flex: 1;
+        margin: .75rem 2rem 0 2rem;
+    }
+    .base--center {
+        position: absolute;
+    }
+    .data--showExtra {
+        background: #E0E0E0;
+        font-size: 1.4rem;
+        padding-left: 10px;
+        color: #535353;
+    }
+    
+    .data--downtime--mod {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .data--downtime {
+        padding-bottom: .3rem;
+        padding-top: .3rem;
+    }
+    .data--downtime--title {
+        display: inline-block;
+        padding-bottom: 5px;
+    }
+    .data--downtime--main {
+        font-size: .875rem;
+        display: block;
+    }
+    
+    @media only screen and (max-width: 768px) {
+        .indicator--block {
+            padding: 3px 7px;
+            font-size: 10px;
+        }
+    }
+}

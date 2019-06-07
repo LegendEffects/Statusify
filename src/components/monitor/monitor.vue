@@ -1,10 +1,12 @@
 <template>
-    <div class="container">
-        <div class="addPadding clickable" @click="toggleExtras">
-            <monitor-data :monitor="monitor"></monitor-data>
+    <div class="component--monitor">
+        <div class="container">
+            <div class="addPadding clickable" @click="toggleExtras">
+                <monitor-data :monitor="monitor"></monitor-data>
+            </div>
+            <monitor-extra-info :monitor="monitor" v-if="previouslyToggledExtra" v-show="showExtra"></monitor-extra-info>
         </div>
-        <monitor-extra-info :monitor="monitor" v-if="previouslyToggledExtra" v-show="showExtra"></monitor-extra-info>
-    </div>
+    </div>    
 </template>
 
 <script>
@@ -23,27 +25,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-    .container {
-        border-radius: 5px;
-        border: 1px solid #E0E0E0;
-        margin-bottom: 30px;
-    }
-    .clickable:hover {
-        cursor: pointer;
-    }
-
-    .addPadding {
-        padding: 10px;
-    }
-
-    .container--titlebar {
-        border-radius: 5px;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-
-        color: #fff;
-        padding: 10px;
-    }
-</style>
