@@ -65,8 +65,6 @@ export default {
             }
 
             let colour = document.querySelector('.component--monitor .container').style.backgroundColor;
-            let tcolour = document.querySelector('.component--monitor-extra .extraInfo--container').style.color;
-            console.log(tcolour);
 
             this.chart = {
                 title: {
@@ -88,7 +86,7 @@ export default {
                 }],
                 legend: {
                     itemStyle: {
-                        color: tcolour
+                        color: '#99AAB5'
                     }
                 },
                 credits: {
