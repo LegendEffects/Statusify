@@ -1,103 +1,114 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>StatusPage</title>
+    <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=es2015"></script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    
+    <title>Loading...</title>
+    <input hidden id="title" type="text" value="Status | LegendEffects"></input>
+    <input hidden id="header" type="text" value="LegendEffects"></input>
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-    <link href="dist/stylesheet.css" rel="stylesheet">
-
-    <script>
-        let settings = {
-            'refreshInterval': 300,
+    <style>
+        .spinner {
+            margin: 100px auto;
+            width: 50px;
+            height: 40px;
+            text-align: center;
+            font-size: 10px;
         }
-    </script>
+
+        .spinner > div {
+            background-color: #333;
+            height: 100%;
+            width: 6px;
+            display: inline-block;
+            
+            -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+            animation: sk-stretchdelay 1.2s infinite ease-in-out;
+        }
+
+        .spinner .rect2 {
+            -webkit-animation-delay: -1.1s;
+            animation-delay: -1.1s;
+        }
+
+        .spinner .rect3 {
+            -webkit-animation-delay: -1.0s;
+            animation-delay: -1.0s;
+        }
+
+        .spinner .rect4 {
+            -webkit-animation-delay: -0.9s;
+            animation-delay: -0.9s;
+        }
+
+        .spinner .rect5 {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+        }
+
+        @-webkit-keyframes sk-stretchdelay {
+            0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+            20% { -webkit-transform: scaleY(1.0) }
+        }
+
+        @keyframes sk-stretchdelay {
+            0%, 40%, 100% { 
+                transform: scaleY(0.4);
+                -webkit-transform: scaleY(0.4);
+            }  20% { 
+                transform: scaleY(1.0);
+                -webkit-transform: scaleY(1.0);
+            }
+        }
+    </style>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Poppins, sans-serif;
+        }
+        .page {
+            width: 90%;
+            max-width: 850px;
+            margin: auto;
+            margin-bottom: 100px;
+        }
+
+        .status-major, .status-danger {
+            background: #e74c3c;
+        }
+        .status-partial {
+            background: #e67e22;
+        }
+        .status-operational, .status-success {
+            background: #2ecc71;
+        }
+        .status-unknown {
+            background: #535353;
+        }
+        .status-major--c, .status-danger--c {
+            color: #e74c3c;
+        }
+        .status-partial--c {
+            color: #e67e22;
+        }
+        .status-operational--c, .status-success--c {
+            color: #2ecc71;
+        }
+    </style>
 </head>
-<body>
-    <div id="vueApp-status">
-        <div v-cloak>
-            <div v-if="global.loader.active" id="loader"><img class="loader--gif" src="dist/img/loader.gif" /></div>
-            <div class="page--header">
-                <span style="position: absolute; color: #fff; top: 2%; left: 2%; text-align: right">
-                    Refreshing in: <span v-if="global.timeleft === 1">{{global.timeleft}} Second</span><span v-else>{{global.timeleft}} Seconds</span>
-                </span>
-                <span class="page--header--text">LegendEffects</span>
-            </div>
+<body id="page">
+    
+    <div id="app"></div>
 
-            <div class="page--container">
-                <div id="status-global">
-                    <div class="status--current--container" :class="'status--'+global.status">{{global.message}}</div>
-                </div>
-
-                <div id="status-monitors">
-                    <div v-for="monitor in reqFeedback.psp.monitors">
-                        <div class="monitor--container" v-on:click="revealExtra(monitor.id)" :id="monitor.id" style="cursor: pointer">
-                            <div class="monitor--container--pad">
-                                <div class="monitor--data--container">
-                                <span class="monitor--data--title">{{monitor.friendly_name}}</span>
-                                <span class="monitor--data--status" :class="'status--'+parseStatus(monitor.statusLabel).toLowerCase()+'--c'">{{parseStatus(monitor.oneWeekRange.label)}}</span>
-                            </div>
-                                <div class="monitor--data--percentile--container">
-                                    <span v-for="range in monitor.customuptimeranges" class="monitor--data--indicator--block" :class="'status--'+parseSeverity(range.ratio).toLowerCase()">{{range.ratio}}%</span>
-                                </div>
-                                <div class="monitor--data--base--container">
-                                    <div class="monitor--data--base--data">6 Days Ago</div>
-                                    <div class="monitor--data--base--spacer"></div>
-
-                                    <div class="monitor--data--base--data monitor--data--base--center">{{monitor.oneWeekRange.ratio}}%</div>
-
-                                    <div class="monitor--data--base--spacer"></div>
-                                    <div class="monitor--data--base--data">Today</div>
-                                </div>
-                            </div>
-                            <div class="monitor--extraInfo--container monitor--data--container">
-                                <div class="contain">
-                                    <span class="monitor--data--title">{{monitor.typeStr.toUpperCase()}} - (Checked every {{monitor.intervalMin}} minutes.)</span>
-                                    <div class="chart-container" :id="'chart-'+monitor.id" style="width: 100%; height: 200px; margin-top: 20px;"></div>
-                                    <div class="latestLog eventTable">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>Event</th>
-                                                    <th>Date</th>
-                                                    <th>Reason</th>
-                                                    <th>Duration</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr v-for="log in monitor.allLogs.slice(-3).reverse()">
-                                                    <td><span class="circle" :class="'status--'+log.label+'--c'"></span>
-                                                    <td>{{log.dateTimeStr}}</td>
-                                                    <td>{{log.reasonStr}}</td>
-                                                    <td>{{log.durationStr}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="status-recentDown" v-if="reqFeedback.psp.latestDownTimeStr.length > 0">
-                    <div class="monitor--data--downtime">
-                        <div class="monitor--container--titlebar status--unknown">Recent Downtime</div>
-                        <div class="monitor--container monitor--data--downtime--mod monitor--container--pad">
-                            <span class="monitor--data--downtime--main">{{reqFeedback.psp.latestDownTimeStr}}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 
-<script src="dist/vendor/vue/vue.min.js"></script>
-<script src="dist/vendor/highcharts/highcharts.min.js"></script>
-<script src="dist/vendor/highcharts/HighchartsAdapter.js"></script>
-<script src="dist/js/util.js"></script>
-<script src="dist/js/status.js"></script>
-
+<footer>
+    <script src="/dist/main.js"></script>
+</footer>
 </html>
-

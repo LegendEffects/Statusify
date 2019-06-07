@@ -1,2 +1,6 @@
 
 api/config\.php
+api/config.php
+src/node_modules
+api
+src/package-lock\.json

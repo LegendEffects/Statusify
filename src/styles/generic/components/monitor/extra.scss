@@ -1,0 +1,57 @@
+.component--monitor-extra {
+    .extraInfo--container {
+        width: 100%;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        color: $contrast;
+    
+        overflow: hidden;
+        transition: max-height 1s cubic-bezier(0, 1, 0, 1);
+        border-top: solid 1px $accent;
+    }
+    .extraInfo--container.show {
+        display: block;
+        max-height: 99em;
+        transition: max-height 1s ease-in-out;
+    }
+    .extraInfo--container .contain {
+        padding: 10px;
+        padding-top: 20px;
+    }
+    
+    .title {
+        display: inline-block;
+    }
+    .circle:before {
+        content: ' \25CF';
+        font-size: 75px;
+    }
+    .circle.status--success--c:before {
+        color: #2ecc71;
+    }
+    .circle.status--danger--c:before {
+        color: #e74c3c;
+    }
+    
+    .eventTable table {
+        width: 100%;
+        border: 1px solid $accent;
+    }
+    .eventTable th {
+        padding: 20px;
+        text-align: left;
+        border-left: 1px solid $accent;
+        border-bottom: 1px solid $accent;
+    }
+    .eventTable td:first-of-type, .eventTable th:first-of-type {
+        text-align: center;
+    }
+    .eventTable td {
+        padding: 10px 20px;
+        border-left: 1px solid $accent;
+    }
+    
+    .eventTable table th:first-of-type, .eventTable table td:first-of-type {
+        border-left: 0;
+    }
+}
