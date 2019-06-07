@@ -1,4 +1,6 @@
 # UptimeRobot-ExternalStatus
+The following needs to be updated to suit V2
+
 A clean self hosted status page which uses UptimeRobots API.
 
 ## Info
