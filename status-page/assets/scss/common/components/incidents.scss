@@ -1,0 +1,34 @@
+.incidents {
+  margin-top: $incidents-margin-top;
+}
+
+.incident  {
+  .title {
+    font-size: $incident-title-size;
+    font-weight: $incident-title-weight;
+
+    border-bottom: 1px solid rgba(0, 0, 0, .5);
+    padding: $incident-title-padding;
+    margin: $incident-title-margin;
+  }
+
+
+  .updates {
+    p {
+      color: $incident-color;
+    
+      strong {
+        color: $incident-stage-color;
+      }
+    
+    }
+    .date {
+      color: $incident-date-color;
+  
+      font-weight: $incident-date-weight;
+      font-size: $incident-date-size;
+  
+      margin-bottom: $incident-date-margin-bottom;
+    }
+  }
+}

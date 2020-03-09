@@ -1,3 +1,9 @@
+/** Generic **/
+$subheading-size: 1rem;
+$subheading-weight: 600;
+$subheading-margin: 0 0 .5rem 0;
+
+/** Heading **/
 $header-height: 25vh;
 $header-margin-bottom: 3rem;
 $header-title-size: 3rem;
@@ -10,6 +16,18 @@ $header-status-weight: 400;
 $header-status-indicator-size: 1.25rem;
 $header-status-indicator-margin-right: 1rem;
 
-
+/** Monitors **/
 $monitor-title-size: 1.2rem;
 $monitor-title-weight: 400;
+
+/** Incidents **/
+$incidents-margin-top: 2rem;
+
+$incident-title-weight: 600;
+$incident-title-size: 1.25rem;
+$incident-title-margin: 0 0 1rem 0;
+$incident-title-padding: 0 0 .4rem 0;
+
+$incident-date-weight: 400;
+$incident-date-size: .85rem;
+$incident-date-margin-bottom: 1rem;

@@ -1,4 +1,7 @@
 
+const path = require("path");
+import Mode from 'frontmatter-markdown-loader/mode'
+
 export default {
   mode: 'spa',
   /*
@@ -54,6 +57,11 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+      config.module.rules.push({
+        test: /\.md$/,
+        include: path.resolve(__dirname, "content"),
+        loader: "frontmatter-markdown-loader"
+      });
     }
   }
 }

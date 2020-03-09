@@ -1,20 +1,14 @@
 <template>
-  <div class="monitor">
+  <div class="monitor-dashes">
 
-    <div class="main-info">
-      <div class="title">Test Title</div>
-      <div class="status status-operational--c">Operational</div>
-    </div>
+    <svg class="outage-graph" preserveAspectRatio="none" height="34" :viewBox="viewbox">
+      <rect v-for="(percent, index) of sampleDashes" :key="index" height="34" width="3" :x="index * 5" y="0" :class="getDashStyle(percent)" class="dash" />
+    </svg>
 
-    <div class="monitor-dashes">
-      <svg class="outage-graph" preserveAspectRatio="none" height="34" :viewBox="viewbox">
-        <rect v-for="(percent, index) of sampleDashes" :key="index" height="34" width="3" :x="index * 5" y="0" :class="getDashStyle(percent)" class="dash" />
-      </svg>
-      <div class="outage-graph-scale">
-        <div class="left">90 Days</div>
-        <div class="middle">Calculating</div>
-        <div class="right">Today</div>
-      </div>
+    <div class="outage-graph-scale">
+      <div class="left">90 Days</div>
+      <div class="middle">Calculating</div>
+      <div class="right">Today</div>
     </div>
 
   </div>
