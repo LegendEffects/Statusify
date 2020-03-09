@@ -1,0 +1,17 @@
+// $primary: #23272A;
+// $secondary: #2C2F33;
+// $accent: #4c4e53;
+// $contrast: #99AAB5;
+
+$background-color: rgb(35, 39, 42);
+
+$status-operational: #2ecc71;
+$status-partial: #e67e22;
+$status-major: #e74c3c;
+$status-info: #535353;
+
+$header-gradient: linear-gradient(323deg, #36D1DC 5%, #5B86E5);
+$header-title-color: rgb(255, 255, 255);
+
+$header-status-background: linear-gradient(90deg, rgba($background-color, 0.5), rgba(0, 0, 0, 0) 125%);
+$header-status-color: rgb(255, 255, 255);

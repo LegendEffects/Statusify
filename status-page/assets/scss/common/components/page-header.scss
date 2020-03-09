@@ -1,0 +1,38 @@
+.page-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    height: $header-height;
+    background-image: $header-gradient;
+
+    .title {
+        margin: auto;
+
+        color: $header-title-color;
+        font-size: $header-title-size;
+        font-weight: $header-title-weight;
+    }
+
+    .status {
+        display: flex;
+        flex-direction: row;
+        
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        padding: $header-status-padding;
+
+        background: $header-status-background;
+        color: $header-status-color;
+
+        font-size: $header-status-size;
+        font-weight: $header-status-weight;
+
+        .status-indicator {
+            margin: auto 0;
+            margin-right: $header-status-indicator-margin-right;
+        }
+    }
+}
