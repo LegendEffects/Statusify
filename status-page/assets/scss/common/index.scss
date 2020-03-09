@@ -1,35 +1,9 @@
 /** Imports **/
 @import "./elements/index.scss";
-@import "./components/page-header.scss";
+@import "./components/index.scss";
 
 /** Statuses **/
-.status-major {
-  background-color: $status-major;
-}
-.status-major--c {
-  color: $status-major;
-}
-
-.status-partial {
-  background-color: $status-partial;
-}
-.status-partial--c {
-  color: $status-partial;
-}
-
-.status-operational {
-  background-color: $status-operational;
-}
-.status-operational--c {
-  color: $status-operational;
-}
-
-.status-info {
-  background-color: $status-info;
-}
-.status-info--c {
-  color: $status-info;
-}
+@import "./statuses";
 
 /** Global **/
 html {
@@ -63,6 +37,13 @@ body,
 .fluid.root {
   display: flex;
   flex-direction: column;
+}
+
+.container {
+  width: 95%;
+  max-width: 850px;
+
+  margin: 0 auto;
 }
 
 body {

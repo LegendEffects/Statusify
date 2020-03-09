@@ -7,7 +7,7 @@
       </div>
 
       <div class="title">
-        Status-Page Title
+        Status Page
       </div>
     </div>
 
@@ -16,16 +16,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
-  computed: {
-    ...mapGetters({
-      theme: "settings/getTheme"
-    })
-  },
-
   beforeCreate() {
+    // Can't use a mapped getter here as beforeCreate has no access to them.
     const theme = this.$store.state.settings.theme;
     if(theme !== undefined) {
       import("@/assets/scss/" + theme + "/main.scss");

@@ -1,0 +1,56 @@
+.monitor-group {
+  .monitor:not(:first-child) {
+    border-top: none;
+  }
+}
+
+.monitor {
+  padding: 1rem;
+
+  border: $monitor-border;
+  
+  .main-info {
+    display: flex;
+    flex-direction: row;
+
+    .title {
+      color: $monitor-title-color;
+      font-size: $monitor-title-size;
+      font-weight: $monitor-title-weight;
+    }
+    
+    .status {
+      margin-left: auto;
+    }
+  } 
+
+  .monitor-dashes {
+    margin-top: .4rem;
+    
+    .outage-graph {
+      width: 100%;
+      overflow: hidden;
+
+      .dash:hover {
+        fill: $status-info;
+      }
+    }
+
+    .outage-graph-scale {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      color: $monitor-dashes-timescale-ends-color;
+
+      .middle {
+        margin-left: auto;
+        margin-right: auto;
+
+        color: $monitor-dashes-timescale-middle-color;
+      }
+    }
+
+  }
+
+}

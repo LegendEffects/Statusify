@@ -15,3 +15,12 @@ $header-title-color: rgb(255, 255, 255);
 
 $header-status-background: linear-gradient(90deg, rgba($background-color, 0.5), rgba(0, 0, 0, 0) 125%);
 $header-status-color: rgb(255, 255, 255);
+
+
+$monitor-border: 1px solid rgb(30, 30, 30);
+
+$monitor-title-color: rgb(255, 255, 255);
+$monitor-tooltip-color: rgb(200, 200, 200);
+
+$monitor-dashes-timescale-ends-color: rgba(255, 255, 255, .75);
+$monitor-dashes-timescale-middle-color: rgba(255, 255, 255, .9);
