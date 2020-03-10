@@ -1,43 +1,22 @@
 <template>
-  <div v-if="loading" class="loading-container">
-    <div class="loading-indicator" />
-  </div>
-  <div v-else class="container">
+  <div class="container">
 
-    <incidents :incidents="incidents" :resolved="false" />
+    <incidents :resolved="false" />
 
-    <div class="monitor-group">
-      <monitor />
-      <monitor />
-      <monitor />
-    </div>
+    <monitors />
 
-    <incidents :incidents="incidents" :resolved="true" />
+    <incidents :resolved="true" />
   </div>
 </template>
 
 <script>
-import Monitor from "@/components/Monitor/Monitor"
+import Monitors from "@/components/Monitor/Monitors"
 import Incidents from "@/components/Incidents/Incidents"
 
 export default {
   components: {
-    Monitor,
+    Monitors,
     Incidents
-  },
-
-  async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
-    const resolve = require.context('@/content/incidents/', true, /\.md$/);
-    const imports = resolve.keys().map(key => {
-      return resolve(key);
-    }).reverse();
-
-    return { incidents: imports };
-  },
-
-  data() {return {
-    loading: false
-  }},
-
+  }
 }
 </script>

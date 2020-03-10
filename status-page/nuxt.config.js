@@ -1,6 +1,5 @@
 
 const path = require("path");
-import Mode from 'frontmatter-markdown-loader/mode'
 
 export default {
   mode: 'spa',
@@ -30,6 +29,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~plugins/vue-tippy'
   ],
   /*
   ** Nuxt.js dev-modules

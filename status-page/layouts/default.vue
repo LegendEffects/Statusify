@@ -23,6 +23,8 @@ export default {
     if(theme !== undefined) {
       import("@/assets/scss/" + theme + "/main.scss");
     }
+
+    this.$store.dispatch("incidents/loadIncidents");
   }
 }
 </script>

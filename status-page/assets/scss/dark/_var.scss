@@ -1,8 +1,3 @@
-// $primary: #23272A;
-// $secondary: #2C2F33;
-// $accent: #4c4e53;
-// $contrast: #99AAB5;
-
 /** Generic **/
 $background-color: rgb(35, 39, 42);
 
@@ -21,6 +16,9 @@ $header-status-background: linear-gradient(90deg, rgba($background-color, 0.5), 
 $header-status-color: rgb(255, 255, 255);
 
 /** Monitors **/
+$monitor-group-title-background-color: rgb(30, 30, 30);
+$monitor-group-title-color: rgba(255, 255, 255, 0.8);
+
 $monitor-border: 1px solid rgb(30, 30, 30);
 
 $monitor-title-color: rgb(255, 255, 255);
@@ -35,7 +33,6 @@ $incident-border: 1px solid rgb(30, 30, 30);
 $incident-resolved-title-border-bottom: 1px solid rgba(0, 0, 0, .5);
 $incident-unresolved-border: 1px solid;
 
-$incident-unresolved-title-padding: 1rem 2rem;
 $incident-unresolved-title-color: rgb(255, 255, 255);
 
 $incident-color: rgba(255, 255, 255, 0.9);

@@ -17,10 +17,21 @@ $header-status-indicator-size: 1.25rem;
 $header-status-indicator-margin-right: 1rem;
 
 /** Monitors **/
+$monitor-group-margin-bottom: 2rem;
+$monitor-group-title-padding: 1rem;
+$monitor-group-title-size: 1.25rem;
+$monitor-group-title-weight: 500;
+
 $monitor-title-size: 1.2rem;
 $monitor-title-weight: 400;
 
+$monitor-tooltip-size: 1rem;
+$monitor-tooltip-weight: 400;
+
 /** Incidents **/
+$incidents-resolved-margin: 4rem 0 2rem 0;
+$incidents-unresolved-margin: 0 0 2rem 0;
+
 $incidents-margin-top: 2rem;
 
 $incident-title-weight: 600;
@@ -29,8 +40,8 @@ $incident-title-margin: 0 0 1rem 0;
 $incident-title-padding: 0 0 .4rem 0;
 $incident-margin: 0 0 2rem 0;
 
-$incidents-resolved-margin: 4rem 0 2rem 0;
-$incidents-unresolved-margin: 0 0 2rem 0;
+$incident-unresolved-title-padding: 1rem;
+
 
 $incident-date-weight: 400;
 $incident-date-size: .85rem;

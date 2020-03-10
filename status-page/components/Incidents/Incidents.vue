@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import Incident from "./Incident"
 
 export default {
@@ -15,10 +17,6 @@ export default {
   },
 
   props: {
-    incidents: {
-      type: Array,
-      default() { return [] }
-    },
     resolved: {
       type: Boolean,
       default: false
@@ -26,6 +24,10 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      incidents: 'incidents/getIncidents'
+    }),
+
     getIncidents() {
       if(this.resolved) {
         return this.incidents.filter(incident => incident.attributes.resolved);

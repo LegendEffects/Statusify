@@ -2,7 +2,10 @@
   <div class="monitor">
 
     <div class="main-info">
-      <div class="title">Test Title</div>
+      <div class="title">
+        {{ monitor.name }}
+        <span v-if="monitor.description" v-tippy="{arrow: true}" :content="monitor.description" class="tooltip">(?)</span>
+      </div>
       <div class="status status-operational--c">Operational</div>
     </div>
 

@@ -1,11 +1,11 @@
 <template>
-  <div class="incident" :class="incidentClasses">
-    <div class="title" :class="incidentTitleClasses">
+  <div class="incident" :class="[isResolved ? 'resolved' : 'unresolved', getSeverity]">
+    <div class="title" :class="'status-' + getSeverity + (isResolved ? '--c' : '')">
       {{ incident.attributes.title }}
-      <div class="date no-margin">{{ formatDate(new Date(incident.attributes.date), config.incidents.overallDateFormat) }}</div>
+      <div class="date no-margin">{{ formatDate(incident.attributes.date, config.incidents.overallDateFormat) }}</div>
     </div>
     <div class="updates">
-      <div v-html="incident.html" />
+      <div v-html="html" />
     </div>
   </div>
 </template>
@@ -38,30 +38,19 @@ export default {
     },
     getSeverity() {
       return this.incident.attributes.severity;
-    },
-
-    incidentClasses() {
-      const final = [];
-      final.push(this.isResolved ? "resolved" : "unresolved");
-      final.push(this.getSeverity);
-
-      return final;
-    },
-    
-    incidentTitleClasses() {
-      if(this.isResolved) {
-        return ['status-' + this.incident.attributes.severity + '--c']
-      }
-
-      return ['status-' + this.incident.attributes.severity];
     }
   },
+  
+  data() {return {
+    html: ""
+  }},
 
   created() {
-    let matches = [... this.incident.html.matchAll(/\{\{date\((.*)\)\}\}/g)];
+    this.html = this.incident.html;
+    let matches = [... this.html.matchAll(/\{\{date\((.*)\)\}\}/g)];
 
     for(const match of matches) {
-      this.incident.html = this.incident.html.replace(match[0], `<div class="date">${this.formatDate(match[1], config.incidents.updateDateFormat)}</div>`);
+      this.html = this.html.replace(match[0], `<div class="date">${this.formatDate(match[1], config.incidents.updateDateFormat)}</div>`);
     }
   }
 }
