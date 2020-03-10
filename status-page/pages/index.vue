@@ -4,40 +4,35 @@
   </div>
   <div v-else class="container">
 
+    <incidents :incidents="incidents" :resolved="false" />
+
     <div class="monitor-group">
       <monitor />
       <monitor />
       <monitor />
     </div>
 
-    <div class="incidents">
-      <div class="sub-heading">Past Incidents</div>
-      <incident v-for="(incident, key) of incidents" :key="key" :incident="incident" />
-    </div>
+    <incidents :incidents="incidents" :resolved="true" />
   </div>
 </template>
 
 <script>
 import Monitor from "@/components/Monitor/Monitor"
-import Incident from "@/components/Incidents/Incident"
+import Incidents from "@/components/Incidents/Incidents"
 
 export default {
-  async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
-    const resolve = require.context('../content/incidents/', true, /\.md$/);
-    // console.log(incidents.keys());
-    const imports = resolve.keys().map(key => {
-      const [, name] = key.match(/\/(.+)\.md$/);
-      return resolve(key);
-    });
-
-    return {
-      incidents: imports
-    };
-  },
-  
   components: {
     Monitor,
-    Incident
+    Incidents
+  },
+
+  async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+    const resolve = require.context('@/content/incidents/', true, /\.md$/);
+    const imports = resolve.keys().map(key => {
+      return resolve(key);
+    }).reverse();
+
+    return { incidents: imports };
   },
 
   data() {return {

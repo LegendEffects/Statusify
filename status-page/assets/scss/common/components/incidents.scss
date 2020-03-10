@@ -2,7 +2,7 @@
   margin-top: $incidents-margin-top;
 }
 
-.incident  {
+.incident.resolved  {
   .title {
     font-size: $incident-title-size;
     font-weight: $incident-title-weight;
@@ -10,8 +10,28 @@
     border-bottom: 1px solid rgba(0, 0, 0, .5);
     padding: $incident-title-padding;
     margin: $incident-title-margin;
+
+    display: flex;
+    flex-direction: row;
+
+    .date {
+      &.no-margin {
+        margin: 0;
+        margin-left: auto;
+      }
+
+      margin-left: auto;
+    }
   }
 
+  .date {
+    color: $incident-date-color;
+
+    font-weight: $incident-date-weight;
+    font-size: $incident-date-size;
+
+    margin-bottom: $incident-date-margin-bottom;
+  }
 
   .updates {
     p {
@@ -22,13 +42,17 @@
       }
     
     }
-    .date {
-      color: $incident-date-color;
-  
-      font-weight: $incident-date-weight;
-      font-size: $incident-date-size;
-  
-      margin-bottom: $incident-date-margin-bottom;
-    }
+  }
+
+  margin-bottom: 2rem;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.incident.unresolved {
+  .title {
+
   }
 }
