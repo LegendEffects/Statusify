@@ -32,6 +32,12 @@ $monitor-dashes-timescale-middle-color: rgba(255, 255, 255, .9);
 /** Incidents **/
 $incident-border: 1px solid rgb(30, 30, 30);
 
+$incident-resolved-title-border-bottom: 1px solid rgba(0, 0, 0, .5);
+$incident-unresolved-border: 1px solid;
+
+$incident-unresolved-title-padding: 1rem 2rem;
+$incident-unresolved-title-color: rgb(255, 255, 255);
+
 $incident-color: rgba(255, 255, 255, 0.9);
 $incident-stage-color: rgb(255, 255, 255);
 $incident-date-color: rgba(255, 255, 255, 0.6);

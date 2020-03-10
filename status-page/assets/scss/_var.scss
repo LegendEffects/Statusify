@@ -1,7 +1,7 @@
 /** Generic **/
 $subheading-size: 1rem;
 $subheading-weight: 600;
-$subheading-margin: 0 0 .5rem 0;
+$subheading-margin: 0 0 1.5rem 0;
 
 /** Heading **/
 $header-height: 25vh;
@@ -27,6 +27,10 @@ $incident-title-weight: 600;
 $incident-title-size: 1.25rem;
 $incident-title-margin: 0 0 1rem 0;
 $incident-title-padding: 0 0 .4rem 0;
+$incident-margin: 0 0 2rem 0;
+
+$incidents-resolved-margin: 4rem 0 2rem 0;
+$incidents-unresolved-margin: 0 0 2rem 0;
 
 $incident-date-weight: 400;
 $incident-date-size: .85rem;

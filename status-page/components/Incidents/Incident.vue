@@ -32,19 +32,28 @@ export default {
     config() {
       return config;
     },
-    incidentClasses() {
-      if(this.incident.attributes.resolved) {
-        return [ "resolved" ];
-      }
 
-      return ["unresolved", "status-" + this.incident.attributes.severity ]
+    isResolved() {
+      return this.incident.attributes.resolved;
     },
+    getSeverity() {
+      return this.incident.attributes.severity;
+    },
+
+    incidentClasses() {
+      const final = [];
+      final.push(this.isResolved ? "resolved" : "unresolved");
+      final.push(this.getSeverity);
+
+      return final;
+    },
+    
     incidentTitleClasses() {
-      if(this.incident.attributes.resolved) {
+      if(this.isResolved) {
         return ['status-' + this.incident.attributes.severity + '--c']
       }
 
-      return [];
+      return ['status-' + this.incident.attributes.severity];
     }
   },
 

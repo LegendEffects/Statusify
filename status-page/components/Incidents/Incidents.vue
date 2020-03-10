@@ -1,5 +1,5 @@
 <template>
-  <div class="incidents">
+  <div class="incidents" :class="{resolved, unresolved: !resolved}">
     <div class="sub-heading" v-if="resolved">Past Incidents</div>
 
     <incident v-for="(incident, key) of getIncidents" :key="key" :incident="incident" />

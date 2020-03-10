@@ -1,13 +1,18 @@
 .incidents {
-  margin-top: $incidents-margin-top;
+  &.resolved {
+    margin: $incidents-resolved-margin;
+  }
+  &.unresolved {
+    margin: $incidents-unresolved-margin;
+  }
 }
 
-.incident.resolved  {
+.incident {
   .title {
     font-size: $incident-title-size;
     font-weight: $incident-title-weight;
 
-    border-bottom: 1px solid rgba(0, 0, 0, .5);
+    border-bottom: $incident-resolved-title-border-bottom;
     padding: $incident-title-padding;
     margin: $incident-title-margin;
 
@@ -40,19 +45,44 @@
       strong {
         color: $incident-stage-color;
       }
-    
     }
   }
 
-  margin-bottom: 2rem;
+  margin: $incident-margin;
+
+  &.unresolved {
+    .title {
+      margin: 0;
+      color: $incident-unresolved-title-color;
+      padding: $incident-unresolved-title-padding;
+      border-bottom: 0;
+    }
+    .updates {
+      padding: 1rem 2rem;
+      background: none;
+    }
+
+    &.info .updates {
+      border: $incident-unresolved-border $status-info;
+      border-top: none;
+    }
+    &.operational .updates {
+      border: $incident-unresolved-border $status-operational;
+      border-top: none;
+    }
+    &.partial .updates {
+      border: $incident-unresolved-border $status-partial;
+      border-top: none;
+    }
+    &.major .updates {
+      border: $incident-unresolved-border $status-major;
+      border-top: none;
+    }
+
+    margin: $incidents-unresolved-margin;
+  }
 
   &:last-of-type {
     margin-bottom: 0;
-  }
-}
-
-.incident.unresolved {
-  .title {
-
   }
 }
