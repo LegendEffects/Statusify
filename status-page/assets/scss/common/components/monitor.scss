@@ -35,8 +35,14 @@
     }
   }
 
-  &.collapsible > .title {
-    cursor: pointer;
+  &.collapsible {
+    > .title {
+      cursor: pointer;
+    }
+
+    .monitors .monitor:first-child {
+      border-top: 0;
+    }
   }
 
   .tooltip {
