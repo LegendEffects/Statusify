@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-for="(group, index) in getMonitorGroups">
-      <monitor-group :key="index" v-if="isDetailedGroup(group)" :monitors="group.monitors" :title="group.group_name" :collapsible="group.collapsible" :initiallyCollapsed="group.collapsed" />
+      <monitor-group :key="index" v-if="isDetailedGroup(group)" :monitors="group.monitors" :title="group.group_name" :description="group.description" :collapsible="group.collapsible" :initiallyCollapsed="group.collapsed" />
       <monitor-group :key="index" v-else :monitors="group" />
     </template>
   </div>

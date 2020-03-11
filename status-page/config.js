@@ -29,6 +29,7 @@ export default {
     // Category example
     {
       group_name: "Services",
+      description: "These services are core to our business.",
 
       collapsible: true,
       collapsed: false,
@@ -44,6 +45,26 @@ export default {
           provider_id: 779428955
         }
       ]
+    }
+  ],
+
+  // Highest severity at the top, lowest at the bottom.
+  severityRatings: [
+    {
+      name: "major",
+      display_name: "Major"
+    },
+    {
+      name: "partial",
+      display_name: "Partial"
+    },
+    {
+      name: "info",
+      display_name: "Affected"
+    },
+    {
+      name: "operational",
+      display_name: "Operational"
     }
   ]
 }

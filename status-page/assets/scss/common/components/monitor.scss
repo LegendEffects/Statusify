@@ -18,6 +18,8 @@
     font-size: $monitor-group-title-size;
     font-weight: $monitor-group-title-weight;
 
+    line-height: 100%;
+
     .collapse-indicator {
       font-size: 1.25rem;
       text-align: center;
@@ -25,11 +27,23 @@
       margin-right: .5rem;
       width: 1rem;
     }
+
+    .status {
+      margin-left: auto;
+      font-size: $monitor-group-status-size;
+      font-weight: $monitor-group-status-weight;
+    }
   }
 
-    &.collapsible > .title {
-      cursor: pointer;
-    }
+  &.collapsible > .title {
+    cursor: pointer;
+  }
+
+  .tooltip {
+    color: $monitor-tooltip-color;
+    font-size: $monitor-tooltip-size;
+    font-weight: $monitor-tooltip-weight;
+  }
 }
 
 .monitor {
@@ -45,12 +59,6 @@
       color: $monitor-title-color;
       font-size: $monitor-title-size;
       font-weight: $monitor-title-weight;
-
-      .tooltip {
-        color: $monitor-tooltip-color;
-        font-size: $monitor-tooltip-size;
-        font-weight: $monitor-tooltip-weight;
-      }
     }
     
     .status {
