@@ -1,37 +1,20 @@
 <template>
   <div>
-    <!-- <div class="monitor-group">
-      <monitor />
-      <monitor />
-    </div>
-    <div class="monitor-group">
-      <monitor />
-    </div> -->
-
-    <div v-for="(group, index) of getMonitorGroups" :key="index" class="monitor-group">
-      <div class="title" v-if="isDetailedGroup(group)">
-        {{ group.group_name }}
-      </div>
-
-      <div class="monitors" v-if="isDetailedGroup(group)">
-        <monitor v-for="(monitor, index) of group.monitors" :key="index" :monitor="monitor" />
-      </div>
-      <div class="monitors" v-else>
-        <monitor v-for="(monitor, index) of group" :key="index" :monitor="monitor" />
-      </div>
-
-    </div>
+    <template v-for="(group, index) in getMonitorGroups">
+      <monitor-group :key="index" v-if="isDetailedGroup(group)" :monitors="group.monitors" :title="group.group_name" :collapsible="group.collapsible" :initiallyCollapsed="group.collapsed" />
+      <monitor-group :key="index" v-else :monitors="group" />
+    </template>
   </div>
 </template>
 
 <script>
 import config from "@/config"
 
-import Monitor from "./Monitor"
+import MonitorGroup from "./MonitorGroup"
 
 export default {
   components: {
-    Monitor
+    MonitorGroup
   },
 
   computed: {

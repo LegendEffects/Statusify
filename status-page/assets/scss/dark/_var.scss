@@ -1,10 +1,10 @@
 /** Generic **/
 $background-color: rgb(35, 39, 42);
 
-$status-operational: #2ecc71;
-$status-partial: #e67e22;
-$status-major: #e74c3c;
-$status-info: #535353;
+$status-operational: rgb(46, 204, 113);
+$status-partial: rgb(230, 126, 34);
+$status-major: rgb(231, 76, 60);
+$status-info: rgb(83, 83, 83);
 
 $subheading-color: rgba(255, 255, 255, .75);
 
@@ -16,21 +16,21 @@ $header-status-background: linear-gradient(90deg, rgba($background-color, 0.5), 
 $header-status-color: rgb(255, 255, 255);
 
 /** Monitors **/
-$monitor-group-title-background-color: rgb(30, 30, 30);
+$monitor-group-title-background-color: rgb(70, 70, 70);
 $monitor-group-title-color: rgba(255, 255, 255, 0.8);
 
-$monitor-border: 1px solid rgb(30, 30, 30);
+$monitor-border: 1px solid rgb(70, 70, 70);
 
 $monitor-title-color: rgb(255, 255, 255);
 $monitor-tooltip-color: rgb(200, 200, 200);
 
 $monitor-dashes-timescale-ends-color: rgba(255, 255, 255, .75);
-$monitor-dashes-timescale-middle-color: rgba(255, 255, 255, .9);
+$monitor-dashes-timescale-middle-color: rgba(255, 255, 255, .85);
 
 /** Incidents **/
-$incident-border: 1px solid rgb(30, 30, 30);
+$incident-border: 1px solid rgb(70, 70, 70);
 
-$incident-resolved-title-border-bottom: 1px solid rgba(0, 0, 0, .5);
+$incident-resolved-title-border-bottom: 1px solid rgb(70, 70, 70);
 $incident-unresolved-border: 1px solid;
 
 $incident-unresolved-title-color: rgb(255, 255, 255);

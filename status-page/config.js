@@ -30,7 +30,7 @@ export default {
     {
       group_name: "Services",
 
-      collapsable: true,
+      collapsible: true,
       collapsed: false,
 
       monitors: [

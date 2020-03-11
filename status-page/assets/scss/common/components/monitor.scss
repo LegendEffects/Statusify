@@ -8,13 +8,28 @@
   }
 
   &>.title {
+    display: flex;
+    flex-direction: row;
+
     background: $monitor-group-title-background-color;
     padding: $monitor-group-title-padding;
 
     color: $monitor-group-title-color;
     font-size: $monitor-group-title-size;
     font-weight: $monitor-group-title-weight;
+
+    .collapse-indicator {
+      font-size: 1.25rem;
+      text-align: center;
+
+      margin-right: .5rem;
+      width: 1rem;
+    }
   }
+
+    &.collapsible > .title {
+      cursor: pointer;
+    }
 }
 
 .monitor {

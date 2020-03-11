@@ -19,6 +19,7 @@
 export default {
   beforeCreate() {
     // Can't use a mapped getter here as beforeCreate has no access to them.
+    // Should be moved into a middleware
     const theme = this.$store.state.settings.theme;
     if(theme !== undefined) {
       import("@/assets/scss/" + theme + "/main.scss");

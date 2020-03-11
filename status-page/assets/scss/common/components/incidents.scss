@@ -53,9 +53,10 @@
   &.unresolved {
     .title {
       margin: 0;
+      border-bottom: 0;
+      
       color: $incident-unresolved-title-color;
       padding: $incident-unresolved-title-padding;
-      border-bottom: 0;
     }
     .updates {
       padding: 1rem;
