@@ -2,7 +2,7 @@
   <div class="container">
 
     <incidents :resolved="false" />
-
+    
     <monitors />
 
     <incidents :resolved="true" />

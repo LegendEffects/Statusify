@@ -3,7 +3,9 @@ export default {
 
   incidents: {
     overallDateFormat: "MMM D, YYYY",
-    updateDateFormat: "MMM D, hh:mm zz"
+    updateDateFormat: "MMM D, hh:mm zz",
+
+    fullPageDateFormat: "MMM D, YYYY, hh:mm zz"
   },
 
   // A provider is not required, its job is to provide uptimes and down statuses automatically

@@ -19,6 +19,13 @@ export const getters = {
   getUnresolvedIncidents: state => {
     return state.incidents.filter(incident => incident.attributes.resolved);
   },
+
+  getIncidentBySlug: state => slug => {
+    return state.incidents.filter(incident => {
+      const filename  = incident.meta.resourcePath.replace(/^.*[\\\/]/, '').replace('.md', '');
+      return filename === slug;
+    })[0];
+  },
   
   getIncidentsRelatedToMonitor: state => monitor => {
     return state.incidents.filter(incident => incident.attributes.affected.indexOf(monitor) > -1);

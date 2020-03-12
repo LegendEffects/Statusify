@@ -1,7 +1,7 @@
 <template>
   <div class="incident" :class="[isResolved ? 'resolved' : 'unresolved', getSeverity]">
     <div class="title" :class="'status-' + getSeverity + (isResolved ? '--c' : '')">
-      {{ incident.attributes.title }}
+      <router-link :to="'/incident/' + getSlug">{{ incident.attributes.title }}</router-link>
       <div class="date no-margin">{{ formatDate(incident.attributes.date, config.incidents.overallDateFormat) }}</div>
     </div>
     <div class="updates">
@@ -38,6 +38,9 @@ export default {
     },
     getSeverity() {
       return this.incident.attributes.severity;
+    },
+    getSlug() {
+      return this.incident.meta.resourcePath.replace(/^.*[\\\/]/, '').replace('.md', '');
     }
   },
   

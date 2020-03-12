@@ -1,4 +1,4 @@
-
+import mode from "frontmatter-markdown-loader/mode"
 const path = require("path");
 
 export default {
@@ -60,8 +60,17 @@ export default {
       config.module.rules.push({
         test: /\.md$/,
         include: path.resolve(__dirname, "content"),
-        loader: "frontmatter-markdown-loader"
+        loader: "frontmatter-markdown-loader",
+        options: {
+          mode: [mode.HTML, mode.META]
+        }        
       });
+    }
+  },
+
+  generate: {
+    routes() {
+      // TODO
     }
   }
 }

@@ -1,0 +1,40 @@
+.incident-page {
+    .title {
+        font-size: 2rem;
+        font-weight: 500;
+        color: #fff;
+    }
+    .date {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .affected {
+        margin-top: .5rem;
+
+        display: flex;
+        flex-direction: row;
+
+        .service {
+            padding: .4rem 1rem;
+
+            background: rgba(0, 0, 0, .5);
+            color: #fff;
+
+            margin-left: .5rem;
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+
+    .body {
+        margin-top: 1.5rem;
+        color: #fff;
+    }
+
+    .meta {
+        padding-bottom: .5rem;
+        border-bottom: 1px solid rgb(70, 70, 70);
+    }
+}
