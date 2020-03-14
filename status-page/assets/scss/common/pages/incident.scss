@@ -2,11 +2,18 @@
     .title {
         font-size: 2rem;
         font-weight: 500;
-        color: #fff;
     }
-    .date {
-        font-size: 1rem;
-        color: rgba(255, 255, 255, 0.8);
+    
+    .meta {
+        padding-bottom: .5rem;
+        border-bottom: 1px solid rgb(70, 70, 70);
+    
+        .date {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+
+            margin-top: .75rem;
+        }
     }
 
     .affected {
@@ -31,10 +38,11 @@
     .body {
         margin-top: 1.5rem;
         color: #fff;
+
+        .date {
+            margin-bottom: 1rem;
+        }
     }
 
-    .meta {
-        padding-bottom: .5rem;
-        border-bottom: 1px solid rgb(70, 70, 70);
-    }
+    
 }

@@ -10,6 +10,7 @@ export default {
 
   // A provider is not required, its job is to provide uptimes and down statuses automatically
   provider: {
+    enabled: true,
     name: 'uptimerobot',
     apikey: 'ur488195-bd46852677deb5ca10988538' // USE A READ ONLY KEY FOR UPTIMEROBOT
   },
@@ -24,7 +25,8 @@ export default {
       {
         name: "API",
         description: "This allows other developers to hook into our service.",
-        provider_id: 780071088
+        provider_id: 780071088,
+        latency: true // Latency data requires the provider to be compatible
       },
     ],
 

@@ -12,7 +12,7 @@ $subheading-color: rgba(255, 255, 255, .75);
 $header-gradient: linear-gradient(323deg, #36D1DC 5%, #5B86E5);
 $header-title-color: rgb(255, 255, 255);
 
-$header-status-background: linear-gradient(90deg, rgba($background-color, 0.5), rgba(0, 0, 0, 0) 125%);
+$header-status-background: rgba($background-color, 0.5);
 $header-status-color: rgb(255, 255, 255);
 
 /** Monitors **/

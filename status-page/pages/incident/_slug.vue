@@ -1,13 +1,15 @@
 <template>
     <div class="container incident-page">
         <div class="meta">
-            <div class="title">{{ incident.attributes.title }}</div>
+            <div class="title" :class="'status-' + incident.attributes.severity + (incident.attributes.resolved ? '--c' : '')">{{ incident.attributes.title }}</div>
             <div class="date">
+                <div v-if="incident.attributes.resolved" class="duration">Resolved after {{ formatDuration(incident.attributes.date, incident.attributes.resolvedWhen) }} of downtime.</div>
+
                 {{ formatDate(incident.attributes.date, config.incidents.fullPageDateFormat) }}
                 <span v-if="incident.attributes.resolved"> - {{ formatDate(incident.attributes.resolvedWhen, config.incidents.fullPageDateFormat) }}</span>
             </div>
         </div>
-
+        
         <div class="affected">
             <div class="service" v-for="(affected, index) of incident.attributes.affected" :key="index">{{ affected }}</div>
         </div>

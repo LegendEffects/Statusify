@@ -9,7 +9,7 @@
       <div class="status" :class="'status-' + getStatus().name + '--c'" v-tippy="{arrow: true}" content="Statues are calculated by the uptime and incident with the highest severity.">{{ getStatus().display_name }}</div>
     </div>
 
-    <dashes />
+    <dashes :monitor="monitor" :providerInfo="providerInfo" />
 
   </div>
 </template>
@@ -36,9 +36,14 @@ export default {
 
   computed: {
     ...mapGetters({
-      getRelatedActiveIncidents: "incidents/getRelatedActiveIncidentsToMonitor"
+      getRelatedActiveIncidents: "incidents/getRelatedActiveIncidentsToMonitor",
+      getProvider: "getProvider"
     })
   },
+
+  data() {return {
+    providerInfo: null
+  }},
   
   methods: {
     getStatus() {
@@ -54,7 +59,17 @@ export default {
       }
 
       return config.severityRatings[highestSeverity];
+    },
+
+    getProviderInformation() {
+      this.providerInfo = this.getProvider.fetchMonitor({
+        axios: this.$axios,
+        monitorConfig: this.monitor
+      });
     }
+  },
+  created() {
+    this.$root.$on('providerReady', this.getProviderInformation);
   }
 }
 </script>

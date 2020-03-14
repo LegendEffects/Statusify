@@ -1,13 +1,16 @@
 <template>
   <div class="monitor-dashes">
 
-    <svg class="outage-graph" preserveAspectRatio="none" height="34" :viewBox="viewbox">
-      <rect v-for="(percent, index) of sampleDashes" :key="index" height="34" width="3" :x="index * 5" y="0" :class="getDashStyle(percent)" class="dash" />
+    <svg v-if="providerInfo !== null" class="outage-graph" preserveAspectRatio="none" height="34" :viewBox="viewbox">
+      <rect v-for="(percent, index) of providerInfo.uptimeRatios" :key="index" height="34" width="3" :x="index * 5" y="0" :class="getDashStyle(percent, index)" class="dash" />
     </svg>
 
     <div class="outage-graph-scale">
-      <div class="left">90 Days</div>
-      <div class="middle">Calculating</div>
+      <div class="left">{{daysShown}} Days</div>
+      <div class="middle">
+        <span v-if="providerInfo === null">Calculating</span>
+        <span v-else>{{ (Math.round((providerInfo.averageUptimes[daysShown] + Number.EPSILON) * 100) / 100).toFixed(2) }}%</span>
+      </div>
       <div class="right">Today</div>
     </div>
 
@@ -16,9 +19,9 @@
 
 <script>
 const viewportMargins = [
-  {width: 1200, box: "0 0 448 34"},
-  {width: 1000, box: "150 0 298 34"},
-  {width: 0, box: "300 0 148 34"}
+  {width: 1200, box: "0 0 448 34", days: 90},
+  {width: 1000, box: "150 0 298 34", days: 60},
+  {width: 0, box: "300 0 148 34", days: 30}
 ]
 
 export default {
@@ -28,16 +31,25 @@ export default {
       default() {
         return {}
       }
+    },
+    providerInfo: {
+      type: Object,
+      default() {
+        return {}
+      }
     }
   },
 
   data() {return {
     sampleDashes: [],
-    viewbox: "0 0 448 34"
+    viewbox: "0 0 448 34",
+    daysShown: 90
   }},
 
   methods: {
-    getDashStyle(percent) {
+    getDashStyle(percent, index) {
+      console.log(percent, index);
+
       if(percent >= 100) {
         return ["status-operational--f"];
       }
@@ -53,6 +65,7 @@ export default {
       for(const margin of viewportMargins) {
         if(window.innerWidth >= margin.width) {
           this.viewbox = margin.box;
+          this.daysShown = margin.days
           return;
         }
       }
