@@ -1,0 +1,17 @@
+.tick-tooltip {
+  text-align: left;
+  padding: .5rem;
+
+  .date {
+    margin-bottom: 1rem;
+  }
+
+  .heading {
+    font-weight: 500;
+  }
+
+  .tooltip-incidents a {
+    color: #fff;
+    text-decoration: none;
+  }
+}

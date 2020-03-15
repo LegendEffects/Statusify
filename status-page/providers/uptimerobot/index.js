@@ -55,7 +55,6 @@ export default {
 
   fetchMonitor({axios, monitorConfig}) {
     const monitor = cache.monitors.find(mon => mon.id === monitorConfig.provider_id);
-    console.log(monitor);
     const averages = monitor.custom_uptime_ratio.split('-');
 
     return {

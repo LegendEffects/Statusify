@@ -3,7 +3,7 @@ title: Maintenance Window
 date: 2018-06-13 15:54:00
 resolved: true
 resolvedWhen: 2018-06-13 16:54:00
-severity: partial
+severity: info
 affected:
   - API
 section: issue
