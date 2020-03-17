@@ -8,9 +8,18 @@ export default {
     fullPageDateFormat: "MMM D, YYYY, hh:mm zz"
   },
 
+  header: {
+    logo: "", // Should be a path to an image
+    name: "Status Page",
+
+    link: "/", // Where clicking on the header banner should lead to, use false for nothing.
+    internalLink: true // If the link is internal or not
+  },
+
   // A provider is not required, its job is to provide uptimes and down statuses automatically
   provider: {
-    enabled: true,
+    enabled: false,
+
     name: 'uptimerobot',
     apikey: 'ur488195-bd46852677deb5ca10988538' // USE A READ ONLY KEY FOR UPTIMEROBOT
   },

@@ -69,7 +69,9 @@ export default {
     }
   },
   created() {
-    this.$root.$on('providerReady', this.getProviderInformation);
+    if(config.provider.enabled) {
+      this.$root.$on('providerReady', this.getProviderInformation);
+    }
   }
 }
 </script>

@@ -1,13 +1,13 @@
 <template>
   <div class="monitor-dashes">
 
-    <svg v-if="providerInfo !== null" class="outage-graph" preserveAspectRatio="none" height="34" :viewBox="viewbox">
+    <svg v-if="providerInfo !== null || !config.provider.enabled" class="outage-graph" preserveAspectRatio="none" height="34" :viewBox="viewbox">
       <rect v-for="(dash, index) of getDashes()" :key="index" height="34" width="3" :x="index * 5" y="0" :class="'status-'+dash.state+'--f'" class="dash" v-tippy="{arrow: true, interactive: true}" :content="generateTooltip(dash)" />
     </svg>
 
     <div class="outage-graph-scale">
       <div class="left">{{daysShown}} Days</div>
-      <div class="middle">
+      <div class="middle" v-if="config.provider.enabled">
         <span v-if="providerInfo === null">Calculating</span>
         <span v-else>{{ (Math.round((providerInfo.averageUptimes[daysShown] + Number.EPSILON) * 100) / 100).toFixed(2) }}%</span>
       </div>
@@ -51,6 +51,7 @@ export default {
   },
 
   data() {return {
+    ready: false,
     viewbox: "0 0 448 34",
     daysShown: 90
   }},
@@ -58,7 +59,10 @@ export default {
   computed: {
     ...mapGetters({
       getRelatedIncidents: 'incidents/getIncidentsRelatedToMonitor'
-    })
+    }),
+    config() {
+      return config;
+    }
   },
 
   methods: {
@@ -77,7 +81,6 @@ export default {
 
       for(let i = 0; i < this.daysShown; i++) {
         const dayMoment = moment().day(-i);
-        const providerRatio = this.providerInfo.uptimeRatios[i];
 
         const dayIncidents = incidents.filter(incident => {
           return dayMoment.isSame(incident.attributes.date, 'day');
@@ -91,9 +94,13 @@ export default {
           }
         }
 
-        if(providerRatio >= 100 && this.isStateWorse('operational', state)) state = "operational";
-        else if(providerRatio >= 85 && this.isStateWorse('partial', state)) state = "partial";
-        else state = "major";
+        if(config.provider.enabled) {
+          const providerRatio = this.providerInfo.uptimeRatios[i];
+
+          if(providerRatio >= 100 && this.isStateWorse('operational', state)) state = "operational";
+          else if(providerRatio >= 85 && this.isStateWorse('partial', state)) state = "partial";
+          else state = "major";
+        }
 
         dashes.push({
           date: dayMoment,
@@ -102,13 +109,14 @@ export default {
         })
       }
 
+      this.ready = true;
       return dashes;
     },
 
     generateTooltip(dashInfo) {
       // Is this messy? Yes.
       // However, vue has issues parsing ``` for some reason? 
-
+      const base = this.$router.options.base;
       const humanDate = this.formatDate(dashInfo.date, config.incidents.overallDateFormat);
       let incidents = '';
 
@@ -120,7 +128,7 @@ export default {
 
         for(const incident of dashInfo.dayIncidents) {
           const slug = this.getSlug(incident);
-          incidents += `<a href="/incident/${slug}">${incident.attributes.title}</a>`
+          incidents += `<a href="${base}incident/${slug}">${incident.attributes.title}</a>`
         }
 
         incidents += `</div>`;

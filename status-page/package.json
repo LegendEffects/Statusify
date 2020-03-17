@@ -20,6 +20,7 @@
     "moment-timezone": "^0.5.28",
     "node-sass": "^4.13.1",
     "nuxt": "^2.0.0",
+    "portal-vue": "^2.1.7",
     "sass-loader": "^8.0.2",
     "vue-slide-up-down": "^2.0.1",
     "vue-tippy": "^4.4.0"

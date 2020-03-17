@@ -8,12 +8,13 @@
 
     margin-bottom: $header-margin-bottom;
 
-    .title {
+    .title, .title a {
         margin: auto;
 
         color: $header-title-color;
         font-size: $header-title-size;
         font-weight: $header-title-weight;
+        text-decoration: none;
     }
 
     .status {

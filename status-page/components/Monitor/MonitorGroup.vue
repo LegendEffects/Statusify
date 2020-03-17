@@ -82,7 +82,6 @@ export default {
     },
 
     getStatus() {
-
       let highestSeverity = config.severityRatings.length - 1; // Default to the lowest severity
       for(const monitor of this.monitors) {
         const incidents = this.getRelatedActiveIncidents(monitor.name);

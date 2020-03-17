@@ -43,6 +43,7 @@ $incident-title-size: 1.25rem;
 $incident-title-margin: 0 0 1rem 0;
 $incident-title-padding: 0 0 .4rem 0;
 $incident-margin: 0 0 2rem 0;
+$incident-updates-padding: 1rem;
 
 $incident-unresolved-title-padding: 1rem;
 
@@ -50,3 +51,10 @@ $incident-unresolved-title-padding: 1rem;
 $incident-date-weight: 400;
 $incident-date-size: .85rem;
 $incident-date-margin-bottom: 1rem;
+
+/** Ticker **/
+$ticker-tooltip-padding: .5rem;
+$ticker-tooltip-date-margin-bottom: 1rem;
+
+$ticker-tooltip-heading-size: 1rem;
+$ticker-tooltip-heading-weight: 500;

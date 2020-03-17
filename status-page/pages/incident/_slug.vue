@@ -1,7 +1,11 @@
 <template>
     <div class="container incident-page">
         <div class="meta">
-            <div class="title" :class="'status-' + incident.attributes.severity + (incident.attributes.resolved ? '--c' : '')">{{ incident.attributes.title }}</div>
+            <router-link class="back-link" to="/">
+                <div class="arrow" />
+                Back to Monitoring
+            </router-link>
+            <div class="title" :class="'status-' + incident.attributes.severity + '--c'">{{ incident.attributes.title }}</div>
             <div class="date">
                 <div v-if="incident.attributes.resolved" class="duration">Resolved after {{ formatDuration(incident.attributes.date, incident.attributes.resolvedWhen) }} of downtime.</div>
 

@@ -16,6 +16,10 @@ async function getDynamicPaths(urlFilepathTable) {
 }
 
 export default async () => ({
+  router: {
+    base: '/test/'
+  },
+
   mode: 'spa',
   /*
   ** Headers of the page

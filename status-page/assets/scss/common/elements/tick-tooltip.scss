@@ -1,17 +1,18 @@
 .tick-tooltip {
   text-align: left;
-  padding: .5rem;
+  padding: $ticker-tooltip-padding;
 
   .date {
-    margin-bottom: 1rem;
+    margin-bottom: $ticker-tooltip-date-margin-bottom;
   }
 
   .heading {
-    font-weight: 500;
+    font-size: $ticker-tooltip-heading-size;
+    font-weight: $ticker-tooltip-heading-weight;
   }
 
   .tooltip-incidents a {
-    color: #fff;
+    color: $ticker-tooltip-incident-color;
     text-decoration: none;
   }
 }

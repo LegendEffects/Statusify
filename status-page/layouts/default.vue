@@ -1,22 +1,33 @@
 <template>
   <div class="fluid root">
     <div class="page-header">
-      <div class="status">
-        <div class="status-indicator status-operational" />
-        All Systems Operational.
+
+      <overall-status />
+
+      <div class="title" v-if="config.header.link !== false && config.header.link.length > 0">
+        <router-link v-if="config.header.internalLink" :to="config.header.link">
+          <img v-if="config.header.logo !== false && config.header.logo.length > 0" :src="config.header.logo">
+          <span v-else>{{ config.header.name }}</span>
+        </router-link>
+        <a v-else :href="config.header.link">
+          <img v-if="config.header.logo !== false && config.header.logo.length > 0" :src="config.header.logo">
+          <span v-else>{{ config.header.name }}</span>
+        </a>
+      </div>
+      <div class="title" v-else>
+        <img v-if="config.header.logo !== false && config.header.logo.length > 0" :src="config.header.logo">
+        <span v-else>{{ config.header.name }}</span>
       </div>
 
-      <div class="title">
-        Status Page
-      </div>
     </div>
-
     <nuxt />
   </div>
 </template>
 
 <script>
 import config from '@/config'
+
+import OverallStatus from '@/components/OverallStatus'
 
 export default {
   async beforeCreate() {
@@ -41,6 +52,16 @@ export default {
         this.$root.$emit('providerReady', provider);
       });
     }
-  }
+  },
+  
+  components: {
+    OverallStatus
+  },
+
+  computed: {
+    config() {
+      return config;
+    }
+  },
 }
 </script>

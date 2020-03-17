@@ -17,7 +17,7 @@ export const getters = {
     return state.incidents.filter(incident => incident.attributes.resolved);
   },
   getUnresolvedIncidents: state => {
-    return state.incidents.filter(incident => incident.attributes.resolved);
+    return state.incidents.filter(incident => !incident.attributes.resolved);
   },
 
   getIncidentBySlug: state => slug => {
