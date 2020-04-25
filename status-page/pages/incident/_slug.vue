@@ -3,7 +3,7 @@
         <div class="meta">
             <router-link class="back-link" to="/">
                 <div class="arrow" />
-                Back to Monitoring
+                Back to Monitors
             </router-link>
             <div class="title" :class="'status-' + incident.attributes.severity + '--c'">{{ incident.attributes.title }}</div>
             <div class="date">
@@ -15,7 +15,7 @@
         </div>
         
         <div class="affected">
-            <div class="service" v-for="(affected, index) of incident.attributes.affected" :key="index">{{ affected }}</div>
+            <router-link :to="'/monitor/' + affected" class="service" v-for="(affected, index) of incident.attributes.affected" :key="index">{{ affected }}</router-link>
         </div>
 
         <div class="body" v-html="getBody" />

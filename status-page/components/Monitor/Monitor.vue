@@ -3,7 +3,7 @@
 
     <div class="main-info">
       <div class="title">
-        {{ monitor.name }}
+        <router-link class="title" :to="'/monitor/' + monitor.name">{{ monitor.name }}</router-link>
         <span v-if="monitor.description" v-tippy="{arrow: true}" :content="monitor.description" class="tooltip">(?)</span>
       </div>
       <div class="status" :class="'status-' + getStatus().name + '--c'" v-tippy="{arrow: true}" content="Statues are calculated by the uptime and incident with the highest severity.">{{ getStatus().display_name }}</div>
@@ -70,7 +70,11 @@ export default {
   },
   created() {
     if(config.provider.enabled) {
-      this.$root.$on('providerReady', this.getProviderInformation);
+      if(this.getProvider != null) {
+        this.getProviderInformation();
+      } else {
+        this.$root.$on('providerReady', this.getProviderInformation);
+      }
     }
   }
 }

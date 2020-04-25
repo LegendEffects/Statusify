@@ -2,7 +2,7 @@
   <div class="fluid root">
     <div class="page-header">
 
-      <overall-status />
+      <overall-status v-if="config.header.showOverallStatus" />
 
       <div class="title" v-if="config.header.link !== false && config.header.link.length > 0">
         <router-link v-if="config.header.internalLink" :to="config.header.link">
@@ -32,7 +32,7 @@ import OverallStatus from '@/components/OverallStatus'
 export default {
   async beforeCreate() {
     // Can't use a mapped getter here as beforeCreate has no access to them.
-    // Should be moved into a middleware
+    // Should be moved into a plugin but there is no easy way to emit an event out of a plugin.
     const theme = this.$store.state.settings.theme;
     if(theme !== undefined) {
       import("@/assets/scss/" + theme + "/main.scss");
@@ -51,6 +51,12 @@ export default {
 
         this.$root.$emit('providerReady', provider);
       });
+    }
+  },
+
+  head() {
+    return {
+      title: config.title.default
     }
   },
   

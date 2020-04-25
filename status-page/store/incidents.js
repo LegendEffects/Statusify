@@ -30,6 +30,12 @@ export const getters = {
   getIncidentsRelatedToMonitor: state => monitor => {
     return state.incidents.filter(incident => incident.attributes.affected.indexOf(monitor) > -1);
   },
+  getRelatedResolvedIncidentsToMonitor: state => monitor => {
+    return state.incidents.filter(incident => {
+      if(incident.attributes.resolved) return false;
+      incident.attributes.affected.indexOf(monitor) > -1
+    });
+  },
   getRelatedActiveIncidentsToMonitor: state => monitor => {
     return state.incidents.filter(incident => {
       if(incident.attributes.resolved) return false;

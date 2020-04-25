@@ -35,8 +35,10 @@ export default {
     }
 
     let uptimeRanges = [];
-    for(let d = -90; d < 0; d++) {
-      const dayMoment = moment().day(d);
+    for(let d = 90 - 1; d >= 0; d--) {
+      const dayMoment = moment().dayOfYear(moment().dayOfYear() - d);
+      console.log(dayMoment);
+
       uptimeRanges.push(dayMoment.startOf('day').unix() + '_' + dayMoment.endOf('day').unix());
     }
 

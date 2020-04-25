@@ -26,12 +26,14 @@
             padding: .4rem 1rem;
 
             background: rgba(0, 0, 0, .5);
+            text-decoration: none;
             color: #fff;
 
             margin-left: .5rem;
             &:first-child {
                 margin-left: 0;
             }
+
         }
     }
 

@@ -9,6 +9,7 @@
 <script>
 import { mapGetters } from 'vuex'
 
+import config from '@/config'
 import Incident from "./Incident"
 
 export default {
@@ -30,7 +31,7 @@ export default {
 
     getIncidents() {
       if(this.resolved) {
-        return this.incidents.filter(incident => incident.attributes.resolved);
+        return this.incidents.filter(incident => incident.attributes.resolved).slice(0, config.pageLimit);
       } else {
         return this.incidents.filter(incident => !incident.attributes.resolved);
       }

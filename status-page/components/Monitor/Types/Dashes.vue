@@ -2,7 +2,7 @@
   <div class="monitor-dashes">
 
     <svg v-if="providerInfo !== null || !config.provider.enabled" class="outage-graph" preserveAspectRatio="none" height="34" :viewBox="viewbox">
-      <rect v-for="(dash, index) of getDashes()" :key="index" height="34" width="3" :x="index * 5" y="0" :class="'status-'+dash.state+'--f'" class="dash" v-tippy="{arrow: true, interactive: true}" :content="generateTooltip(dash)" />
+      <rect v-for="(dash, index) of getDashes()" data-html="true" :key="index" height="34" width="3" :x="index * 5" y="0" :class="'status-'+dash.state+'--f'" class="dash" v-tippy="{arrow: true, interactive: true}" :content="generateTooltip(dash)" />
     </svg>
 
     <div class="outage-graph-scale">
@@ -26,8 +26,8 @@ import config from '@/config'
 
 const viewportMargins = [
   {width: 1200, box: "0 0 448 34", days: 90},
-  {width: 1000, box: "150 0 298 34", days: 60},
-  {width: 0, box: "300 0 148 34", days: 30}
+  {width: 1000, box: "0 0 298 34", days: 60},
+  {width: 0, box: "0 0 148 34", days: 30}
 ]
 
 export default {
@@ -79,8 +79,8 @@ export default {
       let dashes = [];
       const incidents = this.getRelatedIncidents(this.monitor.name);
 
-      for(let i = 0; i < this.daysShown; i++) {
-        const dayMoment = moment().day(-i);
+      for(let i = this.daysShown - 1; i >= 0; i--) {
+        const dayMoment = moment().dayOfYear(moment().dayOfYear() - i);
 
         const dayIncidents = incidents.filter(incident => {
           return dayMoment.isSame(incident.attributes.date, 'day');
