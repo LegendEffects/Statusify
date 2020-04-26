@@ -58,6 +58,9 @@ export default {
 
     created() {
         this.incident = this.getIncidentBySlug(this.$route.params.slug);
+    },
+    mounted() {
+        document.title = config.title.prefixed.replace('{prefix}', this.incident.attributes.title);
     }
 }
 </script>

@@ -53,12 +53,6 @@ export default {
       });
     }
   },
-
-  head() {
-    return {
-      title: config.title.default
-    }
-  },
   
   components: {
     OverallStatus

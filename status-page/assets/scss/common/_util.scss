@@ -48,3 +48,12 @@
     }
   }
 }
+
+.fade-up-enter-active, .fade-up-leave-active {
+  transition: opacity .5s, transform .2s;
+}
+
+.fade-up-enter, .fade-up-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}

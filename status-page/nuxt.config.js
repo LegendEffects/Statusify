@@ -1,4 +1,5 @@
 import mode from "frontmatter-markdown-loader/mode"
+import config from "./config"
 
 const glob = require("glob");
 const path = require("path");
@@ -13,6 +14,29 @@ async function getDynamicPaths(urlFilepathTable) {
         .map(filepath => `${url}/${path.basename(filepath, '.md')}`);
     })
   );
+}
+
+async function getMonitorPaths() {
+  let monitorNames = [];
+  for(const group of config.monitors) {
+    let monitors = Array.isArray(group) ? group : group.monitors;
+    for(const monitorIndex in monitors) monitorNames.push('/monitor/' + monitors[monitorIndex].name);
+  }
+
+  return monitorNames.concat(monitorNames.map(name => name.toLowerCase()));
+}
+
+async function getRoutes() {
+  const routes = [].concat(
+    await getDynamicPaths({
+      '/incident': 'incidents/*.md'
+    }),
+    await getMonitorPaths()
+  );
+
+  console.log(routes);
+
+  return routes;
 }
 
 export default async () => ({
@@ -87,8 +111,6 @@ export default async () => ({
   },
 
   generate: {
-    routes: await getDynamicPaths({
-      '/incidents': 'incidents/*.md'
-    })
+    routes: await getRoutes()
   }
 });

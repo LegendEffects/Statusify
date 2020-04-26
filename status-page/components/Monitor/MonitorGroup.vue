@@ -5,7 +5,9 @@
       {{ title }}&nbsp;
 
       <span v-if="description !== null" v-tippy="{arrow: true}" :content="description" class="tooltip">(?)</span>
-      <div class="status" v-tippy="{arrow: true}" content="Groups take on the status of their most degraded child component. Click to see the status of individual children." :class="'status-' + getStatus().name + '--c'">{{ getStatus().display_name }}</div>
+      <transition name="fade-up">
+        <div class="status" v-show="collapsed" v-tippy="{arrow: true}" content="Groups take on the status of their most degraded child component. Click to see the status of individual children." :class="'status-' + getStatus().name + '--c'">{{ getStatus().display_name }}</div>
+      </transition>
     </div>
 
     <slide-up-down :active="!collapsed">

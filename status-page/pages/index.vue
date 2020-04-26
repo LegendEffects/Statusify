@@ -13,10 +13,18 @@
 import Monitors from "@/components/Monitor/Monitors"
 import Incidents from "@/components/Incidents/Incidents"
 
+import config from "@/config"
+
 export default {
   components: {
     Monitors,
     Incidents
+  },
+
+  head() {
+    return {
+      title: config.title.default
+    }
   }
 }
 </script>
