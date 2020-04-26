@@ -14,5 +14,6 @@
   .tooltip-incidents a {
     color: $ticker-tooltip-incident-color;
     text-decoration: none;
+    display: block;
   }
 }
