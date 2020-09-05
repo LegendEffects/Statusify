@@ -1,52 +1,18 @@
-import mode from "frontmatter-markdown-loader/mode"
-import config from "./config"
 
-const glob = require("glob");
-const path = require("path");
-
-// Credit: https://regenrek.com/posts/create-a-frontmatter-markdown-powered-blog-with-nuxt.js/#6-generate-routes-dynamically-for-static-site-hosting-ssg
-async function getDynamicPaths(urlFilepathTable) {
-  return [].concat(
-    ...Object.keys(urlFilepathTable).map(url => {
-      var filepathGlob = urlFilepathTable[url];
-      return glob
-        .sync(filepathGlob, { cwd: 'content' })
-        .map(filepath => `${url}/${path.basename(filepath, '.md')}`);
-    })
-  );
-}
-
-async function getMonitorPaths() {
-  let monitorNames = [];
-  for(const group of config.monitors) {
-    let monitors = Array.isArray(group) ? group : group.monitors;
-    for(const monitorIndex in monitors) monitorNames.push('/monitor/' + monitors[monitorIndex].name);
-  }
-
-  return monitorNames.concat(monitorNames.map(name => name.toLowerCase()));
-}
-
-async function getRoutes() {
-  const routes = [].concat(
-    await getDynamicPaths({
-      '/incident': 'incidents/*.md'
-    }),
-    await getMonitorPaths()
-  );
-
-  console.log(routes);
-
-  return routes;
-}
-
-export default async () => ({
-  router: {
-    base: '/test/'
-  },
-
+export default {
+  /*
+  ** Nuxt rendering mode
+  ** See https://nuxtjs.org/api/configuration-mode
+  */
   mode: 'spa',
   /*
+  ** Nuxt target
+  ** See https://nuxtjs.org/api/configuration-target
+  */
+  target: 'static',
+  /*
   ** Headers of the page
+  ** See https://nuxtjs.org/api/configuration-head
   */
   head: {
     title: process.env.npm_package_name || '',
@@ -60,23 +26,26 @@ export default async () => ({
     ]
   },
   /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#fff' },
-  /*
   ** Global CSS
   */
-  css: [],
+  css: [
+  ],
   /*
   ** Plugins to load before mounting the App
+  ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '~plugins/vue-tippy'
   ],
+  /*
+  ** Auto import components
+  ** See https://nuxtjs.org/api/configuration-components
+  */
+  components: true,
   /*
   ** Nuxt.js dev-modules
   */
   buildModules: [
+    '@nuxt/typescript-build',
   ],
   /*
   ** Nuxt.js modules
@@ -84,33 +53,23 @@ export default async () => ({
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    // Doc: https://github.com/nuxt/content
+    '@nuxt/content',
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {
-  },
+  axios: {},
+  /*
+  ** Content module configuration
+  ** See https://content.nuxtjs.org/configuration
+  */
+  content: {},
   /*
   ** Build configuration
+  ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
-    /*
-    ** You can extend webpack config here
-    */
-    extend (config, ctx) {
-      config.module.rules.push({
-        test: /\.md$/,
-        include: path.resolve(__dirname, "content"),
-        loader: "frontmatter-markdown-loader",
-        options: {
-          mode: [mode.HTML, mode.META]
-        }        
-      });
-    }
-  },
-
-  generate: {
-    routes: await getRoutes()
   }
-});
+}

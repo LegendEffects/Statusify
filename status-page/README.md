@@ -1,10 +1,8 @@
 # status-page
 
-> An almost fully serverless status page
-
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ yarn install
 
