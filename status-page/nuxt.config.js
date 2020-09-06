@@ -34,7 +34,8 @@ export default {
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
-  plugins: [
+  plugins: [  
+    '~plugins/vue-tippy'
   ],
   /*
   ** Auto import components
@@ -46,6 +47,8 @@ export default {
   */
   buildModules: [
     '@nuxt/typescript-build',
+    // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
+    '@nuxtjs/tailwindcss',
   ],
   /*
   ** Nuxt.js modules

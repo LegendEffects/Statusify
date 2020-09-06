@@ -1,8 +1,27 @@
 <template>
   <div>
+    <div class="page-header py-12 mb-8 bg-background-2">
+      <div class="container mx-auto">
+        <div class="text-center text-5xl font-semibold">LegendEffects</div>
+      </div>
+    </div>
+
     <Nuxt />
   </div>
 </template>
+
+<script lang="ts">
+import { Vue, Component } from 'nuxt-property-decorator'
+
+@Component
+export default class extends Vue { 
+  public head() {return {
+    bodyAttrs: {
+      class: 'bg-layout text-color'
+    }
+  }}
+}
+</script>
 
 <style>
 html {
@@ -29,34 +48,5 @@ html {
 *::after {
   box-sizing: border-box;
   margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
 }
 </style>
