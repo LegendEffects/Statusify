@@ -2,8 +2,12 @@
   <div class="monitor-group mb-8" :class="{ collapsible, collapsed, 'has-title': title !== null }">
     <div class="title flex bg-background-2 p-4 font-medium text-xl leading-full" v-if="title !== null" @click="collapse" :class="{ 'cursor-pointer': collapsible }">
       <div v-if="collapsible" class="collapse-indicator">{{ collapsedIndicator }}</div>
-      {{ title }}&nbsp;
-      <span v-if="description" v-tippy="{arrow: true}" :content="description" class="tooltip">(?)</span>
+
+      {{ title }}&nbsp;<span v-if="description" v-tippy="{arrow: true}" :content="description" class="tooltip">(?)</span>
+
+      <transition name="fade-up">
+        <div class="ml-auto text-base font-normal text-s-operational" v-show="collapsed" v-tippy="{arrow: true}" :content="$t('groups.overallStatusDescription')">Operational</div>
+      </transition>
     </div>
 
     <SlideUpDown :active="!collapsed">

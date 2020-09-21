@@ -1,3 +1,5 @@
+import UptimeRobotProvider from "./providers/UptimeRobotProvider";
+
 export default {
   timezone: "Europe/London",
   pageLimit: 10,
@@ -12,13 +14,12 @@ export default {
     name: "Status Page",
 
     link: "/",
-    internalLink: true,
 
     showOverallStatus: true
   },
 
   // A provider isn't a requirement, its job is to provide status information from an external service.
-  provider: false,
+  provider: new UptimeRobotProvider('ur488195-bd46852677deb5ca10988538'),
 
   monitors: [
     [

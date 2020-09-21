@@ -35,7 +35,10 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [  
-    '~plugins/vue-tippy'
+    '~plugins/vue-tippy',
+    '~plugins/i18n.js',
+    '~plugins/axios.ts',
+    '~plugins/provider.ts'
   ],
   /*
   ** Auto import components
