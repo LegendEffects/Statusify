@@ -1,0 +1,8 @@
+{
+  "global": {
+    
+  },
+  "groups": {
+    "overallStatusDescription": "Groups take on the status of their most degraded child component. Click to see the status of individual children."
+  }
+}
