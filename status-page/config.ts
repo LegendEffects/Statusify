@@ -38,11 +38,11 @@ export default {
 
     // Category example
     {
-      group_name: "Services",
+      name: "Services",
       description: "These services are core to our business.",
 
       collapsible: true,
-      collapsed: false,
+      collapsed: true,
 
       monitors: [
         {

@@ -38,7 +38,8 @@ export default {
     '~plugins/vue-tippy',
     '~plugins/i18n.js',
     '~plugins/axios.ts',
-    '~plugins/provider.ts'
+    '~plugins/provider.ts',
+    '~plugins/NuxtClientInit.ts'
   ],
   /*
   ** Auto import components

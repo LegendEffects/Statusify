@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 
-export type MonitorGroupInfo = {
-  name: string;
+export type MonitorGroup = {
+  name?: string;
   description?: string;
 
   collapsible?: boolean;
@@ -11,6 +11,7 @@ export type MonitorGroupInfo = {
 }
 export type MonitorInfo = {
   name: string;
+  slug?: string;
   description?: string;
 
   provider?: any; // Any provider options
@@ -26,4 +27,4 @@ export interface Monitor extends MonitorInfo {
   providerInfo?: ProviderMonitorResponse;
 }
 
-// declare module 'vue-slide-up-down';
+declare module 'vue-slide-up-down';
