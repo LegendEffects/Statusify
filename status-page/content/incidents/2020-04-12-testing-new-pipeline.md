@@ -1,8 +1,7 @@
 ---
 title: New Pipeline Rollout
-date: 2020-04-12 16:24:00
-resolved: false
-resolvedWhen: 2020-04-12 16:58:00
+date: 2020-09-24 16:24:00
+resolved: 2020-09-28 16:30:00
 severity: major
 affected:
   - API

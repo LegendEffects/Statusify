@@ -1,4 +1,7 @@
-import { AxiosInstance } from 'axios';
+import { contentFunc } from "@nuxt/content"
+import VueI18n from "vue-i18n"
+import Provider from "~/providers/Provider"
+import Logger from "~/utils/Logger"
 
 export type MonitorGroup = {
   name?: string;
@@ -27,4 +30,18 @@ export interface Monitor extends MonitorInfo {
   providerInfo?: ProviderMonitorResponse;
 }
 
-declare module 'vue-slide-up-down';
+declare module '@nuxt/types' {
+  interface Context {
+    $logger: Logger;
+    $i18n: VueI18n;
+    $content: contentFunc;
+    $provider: Provider;
+  }
+}
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $logger: Logger;
+    $provider: Provider;
+  }
+}

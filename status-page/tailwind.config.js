@@ -20,7 +20,8 @@ module.exports = {
     }
   },
   variants: {
-    borderWidth: ['responsive', 'last', 'first']
+    borderWidth: ['responsive', 'last', 'first'],
+    fill: ['hover']
   },
   plugins: [
     require('tailwindcss-theming')

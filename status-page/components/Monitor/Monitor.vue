@@ -13,24 +13,49 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { Monitor } from '../../types'
+import { Vue, Component, Prop, Provide, Inject, ProvideReactive } from 'nuxt-property-decorator'
+import { Monitor, MonitorInfo } from '../../types'
+import moment from 'moment'
 import Slugify from 'slugify'
+import config from '../../config'
 
 @Component({
   name: 'Monitor'
 })
-export default class extends Vue { 
+export default class extends Vue {
   @Prop()
+  @Provide()
   name!: string;
 
   @Prop({type: String})
+  @Provide()
   slug!: string;
 
   @Prop({default: null, type: String})
-  description!: string|null;  
+  @Provide()
+  description!: string|null;
 
   @Prop({default: false, type: Boolean})
+  @Provide()
   latency!: boolean;
+
+  @Prop({default: undefined})
+  @Provide()
+  provider!: any;
+
+  @Provide()
+  getMonitorInfo(): MonitorInfo {
+    return this.$props as MonitorInfo;
+  }
+
+  @Provide()
+  async getProviderInfo() {
+    try {
+      return await this.$provider.fetchMonitor(this.getMonitorInfo());
+    } catch(e) {
+      this.$logger.error('Monitor', 'Error accessing provider.', e);
+      return false;
+    }
+  }
 }
 </script>

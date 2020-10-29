@@ -34,12 +34,12 @@ export default {
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
-  plugins: [  
-    '~plugins/vue-tippy',
-    '~plugins/i18n.js',
-    '~plugins/axios.ts',
-    '~plugins/provider.ts',
-    '~plugins/NuxtClientInit.ts'
+  plugins: [
+    '~plugins/1-LoggerInjector.ts',
+    '~plugins/2-ExternalLibLoader.ts',
+    '~plugins/3-AxiosAccessor.ts',
+    '~plugins/4-ProviderInit.ts',
+    '~plugins/5-NuxtClientInit.ts'
   ],
   /*
   ** Auto import components
@@ -62,17 +62,37 @@ export default {
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
+    'nuxt-i18n',
   ],
+
+  /**
+   ** i18n module configuration
+   ** See https://i18n.nuxtjs.org/options-reference
+   */
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en',
+    vuex: false, // Can't use VueX for this, conflicts with VueX-Module-Decorators (https://github.com/championswimmer/vuex-module-decorators/issues/244)
+    vueI18n: {
+      fallbackLocale: 'en',
+      messages: {
+        en: require('./static/content-en.json')
+      }
+    }
+  },
+
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {},
+
   /*
   ** Content module configuration
   ** See https://content.nuxtjs.org/configuration
   */
   content: {},
+
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/

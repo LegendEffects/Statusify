@@ -26,13 +26,15 @@ export default {
       {
         name: "VPS",
         description: "The core of our services.",
-        provider_id: 780071088,
+        provider_id: '780071088',
         latency: false // Latency data requires the provider to be compatible
       },
       {
         name: "Demo Pages",
         description: "Hosts all product demos and staging areas.",
-        provider_id: 779382341
+        provider: {
+          id: '779382341'
+        }
       }
     ],
 
@@ -46,45 +48,53 @@ export default {
 
       monitors: [
         {
-          name: "Website",
-          provider_id: 779382340
+          name: "API",
+          provider: {
+            id: '779382340'
+          }
         },
         {
           name: "Images",
           description: "We host all of our images in a central location.",
-          provider_id: 779428955
-        },
-        {
-          name: "Mail Server",
-          provider_id: 779382339
+          provider: {
+            id: '779428955'
+          }
         }
       ]
     }
   ],
 
-  incidents: {
-    overallDateFormat: "MMM D, YYYY",
-    updateDateFormat: "MMM D, hh:mm zz",
-
-    fullPageDateFormat: "MMM D, YYYY, hh:mm zz"
+  dateFormats: {
+    overall: "MMM D, YYYY",
+    update: "MMM D, hh:mm zz",
+    fullPage: "MMM D, YYYY, hh:mm zz"
   },
+
+  viewportMargins: [
+    {width: 1200, box: "0 0 448 34", days: 90},
+    {width: 1000, box: "0 0 298 34", days: 60},
+    {width: 0, box: "0 0 148 34", days: 30}
+  ],
 
   severityRatings: [
     {
       name: "major",
-      display_name: "Major"
+      display_name: "Major",
+      percentage: 0
     },
     {
       name: "partial",
-      display_name: "Partial"
+      display_name: "Partial",
+      percentage: 85
     },
     {
       name: "info",
-      display_name: "Affected"
+      display_name: "Affected",
     },
     {
       name: "operational",
-      display_name: "Operational"
+      display_name: "Operational",
+      percentage: 100
     }
   ]
 }

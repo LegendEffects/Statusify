@@ -1,8 +1,7 @@
 ---
 title: Major outage in US East
 date: 2017-02-28 14:30:00
-resolved: true
-resolvedWhen: 2017-02-28 16:00:00
+resolved: 2017-02-28 16:00:00
 severity: major
 affected:
   - API

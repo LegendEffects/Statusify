@@ -26,7 +26,8 @@
     "types": [
       "@types/node",
       "@nuxt/types",
-      "./types"
+      "nuxt-i18n",
+      "./**/*.ts"
     ]
   },
   "exclude": [
