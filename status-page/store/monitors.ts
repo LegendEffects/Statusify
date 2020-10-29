@@ -1,6 +1,6 @@
 import { Module, VuexModule, Action, Mutation } from 'vuex-module-decorators';
 import config from '~/config';
-import { Monitor, MonitorGroup } from '~/types/index';
+import { Monitor, MonitorGroup, MonitorInfo } from '~/types/index';
 import Slugify from 'slugify';
 import { Context } from '@nuxt/types';
 
@@ -23,37 +23,6 @@ export default class Monitors extends VuexModule implements MonitorState {
 
   @Action
   async refreshMonitors(ctx: any) {
-
-  }
-
-  @Action
-  async getMonitorDetails(monitor: string) {
-
-  }
-
-  /**
-   * Flattens the tree
-   */
-  get flattened() {
-    let final: Monitor[] = [];
-
-    for(const group of this.monitors) {
-      final = final.concat(group.monitors);
-    }
-
-    return final;
-  }
-
-  @Action
-  async find(name: string): Promise<undefined|Monitor> {
-    return this.flattened.find((m) => (m.name === name));
-  }
-
-  //
-  // Init
-  //
-  @Action
-  async nuxtClientInit(ctx: Context) {
     // We need to convert the config into a standard format which can be easily implemented in code.
     let final: MonitorGroup[] = [];
 
@@ -71,6 +40,14 @@ export default class Monitors extends VuexModule implements MonitorState {
     }
 
     this.setMonitors(final);
+  }
+
+  //
+  // Init
+  //
+  @Action
+  async nuxtClientInit(ctx: Context) {
+    this.refreshMonitors(ctx);
     ctx.$logger.info('Monitors', 'Monitors Initialized.');
   }
 }

@@ -14,7 +14,6 @@ export type MonitorGroup = {
 }
 export type MonitorInfo = {
   name: string;
-  slug?: string;
   description?: string;
 
   provider?: any; // Any provider options
@@ -28,6 +27,7 @@ export type ProviderMonitorResponse = {
 
 export interface Monitor extends MonitorInfo {
   providerInfo?: ProviderMonitorResponse;
+  slug: string;
 }
 
 declare module '@nuxt/types' {

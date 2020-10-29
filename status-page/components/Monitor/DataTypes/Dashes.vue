@@ -102,7 +102,7 @@ export default class extends Vue {
   }
 
   guessDowntimeDuration(percentage: number): string {
-    return moment.duration((3600 * 24) * (percentage / 100), 'seconds').humanize();
+    return moment.duration((3600 * 24) * ((percentage / 100) - 1), 'seconds').humanize();
   }
 
   /**
