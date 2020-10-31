@@ -1,5 +1,6 @@
 import IComponentConfig from './interfaces/component/IComponentConfig'
 import IComponentGroupConfig from './interfaces/component/IComponentGroupConfig'
+import IProvider from './interfaces/provider/IProvider'
 import ISeverityConfig from './interfaces/severity/ISeverityConfig'
 
 /**
@@ -41,4 +42,6 @@ export abstract class BaseConfig {
   abstract moment: IMomentJSConfig
   abstract ticks: TicksConfig
   abstract severities: SeverityConfig
+
+  provider: IProvider | null = null
 }

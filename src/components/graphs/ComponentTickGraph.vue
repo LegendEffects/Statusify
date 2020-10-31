@@ -64,7 +64,6 @@ export default class extends Vue {
 
   async created() {
     this.ticks = await this.component.getTicks(90)
-    console.log(this.component)
 
     this.resize()
     window.addEventListener('resize', () => {

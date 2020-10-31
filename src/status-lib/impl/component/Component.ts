@@ -32,8 +32,19 @@ export default class Component implements IComponent {
     const ticks: ITick[] = []
     const incidents = await this.getIncidents()
     const severityRegistry = StatusLib.instance.severities
+    const provider = StatusLib.instance.provider
 
-    for (let i = range; i > 0; i--) {
+    let uptimes
+    let downtimes
+
+    if (provider !== undefined) {
+      try {
+        uptimes = await provider.uptimePercentagesFor(this, 90)
+        downtimes = await provider.downtimesFor(this, 90)
+      } catch (e) {}
+    }
+
+    for (let i = range - 1; i >= 0; i--) {
       const date = moment().startOf('day').subtract(i, 'days')
       const tIncidents: IIncident[] = incidents.filter((i: IIncident) => {
         return date.isBetween(
@@ -42,6 +53,27 @@ export default class Component implements IComponent {
         )
       })
 
+      // Uptime Percentage
+      const uptimePercentage =
+        uptimes !== undefined && uptimes[i] !== undefined
+          ? uptimes[i]
+          : undefined
+
+      let downtime
+      if (
+        downtimes !== undefined &&
+        downtimes[i] !== undefined &&
+        downtimes[i] !== 0
+      ) {
+        downtime = {
+          length: downtimes[i],
+          severity: severityRegistry.fromPercentage(
+            ((86400 - downtimes[i]) / 86400) * 100
+          ),
+        }
+      }
+
+
       const allStates: ISeverity[] = [
         ...(tIncidents
           .map((i) => severityRegistry.get(i.severity))
@@ -49,10 +81,16 @@ export default class Component implements IComponent {
         severityRegistry.get('operational') as ISeverity,
       ]
 
+      if (uptimePercentage !== undefined) {
+        allStates.push(severityRegistry.fromPercentage(uptimePercentage))
+      }
+
       ticks.push({
         date,
         incidents: tIncidents,
         severity: StatusLib.instance.severities.worstOf(...allStates),
+        uptimePercentage,
+        downtime,
       })
     }
 

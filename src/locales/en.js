@@ -9,7 +9,10 @@ export default {
     statusDescription:
       'Statuses are calculated by the uptime and incident with the highest severity.',
 
-    noDowntime: 'No downtime recorded for this day',
+    downtime: {
+      none: 'No downtime recorded for this day',
+      display: '{severity} Outage',
+    },
 
     incidents: {
       none: 'No incidents reported on this day.',

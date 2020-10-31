@@ -37,8 +37,8 @@ export default class SeverityRegistry implements ISeverityRegistry {
       .filter((s) => s.percentage !== undefined)
       .reduce((prev: ISeverity, curr: ISeverity) => {
         if (
-          (curr.percentage as number) < (prev.percentage as number) &&
-          (prev.percentage as number) <= percentage
+          curr.percentage! <= percentage &&
+          prev.percentage! < curr.percentage!
         ) {
           return curr
         }

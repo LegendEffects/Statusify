@@ -1,6 +1,9 @@
 import { BaseConfig } from './src/status-lib/BaseConfig'
+import UptimeRobotProvider from './src/status-lib/impl/provider/UptimeRobotProvider'
 
 export default class extends BaseConfig {
+  provider = new UptimeRobotProvider('ur488195-bd46852677deb5ca10988538')
+
   /**
    * Components Config
    */
@@ -9,7 +12,7 @@ export default class extends BaseConfig {
     {
       name: 'Servers',
       description: 'Test Description',
-      collapsible: true,
+      collapsible: false,
       components: [
         {
           name: 'London 1',
@@ -27,6 +30,30 @@ export default class extends BaseConfig {
       ]
     },
 
+    {
+      name: 'Pages',
+      collapsible: true,
+      collapsed: true,
+      components: [
+        {
+          name: "Demo Pages",
+          slug: 'demo-pages',
+          description: 'All of our demos are hosted here',
+          provider: {
+            id: '779382341'
+          }
+        },
+        {
+          name: "Images",
+          slug: 'images',
+          description: "We host all of our images in a central location.",
+          provider: {
+            id: '779428955'
+          }
+        }
+      ]
+    },
+
     // Anonymous Group
     [
       {
@@ -36,14 +63,6 @@ export default class extends BaseConfig {
           id: '779382340',
         }
       },
-      {
-        name: "Images",
-        slug: 'images',
-        description: "We host all of our images in a central location.",
-        provider: {
-          id: '779428955'
-        }
-      }
     ]
   ]
 

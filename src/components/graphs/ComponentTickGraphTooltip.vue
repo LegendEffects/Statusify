@@ -10,33 +10,44 @@
     <div class="tooltip-arrow" data-popper-arrow />
     <div class="day-tooltip">
       <div v-if="tick !== null">
-        <div class="date">{{ $status.formatShort(tick.date) }}</div>
         <div class="info">
-          <template v-if="hasIssues">
-            <div v-if="downtime" class="outage">
-              {{ downtime }}
-            </div>
-            <div v-if="incidents">
-              <div class="font-medium mb-1">
-                {{ $t('component.incidents.related') }}
-              </div>
+          <div class="date">{{ $status.formatShort(tick.date) }}</div>
+          <template v-if="!hasIssues">{{
+            $t('component.downtime.none')
+          }}</template>
 
-              <div
-                v-for="(incident, i) of incidents"
-                :key="i"
-                class="font-light"
-              >
-                <NuxtLink
-                  :to="`/incidents/${incident.slug}`"
-                  class="hover:underline"
-                  >{{ incident.title }}</NuxtLink
-                >
-              </div>
+          <div v-if="incidents" class="incidents">
+            <div class="font-medium mb-1">
+              {{ $t('component.incidents.related') }}
             </div>
+
+            <div v-for="(incident, i) of incidents" :key="i" class="font-light">
+              <NuxtLink
+                :to="`/incidents/${incident.slug}`"
+                class="hover:underline"
+                >{{ incident.title }}</NuxtLink
+              >
+            </div>
+          </div>
+        </div>
+        <div v-if="downtime" class="outage">
+          <template v-if="downtime.severity.id === 'major'">
+            <!-- eslint-disable-next-line prettier/prettier -->
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path class="fill-s-major" fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
           </template>
-          <template v-else>
-            {{ $t('component.noDowntime') }}
+          <template v-else-if="downtime.severity.id === 'partial'">
+            <!-- eslint-disable-next-line prettier/prettier -->
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="exclamation" class="svg-inline--fa fa-exclamation" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path class="fill-s-partial" fill="currentColor" d="M176 432c0 44.112-35.888 80-80 80s-80-35.888-80-80 35.888-80 80-80 80 35.888 80 80zM25.26 25.199l13.6 272C39.499 309.972 50.041 320 62.83 320h66.34c12.789 0 23.331-10.028 23.97-22.801l13.6-272C167.425 11.49 156.496 0 142.77 0H49.23C35.504 0 24.575 11.49 25.26 25.199z"></path></svg>
           </template>
+
+          <span class="severity">
+            {{
+              $t('component.downtime.display', {
+                severity: downtime.severity.displayName,
+              })
+            }}
+          </span>
+          {{ duration(downtime.length, 'seconds').humanize() }}
         </div>
       </div>
     </div>
@@ -46,6 +57,7 @@
 <script lang="ts">
 import { Vue, Component, Ref } from 'nuxt-property-decorator'
 import { createPopper, Instance } from '@popperjs/core'
+import moment, { DurationInputArg1, DurationInputArg2 } from 'moment-timezone'
 import ITick from '~/src/status-lib/interfaces/ticks/ITick'
 
 @Component({
@@ -73,7 +85,7 @@ export default class extends Vue {
       return false
     }
 
-    if (this.tick.downtime === undefined || this.tick.downtime === 0) {
+    if (this.tick.downtime === undefined) {
       return false
     }
 
@@ -90,6 +102,10 @@ export default class extends Vue {
     }
 
     return this.tick.incidents
+  }
+
+  duration(val: DurationInputArg1, unit: DurationInputArg2) {
+    return moment.duration(val, unit)
   }
 
   //
@@ -160,10 +176,27 @@ export default class extends Vue {
 
 <style>
 .day-tooltip {
-  @apply bg-background text-color px-4 py-2 text-sm rounded-sm mt-3;
+  @apply bg-background text-color text-sm rounded-sm mt-3;
 }
+
+.day-tooltip .info {
+  @apply px-4 py-2;
+}
+
 .day-tooltip .date {
-  @apply font-medium mb-2 w-64;
+  @apply font-medium w-64;
+}
+.day-tooltip .incidents {
+  @apply mt-2;
+}
+.day-tooltip .outage {
+  @apply bg-background-2 px-4 py-2 flex;
+}
+.day-tooltip .outage svg {
+  @apply w-2 mr-3;
+}
+.day-tooltip .outage .severity {
+  @apply mr-auto font-medium;
 }
 
 .tooltip-arrow,

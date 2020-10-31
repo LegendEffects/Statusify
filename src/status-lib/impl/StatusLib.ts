@@ -1,25 +1,19 @@
 import { Context } from '@nuxt/types'
 import { Consola } from 'consola/types/consola'
 import consola from 'consola'
-import Config from '@@/config'
 import moment, { Moment } from 'moment-timezone'
-import IStatusLibModuleConfig from '../interfaces/config/IStatusLibModuleConfig'
 import ISeverityRegistry from '../interfaces/severity/ISeverityRegistry'
 import IComponentGroup from '../interfaces/component/IComponentGroup'
+import IProvider from '../interfaces/provider/IProvider'
 import ConfigParser from './ConfigParser'
 import SeverityRegistry from './severity/SeverityRegistry'
-import { IMomentJSFormats, TicksConfig } from '~/src/status-lib/BaseConfig'
+import { BaseConfig, IMomentJSFormats, TicksConfig } from '~/src/status-lib/BaseConfig'
 
 export default class StatusLib {
   /**
    * Static Singleton
    */
   private static _instance: StatusLib
-
-  /**
-   * Module Config
-   */
-  private moduleConfig: IStatusLibModuleConfig
 
   /**
    * Nuxt Context
@@ -47,11 +41,16 @@ export default class StatusLib {
   public config: { formats: IMomentJSFormats; ticks: TicksConfig }
 
   /**
+   * Provider
+   */
+  public provider?: IProvider
+
+  /**
    * Constructor
-   * @param moduleConfig Module Configuration
+   * @param BaseConfig Config
    * @param nuxt Nuxt Context
    */
-  constructor(moduleConfig: IStatusLibModuleConfig, nuxt: Context) {
+  constructor(_config: BaseConfig, nuxt: Context) {
     if (StatusLib._instance !== undefined) {
       throw new Error('Use StatusLib.instance instead of prompting new.')
     }
@@ -60,7 +59,6 @@ export default class StatusLib {
     StatusLib._instance = this
 
     // Setup References
-    this.moduleConfig = moduleConfig
     this.nuxt = nuxt
     this.severities = new SeverityRegistry()
 
@@ -72,7 +70,7 @@ export default class StatusLib {
     //
 
     // Parse Information From Config
-    const config = ConfigParser(new Config(), this.severities)
+    const config = ConfigParser(_config, this.severities)
     this.componentGroups = config.components
 
     // Setup MomentJS
@@ -82,6 +80,15 @@ export default class StatusLib {
     this.config = {
       formats: config.moment.formats,
       ticks: config.ticks,
+    }
+  }
+
+  async init(_config: BaseConfig) {
+    // Setup Provider
+    if (_config.provider) {
+      this.provider = _config.provider
+      await this.provider?.init(this, _config)
+      this.logger.log('Provider Initialized.')
     }
 
     this.logger.log('Initialized.')

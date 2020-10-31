@@ -18,3 +18,6 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+# Credits
+Some icons in the default theme are taken from [FontAwesome](https://fontawesome.com) [(license)](https://fontawesome.com/license)

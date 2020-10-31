@@ -1,4 +1,5 @@
 import { Moment } from 'moment-timezone'
+import IDowntime from '../IDowntime'
 import IIncident from '../incident/IIncident'
 import ISeverity from '../severity/ISeverity'
 
@@ -22,7 +23,7 @@ export default interface ITick {
    * OPTIONAL (May not have a provider)
    * Seconds of downtime
    */
-  downtime?: number
+  downtime?: IDowntime
 
   /**
    * OPTIONAL (May not have a provider)
