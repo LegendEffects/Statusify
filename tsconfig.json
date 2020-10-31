@@ -15,20 +15,25 @@
     "noEmit": true,
     "experimentalDecorators": true,
     "baseUrl": ".",
+    "rootDir": "src",
     "paths": {
       "~/*": [
         "./*"
       ],
       "@/*": [
-        "./*"
+        "./*",
       ]
     },
     "types": [
       "@types/node",
       "@nuxt/types",
+      "@nuxt/content",
       "nuxt-i18n"
     ]
   },
+  "include": [
+    "src/**/*", "theme.config.js", "theme.config.js"
+  ],
   "exclude": [
     "node_modules",
     ".nuxt",

@@ -1,4 +1,4 @@
-# status-page
+# statusify
 
 ## Build Setup
 

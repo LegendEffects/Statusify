@@ -12,7 +12,7 @@ const light = new Theme()
   .targetable()
   .addColors({
     ...commonColors,
-
+    
     'layout': 'rgb(255, 255, 255)',
     'background': 'rgb(244, 247, 248)',
     'background2': 'rgb(238, 242, 245)',
@@ -38,8 +38,6 @@ const dark = new Theme()
   });
 
 const themeManager = new ThemeManager()
-
-console.log('\n\n\n\n\nFOUND\n\n\n\n\n')
 
 themeManager.setDefaultTheme(light).setDefaultDarkTheme(dark);
 

@@ -40,7 +40,7 @@ import { isWorseThan, findSeverityFromPercentage } from '../../../utils/ParseUti
 import { MonitorInfo, ProviderMonitorResponse } from '../../../types'
 
 @Component({
-  name: 'GraphDashes'
+  name: 'GraphDashes',
 })
 export default class extends Vue {
   private viewport = config.viewportMargins[0];

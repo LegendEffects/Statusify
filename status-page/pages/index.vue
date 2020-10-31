@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto max-w-4xl">    
+  <div class="container mx-auto max-w-4xl">
     <MonitorGroup v-for="(monitor, i) of monitors" :key="i" v-bind="monitor" />
   </div>
 </template>
@@ -9,7 +9,7 @@ import { Vue, Component, State } from 'nuxt-property-decorator'
 import { MonitorState } from '../store/monitors';
 
 @Component
-export default class extends Vue { 
+export default class extends Vue {
   @State('monitors')
   private monitorStore!: MonitorState;
 

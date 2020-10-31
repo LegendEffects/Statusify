@@ -11,7 +11,7 @@ export interface MonitorState {
 @Module({
   name: 'monitors',
   stateFactory: true,
-  namespaced: true
+  namespaced: true,
 })
 export default class Monitors extends VuexModule implements MonitorState {
   monitors: MonitorGroup[] = [];
