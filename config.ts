@@ -12,7 +12,7 @@ export default class extends BaseConfig {
       collapsible: true,
       components: [
         {
-          name: 'EU London 1',
+          name: 'London 1',
           description: 'Domain Controller 1',
           slug: 'eu-lon1',
           provider: {
@@ -20,7 +20,7 @@ export default class extends BaseConfig {
           }
         },
         {
-          name: 'EU London 2',
+          name: 'London 2',
           slug: 'eu-lon2',
           description: 'Domain Controller 2',
         }
@@ -65,8 +65,8 @@ export default class extends BaseConfig {
    */
   ticks = [
     {width: 1200, box: "0 0 448 34", days: 90},
-    {width: 1000, box: "0 0 298 34", days: 60},
-    {width: 0, box: "0 0 148 34", days: 30}
+    {width: 1000, box: "150 0 298 34", days: 60},
+    {width: 0, box: "300 0 148 34", days: 30}
   ]
 
   /**

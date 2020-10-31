@@ -6,15 +6,15 @@
 
 <script lang="ts">
 import { Vue, Component, State } from 'nuxt-property-decorator'
-import { MonitorState } from '../store/monitors';
+import { MonitorState } from '../store/monitors'
 
 @Component
 export default class extends Vue {
   @State('monitors')
-  private monitorStore!: MonitorState;
+  private monitorStore!: MonitorState
 
   get monitors() {
-    return this.monitorStore.monitors;
+    return this.monitorStore.monitors
   }
 }
 </script>

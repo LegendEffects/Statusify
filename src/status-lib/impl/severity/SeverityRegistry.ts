@@ -52,10 +52,10 @@ export default class SeverityRegistry implements ISeverityRegistry {
    */
   worstOf(...severities: ISeverity[]): ISeverity {
     return severities.reduce((prev: ISeverity, curr: ISeverity) => {
-      if (this.findIndex(prev.id) > this.findIndex(curr.id)) {
-        return prev
+      if (this.findIndex(curr.id) < this.findIndex(prev.id)) {
+        return curr
       }
-      return curr
+      return prev
     })
   }
 

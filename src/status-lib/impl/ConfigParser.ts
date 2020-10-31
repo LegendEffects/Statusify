@@ -49,7 +49,7 @@ function parseComponents(components: ComponentConfig): IComponentGroup[] {
       // Named Group
       result = new ComponentGroup({
         ...componentEntry,
-        components: toComponents(componentEntry.components)
+        components: toComponents(componentEntry.components),
       })
     }
 

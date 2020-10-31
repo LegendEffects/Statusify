@@ -2,7 +2,7 @@ import { Context } from '@nuxt/types'
 import { Consola } from 'consola/types/consola'
 import consola from 'consola'
 import Config from '@@/config'
-import moment from 'moment-timezone'
+import moment, { Moment } from 'moment-timezone'
 import IStatusLibModuleConfig from '../interfaces/config/IStatusLibModuleConfig'
 import ISeverityRegistry from '../interfaces/severity/ISeverityRegistry'
 import IComponentGroup from '../interfaces/component/IComponentGroup'
@@ -93,6 +93,21 @@ export default class StatusLib {
 
   getLogger() {
     return this.logger
+  }
+
+  //
+  // Date Utilities
+  //
+  formatFull(moment: Moment): string {
+    return moment.format(this.config.formats.full)
+  }
+
+  formatMedium(moment: Moment): string {
+    return moment.format(this.config.formats.medium)
+  }
+
+  formatShort(moment: Moment): string {
+    return moment.format(this.config.formats.short)
   }
 
   /**

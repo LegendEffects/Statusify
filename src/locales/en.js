@@ -9,6 +9,8 @@ export default {
     statusDescription:
       'Statuses are calculated by the uptime and incident with the highest severity.',
 
+    noDowntime: 'No downtime recorded for this day',
+
     incidents: {
       none: 'No incidents reported on this day.',
       related: 'Related',
