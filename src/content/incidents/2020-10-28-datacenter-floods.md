@@ -1,7 +1,7 @@
 ---
 title: EU West Datacenter Floods
 date: 2020-10-27 16:24:00
-resolved: false
+resolved: 2020-10-30 10:30:00
 severity: major
 affected:
   - api

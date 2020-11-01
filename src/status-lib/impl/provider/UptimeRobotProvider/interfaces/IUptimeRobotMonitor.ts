@@ -1,5 +1,7 @@
 /* eslint-disable camelcase */
 
+import { IUptimeRobotMonitorStatus } from './IUptimeRobotMonitorStatus'
+
 /**
  * @see https://uptimerobot.com/api/
  */
@@ -43,6 +45,11 @@ export default interface IUptimeRobotMonitor {
    * Type of monitor
    */
   type: 1 | 2 | 3 | 4 | 5
+
+  /**
+   * Status of the monitor
+   */
+  status: IUptimeRobotMonitorStatus
 
   /**
    * Sub Type of Monitor

@@ -29,7 +29,7 @@
     <div>
       {{ $status.formatFull(createdAt) }}
     </div>
-    <div class="text-color-light">
+    <div v-if="resolvedAt !== false" class="text-color-light">
       {{ $t('incident.resolvedAfter', { duration }) }}
     </div>
 
@@ -72,7 +72,7 @@ export default class extends Vue {
     return moment(this.incident.createdAt)
   }
 
-  get resolvedAt(): Moment {
+  get resolvedAt(): Moment | false {
     if (this.incident.resolved === true) {
       return moment(this.incident.updatedAt)
     }
@@ -81,7 +81,7 @@ export default class extends Vue {
       return moment(this.incident.resolved)
     }
 
-    return moment()
+    return false
   }
 
   get affected() {

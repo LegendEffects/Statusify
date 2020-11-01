@@ -20,9 +20,10 @@
           v-show="collapsed"
           v-tippy
           :content="$t('component.groups.overallStatusDescription')"
-          class="overall-status text-s-operational"
+          class="overall-status"
+          :class="`text-s-${severity !== null ? severity.id : 'info'}`"
         >
-          Operational
+          {{ severity !== null ? severity.displayName : '' }}
         </div>
       </transition>
     </div>
@@ -88,8 +89,11 @@ export default class extends Vue {
     }
   }
 
-  created() {
+  severity: ISeverity | null = null
+
+  async created() {
     this.collapsed = this.group.collapsed || false
+    this.severity = await this.group.getSeverity()
   }
 }
 </script>

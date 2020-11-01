@@ -1,6 +1,8 @@
 import IComponent from '../../interfaces/component/IComponent'
 import IComponentGroup from '../../interfaces/component/IComponentGroup'
 import IComponentGroupConfig from '../../interfaces/component/IComponentGroupConfig'
+import ISeverity from '../../interfaces/severity/ISeverity'
+import StatusLib from '../StatusLib'
 
 export default class ComponentGroup implements IComponentGroup {
   name?: string
@@ -25,5 +27,10 @@ export default class ComponentGroup implements IComponentGroup {
 
   isAnonymous(): boolean {
     return this.name === undefined
+  }
+
+  async getSeverity(): Promise<ISeverity> {
+    const sevs = await Promise.all(this.components.map((c) => c.getSeverity()))
+    return StatusLib.instance.severities.worstOf(...sevs)
   }
 }

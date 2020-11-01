@@ -6,11 +6,13 @@ import IProviderTickInfo from '../../../interfaces/provider/IProviderTickInfo'
 import IUptimeRobotResponse from './interfaces/IUptimeRobotResponse'
 import IUptimeRobotMonitor from './interfaces/IUptimeRobotMonitor'
 import { BaseConfig } from '~/src/status-lib/BaseConfig'
+import ISeverity from '~/src/status-lib/interfaces/severity/ISeverity'
 
 export default class UptimeRobotProvider implements IProvider {
   private cache: IUptimeRobotResponse | null = null
   private key: string
   private monitorIDs: number[] = []
+  private statusLib: StatusLib | undefined = undefined
 
   static readonly POLL_URL = 'https://api.uptimerobot.com/v2/getMonitors'
 
@@ -22,6 +24,9 @@ export default class UptimeRobotProvider implements IProvider {
     this.key = apiKey
   }
 
+  /**
+   * @inheritdoc
+   */
   async init(statusLib: StatusLib, _original: BaseConfig): Promise<void> {
     this.monitorIDs = statusLib.componentGroups.flatMap((cg) => {
       return cg.components
@@ -77,8 +82,13 @@ export default class UptimeRobotProvider implements IProvider {
     })
   }
 
-  // eslint-disable-next-line prettier/prettier
-  uptimePercentagesFor(component: IComponent, range: number): Promise<number[]> {
+  /**
+   * @inheritdoc
+   */
+  uptimePercentagesFor(
+    component: IComponent,
+    range: number
+  ): Promise<number[]> {
     return new Promise((resolve, reject) => {
       if (this.cache === null) {
         return reject(new Error("Cache isn't populated, you're early!"))
@@ -97,12 +107,41 @@ export default class UptimeRobotProvider implements IProvider {
     })
   }
 
+  /**
+   * @inheritdoc
+   */
   averageUptimeOver(component: IComponent, range: number): Promise<number> {
     throw new Error("Method not implemented.");
   }
 
+  /**
+   * @inheritdoc
+   */
   ticksInfo(component: IComponent, range: number): Promise<IProviderTickInfo[]> {
     throw new Error("Method not implemented.");
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getSeverity(component: IComponent): Promise<ISeverity> {
+    return new Promise((resolve, reject) => {
+      if (this.cache === null) {
+        return reject(new Error("Cache isn't populated, you're early!"))
+      }
+
+      const monitor = this.findMonitorFor(component)
+      if (monitor === undefined) {
+        return reject(new Error('Unable to find related monitor for component'))
+      }
+
+      const ratios = monitor.custom_uptime_ratios
+      resolve(
+        this.statusLib?.severities.fromPercentage(
+          parseFloat(ratios[ratios.length - 1])
+        )
+      )
+    })
   }
 
   //

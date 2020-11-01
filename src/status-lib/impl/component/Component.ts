@@ -20,6 +20,9 @@ export default class Component implements IComponent {
     this.provider = provider
   }
 
+  /**
+   * @inheritdoc
+   */
   getIncidents(query?: Object): Promise<IIncident[]> {
     return StatusLib.instance
       .getNuxt()
@@ -28,6 +31,9 @@ export default class Component implements IComponent {
       .fetch() as Promise<IIncident[]>
   }
 
+  /**
+   * @inheritdoc
+   */
   async getTicks(range: number): Promise<ITick[]> {
     const ticks: ITick[] = []
     const incidents = await this.getIncidents()
@@ -94,6 +100,38 @@ export default class Component implements IComponent {
     }
 
     return ticks
+  }
+
+  /**
+   * @inheritdoc
+   */
+  async getSeverity(): Promise<ISeverity> {
+    const provider = StatusLib.instance.provider
+    const severityRegistry = StatusLib.instance.severities
+    const states = [severityRegistry.get('operational') as ISeverity]
+
+    // From Incidents
+    const incidentStates: ISeverity[] =
+      (
+        await this.getIncidents({
+          resolved: {
+            $in: [null, false],
+          },
+        })
+      ).map((i) => severityRegistry.get(i.severity)) || []
+
+    // From Provider
+    if (provider !== undefined) {
+      try {
+        const providerState = await provider.getSeverity(this)
+        if (providerState !== undefined) {
+          states.push(providerState)
+        }
+      } catch (e) {}
+    }
+
+    // Get the worst one
+    return severityRegistry.worstOf(...states, ...incidentStates)
   }
 
   //

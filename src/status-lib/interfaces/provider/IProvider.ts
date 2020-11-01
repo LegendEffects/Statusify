@@ -1,6 +1,7 @@
 import { BaseConfig } from '../../BaseConfig'
 import StatusLib from '../../impl/StatusLib'
 import IComponent from '../component/IComponent'
+import ISeverity from '../severity/ISeverity'
 import IProviderTickInfo from './IProviderTickInfo'
 
 export default interface IProvider {
@@ -36,4 +37,10 @@ export default interface IProvider {
    * @param range Number of days that need to be fetched
    */
   ticksInfo(component: IComponent, range: number): Promise<IProviderTickInfo[]>
+
+  /**
+   * Gets a components current severity
+   * @param component Component to get severity for
+   */
+  getSeverity(component: IComponent): Promise<ISeverity>
 }

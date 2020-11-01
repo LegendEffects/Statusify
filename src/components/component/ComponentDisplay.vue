@@ -14,9 +14,10 @@
       <div
         v-tippy
         :content="$t('component.statusDescription')"
-        class="status text-s-operational"
+        class="status"
+        :class="`text-s-${severity !== null ? severity.id : 'info'}`"
       >
-        Operational
+        {{ severity !== null ? severity.displayName : '' }}
       </div>
     </div>
 
@@ -27,6 +28,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import IComponent from '~/src/status-lib/interfaces/component/IComponent'
+import ISeverity from '~/src/status-lib/interfaces/severity/ISeverity'
 
 @Component({
   name: 'ComponentDisplay',
@@ -45,6 +47,12 @@ export default class extends Vue {
 
   get slug() {
     return this.component.slug
+  }
+
+  severity: ISeverity | null = null
+
+  async created() {
+    this.severity = await this.component.getSeverity()
   }
 }
 </script>
