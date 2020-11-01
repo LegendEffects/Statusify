@@ -48,4 +48,8 @@ export default {
     langDir: 'locales/',
     lazy: true,
   },
+
+  content: {
+    liveEdit: false,
+  },
 }

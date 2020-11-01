@@ -5,9 +5,14 @@ import moment, { Moment } from 'moment-timezone'
 import ISeverityRegistry from '../interfaces/severity/ISeverityRegistry'
 import IComponentGroup from '../interfaces/component/IComponentGroup'
 import IProvider from '../interfaces/provider/IProvider'
+import IComponent from '../interfaces/component/IComponent'
 import ConfigParser from './ConfigParser'
 import SeverityRegistry from './severity/SeverityRegistry'
-import { BaseConfig, IMomentJSFormats, TicksConfig } from '~/src/status-lib/BaseConfig'
+import {
+  BaseConfig,
+  IMomentJSFormats,
+  TicksConfig,
+} from '~/src/status-lib/BaseConfig'
 
 export default class StatusLib {
   /**
@@ -100,6 +105,17 @@ export default class StatusLib {
 
   getLogger() {
     return this.logger
+  }
+
+  //
+  // Component Utilities
+  //
+  allComponents() {
+    return this.componentGroups.flatMap((g) => g.components)
+  }
+
+  findComponentBy(by: keyof IComponent, value: any) {
+    return this.allComponents().find((c) => c[by] === value)
   }
 
   //

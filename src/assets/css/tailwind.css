@@ -2,6 +2,8 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import './util/back-link';
+
 .fade-up-enter-active, .fade-up-leave-active {
   transition: opacity .5s, transform .2s;
 }
@@ -13,4 +15,11 @@
 
 .tooltip {
   @apply text-base font-normal text-color-light ml-2;
+}
+
+.back-link {
+  @apply mt-5;
+}
+.back-link img {
+  @apply w-4;
 }

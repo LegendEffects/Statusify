@@ -24,7 +24,7 @@ export default class Component implements IComponent {
     return StatusLib.instance
       .getNuxt()
       .$content('incidents')
-      .where({ ...query, affected: { $contains: this.name } })
+      .where({ ...query, affected: { $contains: this.slug } })
       .fetch() as Promise<IIncident[]>
   }
 
@@ -72,7 +72,6 @@ export default class Component implements IComponent {
           ),
         }
       }
-
 
       const allStates: ISeverity[] = [
         ...(tIncidents

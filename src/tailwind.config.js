@@ -21,6 +21,7 @@ module.exports = {
   },
   variants: {
     borderWidth: ['responsive', 'last', 'first'],
+    margin: ['responsive', 'first', 'last'],
     fill: ['hover']
   },
   plugins: [

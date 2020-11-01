@@ -39,8 +39,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import IComponentGroup from '~/src/status-lib/interfaces/component/IComponentGroup'
 import Collapsible from 'vue-slide-up-down'
+import IComponentGroup from '~/src/status-lib/interfaces/component/IComponentGroup'
 
 @Component({
   name: 'ComponentGroup',

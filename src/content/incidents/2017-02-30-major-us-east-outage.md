@@ -4,10 +4,14 @@ date: 2017-02-28 14:30:00
 resolved: 2017-02-28 16:00:00
 severity: partial
 affected:
-  - API
+  - api
 section: issue
 ---
 
-**Monitoring** - After hitting the ole reboot button Example Chat App is now recovering. We’re going to continue to monitor as everyone reconnects. {{date(2017-02-28 16:50:00)}}
+<incident-update title="Monitoring" title-color="s-operational" date="2017-02-28 16:00:00">
+  After hitting the ole reboot button Example Chat App is now recovering. We’re going to continue to monitor as everyone reconnects.
+</incident-update>
 
-**Investigating** - We’re aware of users experiencing unavailable guilds and issues when attempting to connect. We’re currently investigating. {{date(2017-02-28 15:54:00)}}
+<incident-update title="Investigating" title-color="s-major" date="2017-02-28 14:30:00">
+  We’re aware of users experiencing unavailable guilds and issues when attempting to connect. We’re currently investigating.
+</incident-update>
