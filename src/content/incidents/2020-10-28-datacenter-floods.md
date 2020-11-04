@@ -1,11 +1,10 @@
 ---
 title: EU West Datacenter Floods
 date: 2020-10-27 16:24:00
-resolved: 2020-10-30 10:30:00
+resolved: false
 severity: major
 affected:
   - api
-  - demo-pages
   - images
 section: issue
 ---
@@ -15,7 +14,7 @@ section: issue
 </incident-update>
 
 <incident-update title="Issue Found" title-color="s-partial" date="2020-10-27 16:50:00">
-  The EU West datacenter was recently flooded by Joe. This aint good chief.
+  The EU West datacenter was recently flooded by Joe. This ain't good chief.
 </incident-update>
 
 <incident-update title="Investigating" title-color="s-major" date="2020-10-27 15:54:00">

@@ -27,19 +27,19 @@ export default interface IUptimeRobotMonitor {
   create_datetime: number
 
   /**
-   * String seperated by '-'
+   * String separated by '-'
    */
   custom_down_durations: string
 
   /**
-   * String seperated by '-'
+   * String separated by '-'
    */
   custom_uptime_ranges: string
 
   /**
-   * String seperated by '-'
+   * String separated by '-'
    */
-  custom_uptime_ratios: string
+  custom_uptime_ratio: string
 
   /**
    * Type of monitor

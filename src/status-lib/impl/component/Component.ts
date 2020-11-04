@@ -40,13 +40,11 @@ export default class Component implements IComponent {
     const severityRegistry = StatusLib.instance.severities
     const provider = StatusLib.instance.provider
 
-    let uptimes
-    let downtimes
+    let providerInfo
 
     if (provider !== undefined) {
       try {
-        uptimes = await provider.uptimePercentagesFor(this, 90)
-        downtimes = await provider.downtimesFor(this, 90)
+        providerInfo = await provider.ticksInfo(this, 90)
       } catch (e) {}
     }
 
@@ -59,26 +57,19 @@ export default class Component implements IComponent {
         )
       })
 
-      // Uptime Percentage
-      const uptimePercentage =
-        uptimes !== undefined && uptimes[i] !== undefined
-          ? uptimes[i]
-          : undefined
-
       let downtime
-      if (
-        downtimes !== undefined &&
-        downtimes[i] !== undefined &&
-        downtimes[i] !== 0
-      ) {
+      let uptimePercentage
+      if (providerInfo !== undefined && providerInfo[i].downtime !== 0) {
         downtime = {
-          length: downtimes[i],
+          length: providerInfo[i].downtime,
           severity: severityRegistry.fromPercentage(
-            ((86400 - downtimes[i]) / 86400) * 100
+            ((86400 - providerInfo[i].downtime) / 86400) * 100
           ),
         }
+        uptimePercentage = providerInfo[i].uptimePercentage
       }
 
+      // Calculate state
       const allStates: ISeverity[] = [
         ...(tIncidents
           .map((i) => severityRegistry.get(i.severity))

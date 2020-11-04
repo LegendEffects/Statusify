@@ -81,13 +81,13 @@ export default class extends Vue {
   }
 
   get downtime() {
-    if (this.tick === null) {
+    if (this.tick === null || this.tick.downtime === undefined) {
       return false
     }
 
-    if (this.tick.downtime === undefined) {
-      return false
-    }
+    // if (this.tick.downtime.length === 0) {
+    //   return false
+    // }
 
     return this.tick.downtime
   }

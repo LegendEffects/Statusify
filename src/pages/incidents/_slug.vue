@@ -59,9 +59,11 @@ export default class extends Vue {
   incident!: IIncident
 
   get duration() {
-    return moment
-      .duration(this.createdAt.diff(this.incident.resolvedAt))
-      .humanize()
+    if (this.resolvedAt === false) {
+      return 'Unresolved'
+    }
+
+    return moment.duration(this.createdAt.diff(this.resolvedAt)).humanize()
   }
 
   get createdAt(): Moment {

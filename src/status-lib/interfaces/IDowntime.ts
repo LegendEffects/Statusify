@@ -1,4 +1,4 @@
-import ISeverity from "./severity/ISeverity";
+import ISeverity from './severity/ISeverity'
 
 export default interface IDowntime {
   length: number

@@ -15,6 +15,7 @@ export default class UptimeRobotProvider implements IProvider {
   private statusLib: StatusLib | undefined = undefined
 
   static readonly POLL_URL = 'https://api.uptimerobot.com/v2/getMonitors'
+  static readonly SECONDS_IN_DAY = 86400
 
   /**
    * UptimeRobotProvider Constructor
@@ -59,6 +60,15 @@ export default class UptimeRobotProvider implements IProvider {
 
   /**
    * @inheritdoc
+   */
+  available(): Promise<boolean> {
+    return new Promise((resolve) => {
+      resolve(this.cache !== null && this.cache.stat === 'ok')
+    })
+  }
+
+  /**
+   * @inheritdoc
    * Issues with this: UptimeRobot doesn't give us downtimes for this type, so let's estimate!
    */
   async downtimesFor(component: IComponent, range: number): Promise<number[]> {
@@ -71,14 +81,13 @@ export default class UptimeRobotProvider implements IProvider {
       throw new Error('Unable to find related monitor for component')
     }
 
-    const SECONDS_IN_DAY = 86400
     const uptimePercentages = await this.uptimePercentagesFor(component, range)
     return uptimePercentages.map((percent) => {
       // Take the seconds in a day and calculate the seconds of uptime from it
-      const uptime = SECONDS_IN_DAY * (percent / 100)
+      const uptime = UptimeRobotProvider.SECONDS_IN_DAY * (percent / 100)
 
       // Take away from seconds in day to get the downtime
-      return Math.ceil(SECONDS_IN_DAY - uptime)
+      return Math.ceil(UptimeRobotProvider.SECONDS_IN_DAY - uptime)
     })
   }
 
@@ -110,15 +119,61 @@ export default class UptimeRobotProvider implements IProvider {
   /**
    * @inheritdoc
    */
-  averageUptimeOver(component: IComponent, range: number): Promise<number> {
-    throw new Error("Method not implemented.");
+  async averageUptimeOver(
+    component: IComponent,
+    range: number
+  ): Promise<number> {
+    if (this.cache === null) {
+      throw new Error("Cache isn't populated, you're early!")
+    }
+
+    const monitor = this.findMonitorFor(component)
+    if (monitor === undefined) {
+      throw new Error('Unable to find related monitor for component')
+    }
+
+    // Check if it's a common amount
+    for (let i = 0; i < StatusLib.config.ticks.length; i++) {
+      const element = StatusLib.config.ticks[i]
+      if (element.days === range) {
+        return parseFloat(monitor.custom_uptime_ratio.split('-')[i])
+      }
+    }
+
+    const { data } = await StatusLib.instance
+      .getNuxt()
+      .$axios.post(UptimeRobotProvider.POLL_URL, {
+        api_key: this.key,
+        monitors: component.provider?.id,
+        custom_uptime_ratios: `1-${range}`,
+      })
+
+    return parseFloat(data.monitors[0].custom_uptime_ratio.split('-')[1])
   }
 
   /**
    * @inheritdoc
    */
-  ticksInfo(component: IComponent, range: number): Promise<IProviderTickInfo[]> {
-    throw new Error("Method not implemented.");
+  async ticksInfo(
+    component: IComponent,
+    range: number
+  ): Promise<IProviderTickInfo[]> {
+    const uptimes = await this.uptimePercentagesFor(component, range)
+    const ticks: IProviderTickInfo[] = []
+
+    for (const uptimePercentage of uptimes) {
+      const downtime = Math.ceil(
+        UptimeRobotProvider.SECONDS_IN_DAY -
+          UptimeRobotProvider.SECONDS_IN_DAY * (uptimePercentage / 100)
+      )
+
+      ticks.push({
+        downtime,
+        uptimePercentage,
+      })
+    }
+
+    return ticks
   }
 
   /**

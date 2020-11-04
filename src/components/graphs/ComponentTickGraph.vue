@@ -24,7 +24,9 @@
 
     <div class="graph-scale flex justify-between mt-1 font-light">
       <div class="align-left text-color-light">{{ viewport.days }} Days</div>
-      <div class="align-middle">TODO</div>
+      <div v-if="average !== null" class="align-middle">
+        {{ toPercent(average) }}
+      </div>
       <div class="align-right text-color-light">Today</div>
     </div>
 
@@ -52,14 +54,24 @@ export default class extends Vue {
   private viewport: ITickConfig = this.$status.config.ticks[0]
   private resizeTimeout!: NodeJS.Timeout
   private ticks: ITick[] = []
+  private average: number | null = null
 
   //
   // Viewport Resizing
   //
-  private resize() {
+  private async resize() {
     this.viewport =
       this.$status.config.ticks.find((m) => window.innerWidth >= m.width) ||
       this.$status.config.ticks[0]
+
+    if (this.$status.provider !== undefined) {
+      try {
+        this.average = await this.$status.provider.averageUptimeOver(
+          this.component,
+          this.viewport.days
+        )
+      } catch (e) {}
+    }
   }
 
   async created() {
@@ -70,6 +82,10 @@ export default class extends Vue {
       clearTimeout(this.resizeTimeout)
       this.resizeTimeout = setTimeout(this.resize, 50)
     })
+  }
+
+  toPercent(float: number) {
+    return `${Math.round(float * 100) / 100}%`
   }
 }
 </script>

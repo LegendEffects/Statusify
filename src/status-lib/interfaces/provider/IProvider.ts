@@ -11,6 +11,11 @@ export default interface IProvider {
   init(statusLib: StatusLib, _originalConfig: BaseConfig): Promise<void>
 
   /**
+   * Checks if the monitor is available, this is useful for providers that rely on external APIs
+   */
+  available(): Promise<boolean>
+
+  /**
    * Gets downtimes for a select range of time
    * @param component Component to get downtimes for
    * @param range Number of days that need to be fetched
@@ -25,18 +30,18 @@ export default interface IProvider {
   uptimePercentagesFor(component: IComponent, range: number): Promise<number[]>
 
   /**
-   * Calculates the average uptime for the given range
-   * @param component Component to calculate the average uptime for
-   * @param range Number of days that the average goes over
-   */
-  averageUptimeOver(component: IComponent, range: number): Promise<number>
-
-  /**
    * Gets all info for ticks
    * @param component Component to get tick info for
    * @param range Number of days that need to be fetched
    */
   ticksInfo(component: IComponent, range: number): Promise<IProviderTickInfo[]>
+
+  /**
+   * Calculates the average uptime for the given range
+   * @param component Component to calculate the average uptime for
+   * @param range Number of days that the average goes over
+   */
+  averageUptimeOver(component: IComponent, range: number): Promise<number>
 
   /**
    * Gets a components current severity

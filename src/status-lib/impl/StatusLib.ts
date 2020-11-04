@@ -26,7 +26,7 @@ export default class StatusLib {
   private nuxt: Context
 
   /**
-   * Consola Logger Instance
+   * Logger Instance
    */
   private logger: Consola
 
