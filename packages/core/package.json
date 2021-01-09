@@ -1,0 +1,35 @@
+{
+  "name": "@statusify/core",
+  "version": "1.0.0",
+  "description": "The core of Statusify",
+  "keywords": [
+    "status",
+    "platform",
+    "agnostic"
+  ],
+  "author": "Legend <evaninho94@gmail.com>",
+  "homepage": "https://github.com/LegendEffects/Statusify#readme",
+  "license": "ISC",
+  "main": "lib/index.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LegendEffects/Statusify.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "main": "ts-node lib/index.ts"
+  },
+  "bugs": {
+    "url": "https://github.com/LegendEffects/Statusify/issues"
+  }
+}
