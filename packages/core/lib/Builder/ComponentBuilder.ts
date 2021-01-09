@@ -1,33 +1,18 @@
-import Component from "./Component/Component"
-import ComponentGroup from "./component/ComponentGroup"
-import IProvidesComponents from "./Component/IProvidesComponents"
-import IProvidesSeverities from "./Severity/IProvidesSeverities"
-import Severity from "./Severity/Severity"
-import Statusify from "./Statusify"
+import Component from "../component/Component"
+import ComponentGroup from "../Component/ComponentGroup"
+import IProvidesComponents from "../Component/IProvidesComponents"
+import Statusify from "../Statusify"
 
-/**
- * Builder
- */
-export class Builder implements IProvidesComponents, IProvidesSeverities {
-  protected _groups: ComponentGroupBuilder[] = []
-  protected _severities: SeverityBuilder[] = []
-  
+export class ComponentBuilderMixin extends Base implements IProvidesComponents {
+  _groups: ComponentGroupBuilder[] = []
+
   groups(builders: ComponentGroupBuilder[]) {
     this._groups = builders
     return this
   }
 
-  severities(builders: SeverityBuilder[]) {
-    this._severities = builders
-    return this
-  }
-  
   async getComponents(statusify: Statusify): Promise<ComponentGroup[]> {
     return this._groups.map(g => g.build())
-  }
-  
-  async getSeverities(statusify: Statusify): Promise<Severity[]> {
-    return this._severities.map(s => s.build())
   }
 }
 
@@ -68,6 +53,10 @@ export class ComponentGroupBuilder {
   }
 }
 
+export function group() {
+  return new ComponentGroupBuilder()
+}
+
 /**
  * Component Builder
  */
@@ -102,39 +91,6 @@ export class ComponentBuilder {
   }
 }
 
-/**
- * Severity Builder (ABSTRACT)
- */
-export abstract class SeverityBuilder {
-  protected _name: string
-  protected _id: string
-
-  constructor(id: string) {
-    this._id = id
-  }
-
-  public name(name: string) {
-    this._name = name
-    return this
-  }
-
-  /**
-   * @ignore
-   */
-  public abstract build(): Severity
-}
-
-//
-// Utility Functions
-//
-export function group() {
-  return new ComponentGroupBuilder();
-}
-
 export function component(id: string) {
-  return new ComponentBuilder(id);
-}
-
-export function builder() {
-  return new Builder();
+  return new ComponentBuilder(id)
 }

@@ -4,7 +4,7 @@ import { runnableSeverity } from '../packages/core/lib/Severity/RunnableSeverity
 import LokiIncidentProvider from './LokiIncidentProvider';
 
 async function bootstrap() {
-  const builder = new Builder()
+  const built = new Builder()
         .groups([
             group()
                 .name('Test Group')
@@ -58,8 +58,8 @@ async function bootstrap() {
     ;
 
   const statusify = new Statusify({
-    componentProvider: builder,
-    severityProvider: builder,
+    componentProvider: built,
+    severityProvider: built,
     incidentProvider: new LokiIncidentProvider()
   });
 

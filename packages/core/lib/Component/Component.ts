@@ -29,11 +29,4 @@ export default class Component {
     this.name = name
     this.description = description
   }
-
-  //
-  // Status
-  //
-  async getSeverity() {
-    
-  }
 }
