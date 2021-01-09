@@ -2,7 +2,7 @@
   "id": "test-incident",
   "name": "Test Incident",
 
-  "severity": "minor",
+  "severity": "major",
   "components": [
     "component-1", 
     "component-3"

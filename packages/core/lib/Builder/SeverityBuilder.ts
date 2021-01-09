@@ -1,5 +1,3 @@
-import Component from "../component/Component"
-import ComponentGroup from "../Component/ComponentGroup"
 import IProvidesSeverities from "../Severity/IProvidesSeverities"
 import Severity from "../Severity/Severity"
 import Statusify from "../Statusify"
@@ -16,12 +14,9 @@ export class SeverityBuilderMixin implements IProvidesSeverities {
     return this._severities.map(s => s.build())
   }
 
-  async getSeverityForGroup(group: ComponentGroup, statusify: Statusify): Promise<Severity> {
-    throw new Error("Method not implemented.")
-  }
-
-  async getSeverityForComponent(component: Component, statusify: Statusify): Promise<Severity> {
-    throw new Error("Method not implemented.")
+  async getSeverity(statusify: Statusify, id: string): Promise<Severity> {
+    const found = (await this.getSeverities(statusify)).find(s => s.id === id)
+    return (found === undefined) ? null : found
   }
 }
 

@@ -14,11 +14,6 @@ export default interface IIncident {
   name: string
 
   /**
-   * If the incident has been resolved
-   */
-  resolved: boolean
-
-  /**
    * The body of the incident message
    */
   body: string
@@ -37,6 +32,11 @@ export default interface IIncident {
    * Severity that the incident inflicts
    */
   severity: Severity
+
+  /**
+   * When the incident was resolved (Null if unresolved)
+   */
+  resolvedAt: Date
 
   /**
    * Components that are affected by the incident

@@ -3,16 +3,44 @@ import ComponentGroup from "../Component/ComponentGroup"
 import IProvidesComponents from "../Component/IProvidesComponents"
 import Statusify from "../Statusify"
 
-export class ComponentBuilderMixin extends Base implements IProvidesComponents {
+export class ComponentBuilderMixin implements IProvidesComponents {
   _groups: ComponentGroupBuilder[] = []
-
+  
   groups(builders: ComponentGroupBuilder[]) {
     this._groups = builders
     return this
   }
 
-  async getComponents(statusify: Statusify): Promise<ComponentGroup[]> {
+  /**
+   * Gets the component groups for the service
+   * @param statusify Statusify core
+   */
+  async getComponentGroups(_statusify: Statusify): Promise<ComponentGroup[]> {
     return this._groups.map(g => g.build())
+  }
+
+  /**
+   * Gets the components for the service
+   * @param statusify Statusify core
+   */
+  async getComponents(statusify: Statusify): Promise<Component[]> {
+    const components = [];
+
+    (await this.getComponentGroups(statusify)).forEach(async (group) => {
+      components.push(...(await group.getComponents())) 
+    })
+
+    return components
+  }
+
+  /**
+   * Gets a component by its ID
+   * @param statusify Statusify core
+   * @param id Component ID
+   */
+  async getComponent(statusify: Statusify, id: string): Promise<Component> {
+    const found = (await this.getComponents(statusify)).find(c => c.id === id)
+    return (found === undefined) ? null : found
   }
 }
 

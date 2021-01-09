@@ -9,12 +9,12 @@ export default abstract class Severity {
   /**
    * ID of the severity (For Lookups and Reference)
    */
-  private id: string
+  public readonly id: string
 
   /**
    * Friendly Name
    */
-  private name: string
+  public readonly name: string
 
   //
   // Constructor

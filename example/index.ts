@@ -1,6 +1,7 @@
 import Statusify from '../packages/core/lib/Statusify'
 import { Builder, group, component } from '../packages/core/lib/Builder'
 import { runnableSeverity } from '../packages/core/lib/Severity/RunnableSeverity'
+import IncidentSeverityCalculator from '../packages/core/lib/Severity/IncidentSeverityCalculator'
 import LokiIncidentProvider from './LokiIncidentProvider';
 
 async function bootstrap() {
@@ -60,11 +61,17 @@ async function bootstrap() {
   const statusify = new Statusify({
     componentProvider: built,
     severityProvider: built,
-    incidentProvider: new LokiIncidentProvider()
+    incidentProvider: new LokiIncidentProvider(),
+    severityCalculator: new IncidentSeverityCalculator()
   });
 
-  console.log(await statusify.getComponentGroups())
-  console.log(await statusify.getIncidents())
+  const groups = await statusify.getComponentGroups()
+
+//   console.log(await statusify.getIncidentsFor(groups[0].components[0], {}))
+//   console.log(groups)
+//   console.log(await statusify.getIncidents())
+  console.log(await statusify.getSeverityForGroup(groups[0]))
+  console.log(await statusify.getSeverityForComponent(groups[0].components[0]))
 }
 
 bootstrap()
