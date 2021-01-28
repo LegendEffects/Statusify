@@ -1,70 +1,90 @@
-'use strict';
+import IProvidesComponents from "./Component/IProvidesComponents"
+import IProvidesSeverities from "./Severity/IProvidesSeverities"
+import IProvidesIncidents, { IncidentsQuery } from './Incident/IProvidesIncidents'
+import { EventEmitter } from 'events'
+import Component from "./component/Component"
+import ICalculatesSeverities from "./Severity/ICalculatesSeverities"
+import ComponentGroup from "./Component/ComponentGroup"
 
-import { Builder, component, group } from "./Builder";
-import { runnableSeverity } from "./Severity/RunnableSeverity";
-import Statusify from "./Statusify";
-
-async function core() {
-    const builder = new Builder()
-        .groups([
-            group()
-                .name('Test Group')
-                .description('Test Groups Description')
-                .components([
-                    component('component-1')
-                        .name('Test Component 1')
-                        .description('Test Component 1 Description'),
-                        
-                    component('component-2')
-                        .name('Test Component 2')
-                ]),
-
-            group()
-                .name('Test Group 2')
-                .components([
-                    component('component-3')
-                        .name('Test Component 3')
-                        .description('Test Component 3 Description'),
-
-                    component('component-4')
-                        .name('Test Component 4')
-                ]),
-        ])
-        
-        .severities([
-            runnableSeverity('operational')
-                .name('Operational')
-                .runnable(async (component) => {
-                    return true
-                }),
-
-            runnableSeverity('partial')
-                .name('Partial')
-                .runnable(async (component) => {
-                    return false
-                }),
-
-            runnableSeverity('minor')
-                .name('Minor')
-                .runnable(async (component) => {
-                    return false
-                }),
-            
-            runnableSeverity('major')
-                .name('Major')
-                .runnable(async (component) => {
-                    return false
-                }),
-        ])
-    ;
-
-
-    const statusify = new Statusify({
-        componentProvider: builder,
-        severityProvider: builder
-    });
-
-    console.log(await statusify.getComponentGroups())
+export interface StatusifyOptions {
+  componentProvider: IProvidesComponents
+  incidentProvider: IProvidesIncidents
+  severityProvider: IProvidesSeverities
+  severityCalculator: ICalculatesSeverities
 }
 
-core();
+export default class Statusify extends EventEmitter {
+  private componentProvider: IProvidesComponents
+  private incidentProvider: IProvidesIncidents
+  private severityProvider: IProvidesSeverities
+  private severityCalculator: ICalculatesSeverities
+
+  constructor(options: StatusifyOptions) {
+    super()
+    
+    this.componentProvider = options.componentProvider
+    this.severityProvider = options.severityProvider
+    this.incidentProvider = options.incidentProvider
+    this.severityCalculator = options.severityCalculator
+  }
+
+  //
+  // Components
+  //
+  /**
+   * Get all of the component groups
+   */
+  async getComponentGroups() {
+    return this.componentProvider.getComponentGroups(this)
+  }
+
+  /**
+   * Get all of the components from the component groups
+   */
+  async getComponents(): Promise<Component[]> {
+    return this.componentProvider.getComponents(this)
+  }
+
+  /**
+   * Gets a specific component
+   * @param id ID of the component
+   * @return Component if found, otherwise null
+   */
+  async getComponent(id: string) {
+    return this.componentProvider.getComponent(this, id)
+  }
+
+  //
+  // Incidents
+  //
+  async getIncident(id: string) {
+    return this.incidentProvider.getIncident(this, id)
+  }
+
+  async getIncidents(query?: IncidentsQuery) {
+    return this.incidentProvider.getIncidents(this, query)
+  }
+
+  async getIncidentsFor(component: Component, query: IncidentsQuery) {
+    return this.incidentProvider.getIncidentsFor(this, component, query)
+  }
+
+  //
+  // Severities
+  //
+  async getSeverities() {
+    return this.severityProvider.getSeverities(this)
+  }
+  
+  async getSeverityForComponent(component: Component) {
+    return this.severityCalculator.getSeverityForComponent(component, this)
+  }
+  
+  async getSeverityForGroup(group: ComponentGroup) {
+    return this.severityCalculator.getSeverityForGroup(group, this)
+  }
+
+  async getSeverity(id: string) {
+    return (await this.getSeverities()).find(s => s.id === id)
+  }
+}

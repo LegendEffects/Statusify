@@ -5,7 +5,7 @@ import Component from "../packages/core/lib/Component/Component";
 import IIncident from "../packages/core/lib/Incident/IIncident";
 import IIncidentUpdate from "../packages/core/lib/Incident/IIncidentUpdate";
 import IProvidesIncidents, { DateQuery, IncidentsQuery } from "../packages/core/lib/Incident/IProvidesIncidents";
-import Statusify from "../packages/core/lib/Statusify";
+import Statusify from "../packages/core/lib";
 
 export default class LokiIncidentProvider implements IProvidesIncidents {
   private db = new loki('incidents')

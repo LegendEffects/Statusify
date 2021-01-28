@@ -1,4 +1,4 @@
-import Statusify from "../Statusify";
+import Statusify from "..";
 import Component from "./Component";
 import ComponentGroup from "./ComponentGroup";
 

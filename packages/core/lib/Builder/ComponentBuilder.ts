@@ -1,7 +1,7 @@
 import Component from "../component/Component"
 import ComponentGroup from "../Component/ComponentGroup"
 import IProvidesComponents from "../Component/IProvidesComponents"
-import Statusify from "../Statusify"
+import Statusify from ".."
 
 export class ComponentBuilderMixin implements IProvidesComponents {
   _groups: ComponentGroupBuilder[] = []

@@ -1,6 +1,6 @@
 import Component from "../component/Component";
 import ComponentGroup from "../Component/ComponentGroup";
-import Statusify from "../Statusify";
+import Statusify from "..";
 import ICalculatesSeverities from "./ICalculatesSeverities";
 import Severity from "./Severity";
 
@@ -47,7 +47,7 @@ export default class IncidentSeverityProvider implements ICalculatesSeverities {
    * @param severities Severities to find the worst one of
    * @param statusify Statusify Core
    */
-  private async worstSeverity(severities: Severity[], statusify: Statusify) {
+  protected async worstSeverity(severities: Severity[], statusify: Statusify) {
     const allSeverities = await statusify.getSeverities()
     let currentWorst = 0
 

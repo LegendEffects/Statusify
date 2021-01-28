@@ -1,4 +1,4 @@
-import Statusify from '../packages/core/lib/Statusify'
+import Statusify from '../packages/core/lib'
 import { Builder, group, component } from '../packages/core/lib/Builder'
 import { runnableSeverity } from '../packages/core/lib/Severity/RunnableSeverity'
 import IncidentSeverityCalculator from '../packages/core/lib/Severity/IncidentSeverityCalculator'

@@ -1,4 +1,4 @@
-import Statusify from "../Statusify";
+import Statusify from "..";
 import Severity from "./Severity";
 
 export default interface IProvidesSeverities {

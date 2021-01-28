@@ -1,6 +1,6 @@
 import IProvidesSeverities from "../Severity/IProvidesSeverities"
 import Severity from "../Severity/Severity"
-import Statusify from "../Statusify"
+import Statusify from ".."
 
 export class SeverityBuilderMixin implements IProvidesSeverities {
   _severities: SeverityBuilder[] = []

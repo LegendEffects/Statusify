@@ -1,5 +1,5 @@
 import Component from "../component/Component";
-import Statusify from "../Statusify";
+import Statusify from "..";
 import IIncident from "./IIncident";
 
 export type DateQuery = {
