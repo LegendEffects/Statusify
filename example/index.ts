@@ -70,8 +70,9 @@ async function bootstrap() {
 //   console.log(await statusify.getIncidentsFor(groups[0].components[0], {}))
 //   console.log(groups)
 //   console.log(await statusify.getIncidents())
-  console.log(await statusify.getSeverityForGroup(groups[0]))
-  console.log(await statusify.getSeverityForComponent(groups[0].components[0]))
+//   console.log(await statusify.getSeverityForGroup(groups[0]))
+//   console.log(await statusify.getSeverityForComponent(groups[0].components[0]))
+console.log(groups)
 }
 
 bootstrap()
