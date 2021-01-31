@@ -27,8 +27,8 @@ export const ComponentGroup = ({...props}: ComponentGroupProps) => {
 
       <Collapse in={!isCollapsed}>
         <Stack padding="1rem" paddingTop=".5rem" spacing={5}>
-          <SComponent />
-          <SComponent />
+          <SComponent name="Component Name" />
+          <SComponent name="Short Name" />
         </Stack>
       </Collapse>
     </Box>
