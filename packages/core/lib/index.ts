@@ -87,4 +87,8 @@ export default class Statusify extends EventEmitter {
   async getSeverityForGroup(group: ComponentGroup) {
     return this.severityCalculator.getSeverityForGroup(group, this)
   }
+
+  async getGlobalSeverity() {
+    return this.severityCalculator.getGlobalSeverity(this)
+  }
 }

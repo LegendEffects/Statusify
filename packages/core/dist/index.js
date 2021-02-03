@@ -39,6 +39,9 @@ class Statusify extends events_1.EventEmitter {
     async getSeverityForGroup(group) {
         return this.severityCalculator.getSeverityForGroup(group, this);
     }
+    async getGlobalSeverity() {
+        return this.severityCalculator.getGlobalSeverity(this);
+    }
 }
 exports.default = Statusify;
 //# sourceMappingURL=index.js.map

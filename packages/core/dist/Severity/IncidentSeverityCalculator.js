@@ -1,6 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class IncidentSeverityProvider {
+    async getGlobalSeverity(statusify) {
+        const componentSeverities = Promise.all((await statusify.getComponents()).map(async (c) => {
+            return this.getSeverityForComponent(c, statusify);
+        }));
+        return await this.worstSeverity(await componentSeverities, statusify);
+    }
     async getSeverityForGroup(group, statusify) {
         const componentSeverities = Promise.all(group.components.map(async (c) => {
             return this.getSeverityForComponent(c, statusify);

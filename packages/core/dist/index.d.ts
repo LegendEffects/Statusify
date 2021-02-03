@@ -28,4 +28,5 @@ export default class Statusify extends EventEmitter {
     getSeverity(id: string): Promise<import("./Severity/Severity").default>;
     getSeverityForComponent(component: Component): Promise<import("./Severity/Severity").default>;
     getSeverityForGroup(group: ComponentGroup): Promise<import("./Severity/Severity").default>;
+    getGlobalSeverity(): Promise<import("./Severity/Severity").default>;
 }

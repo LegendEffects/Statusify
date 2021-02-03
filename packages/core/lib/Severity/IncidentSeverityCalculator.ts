@@ -8,6 +8,20 @@ import Severity from "./Severity";
  * This take into account severities only, it is expected to be extended to implement extra functionality
  */
 export default class IncidentSeverityProvider implements ICalculatesSeverities {
+  /**
+   * Gets a global severity for all groups
+   * Uses the severity of the most degraded child
+   * @param statusify Statusify Core
+   */
+  async getGlobalSeverity(statusify: Statusify): Promise<Severity> {
+    const componentSeverities = Promise.all(
+      (await statusify.getComponents()).map(async (c) => {
+        return this.getSeverityForComponent(c, statusify)
+      })
+    )
+
+    return await this.worstSeverity(await componentSeverities, statusify)
+  }
 
   /**
    * Gets the severity for a group
