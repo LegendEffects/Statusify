@@ -75,6 +75,10 @@ export default class Statusify extends EventEmitter {
   async getSeverities() {
     return this.severityProvider.getSeverities(this)
   }
+
+  async getSeverity(id: string) {
+    return this.severityProvider.getSeverity(this, id)
+  }
   
   async getSeverityForComponent(component: Component) {
     return this.severityCalculator.getSeverityForComponent(component, this)
@@ -82,9 +86,5 @@ export default class Statusify extends EventEmitter {
   
   async getSeverityForGroup(group: ComponentGroup) {
     return this.severityCalculator.getSeverityForGroup(group, this)
-  }
-
-  async getSeverity(id: string) {
-    return (await this.getSeverities()).find(s => s.id === id)
   }
 }

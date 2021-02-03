@@ -1,6 +1,6 @@
-import IMetricRange from '@statusify/core/lib/Metric/IMetricRange';
-import { MetricType } from '@statusify/core/lib/Metric/Metric'
-import ILatencyMetricRecord from '@statusify/core/lib/Metric/ILatencyMetricRecord'
+import IMetricRange from '@statusify/core/dist/Metric/IMetricRange';
+import { MetricType } from '@statusify/core/dist/Metric/Metric'
+import ILatencyMetricRecord from '@statusify/core/dist/Metric/ILatencyMetricRecord'
 import UptimeRobotCore from '..';
 import * as moment from 'moment';
 import { CACHE_LIFETIME } from '../constants';

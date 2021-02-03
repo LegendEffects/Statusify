@@ -1,10 +1,10 @@
-import { MetricType } from "@statusify/core/lib/Metric/Metric";
-import IDowntimeMetricRecord from "@statusify/core/lib/Metric/IDowntimeMetricRecord"
-import IMetricRange from "@statusify/core/lib/Metric/IMetricRange";
+import { MetricType } from "@statusify/core/dist/Metric/Metric";
+import IDowntimeMetricRecord from "@statusify/core/dist/Metric/IDowntimeMetricRecord"
+import IMetricRange from "@statusify/core/dist/Metric/IMetricRange";
 import UptimeRobotCore from "..";
 import { GenericUptimeRobotMetric, UptimeRobotGenericMetricCParams } from "./GenericUptimeRobotMetric";
 import * as moment from 'moment'
-import ILatencyMetricRecord from "@statusify/core/lib/Metric/ILatencyMetricRecord";
+import ILatencyMetricRecord from "@statusify/core/dist/Metric/ILatencyMetricRecord";
 import UseCache from "../Util/UseCache";
 import { CACHE_LIFETIME, MILLISECONDS_IN_DAY } from "../constants";
 

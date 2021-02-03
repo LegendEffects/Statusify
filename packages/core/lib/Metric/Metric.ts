@@ -2,9 +2,9 @@ import IMetricRange from "./IMetricRange";
 import MetricRecord from "./MetricRecord";
 
 export enum MetricType {
-  DOWNTIME,
-  LATENCY,
-  CUSTOM
+  DOWNTIME = 'downtime',
+  LATENCY = 'latency',
+  CUSTOM = 'custom'
 }
 
 export interface MetricCParams {

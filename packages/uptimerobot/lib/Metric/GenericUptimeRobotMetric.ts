@@ -1,5 +1,5 @@
-import Metric, { MetricCParams, MetricType } from "@statusify/core/lib/Metric/Metric";
-import MetricRecord from "@statusify/core/lib/Metric/MetricRecord";
+import Metric, { MetricCParams, MetricType } from "@statusify/core/dist/Metric/Metric";
+import MetricRecord from "@statusify/core/dist/Metric/MetricRecord";
 import UptimeRobotCore from "..";
 
 export interface UptimeRobotGenericMetricCParams extends Omit<MetricCParams, 'type'> {
