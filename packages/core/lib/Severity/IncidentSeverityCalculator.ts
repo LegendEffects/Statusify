@@ -3,6 +3,7 @@ import ComponentGroup from "../Component/ComponentGroup";
 import Statusify from "..";
 import ICalculatesSeverities from "./ICalculatesSeverities";
 import Severity from "./Severity";
+import WorstSeverity from "../Util/WorstSeverity";
 
 /**
  * This take into account severities only, it is expected to be extended to implement extra functionality
@@ -20,7 +21,7 @@ export default class IncidentSeverityProvider implements ICalculatesSeverities {
       })
     )
 
-    return await this.worstSeverity(await componentSeverities, statusify)
+    return await WorstSeverity(await componentSeverities, statusify)
   }
 
   /**
@@ -36,7 +37,7 @@ export default class IncidentSeverityProvider implements ICalculatesSeverities {
       })
     )
     
-    return await this.worstSeverity(await componentSeverities, statusify)
+    return await WorstSeverity(await componentSeverities, statusify)
   }
   
   /**
@@ -50,26 +51,6 @@ export default class IncidentSeverityProvider implements ICalculatesSeverities {
       resolvedAt: null
     })
 
-    return await this.worstSeverity(activeIncidents.map(i => i.severity), statusify)
-  }
-
-  //
-  // Private
-  //
-  /**
-   * Finds the worst severity from all of the severities provided
-   * @param severities Severities to find the worst one of
-   * @param statusify Statusify Core
-   */
-  protected async worstSeverity(severities: Severity[], statusify: Statusify) {
-    const allSeverities = await statusify.getSeverities()
-    let currentWorst = 0
-
-    for(const severity of severities) {
-      const index = allSeverities.findIndex((cSev) => cSev.id === severity.id)
-      currentWorst = (index > currentWorst) ? index : currentWorst
-    }
-
-    return allSeverities[currentWorst]
+    return await WorstSeverity(activeIncidents.map(i => i.severity), statusify)
   }
 }

@@ -2,6 +2,8 @@ import Component from "../component/Component"
 import ComponentGroup from "../Component/ComponentGroup"
 import IProvidesComponents from "../Component/IProvidesComponents"
 import Statusify from ".."
+import MetricRecord from "../Metric/MetricRecord"
+import Metric from "../Metric/Metric"
 
 export class ComponentBuilderMixin implements IProvidesComponents {
   _groups: ComponentGroupBuilder[] = []
@@ -92,6 +94,7 @@ export class ComponentBuilder {
   protected _id: string
   protected _name: string
   protected _description?: string
+  protected _metrics?: Metric<MetricRecord>[] 
 
   constructor(id: string) {
     this._id = id
@@ -107,6 +110,12 @@ export class ComponentBuilder {
     return this
   }
 
+  public metric(metric: Metric<MetricRecord>) {
+    if(this._metrics === undefined) this._metrics = []
+    this._metrics.push(metric)
+    return this;
+  }
+
   /**
    * @ignore
    */
@@ -114,7 +123,8 @@ export class ComponentBuilder {
     return new Component({
       id: this._id,
       name: this._name,
-      description: this._description
+      description: this._description,
+      metrics: this._metrics
     });
   }
 }
