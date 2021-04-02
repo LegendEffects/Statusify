@@ -26,14 +26,14 @@ export default class UptimeRobotDowntime extends GenericUptimeRobotMetric<IDownt
    * @inheritdoc
    */
   getPeriod(range: IMetricRange): Promise<IDowntimeMetricRecord[]> {
-    return this.getDowntimes(range);
+    return this.getDowntimes(this.changeHashCode(range));
   }
 
   /**
    * @inheritdoc
    */
   async getAverage(range: IMetricRange): Promise<IDowntimeMetricRecord> {
-    const downtimes = await this.getDowntimes(range);
+    const downtimes = await this.getDowntimes(this.changeHashCode(range));
 
     return {
       time: range.start,
@@ -69,5 +69,12 @@ export default class UptimeRobotDowntime extends GenericUptimeRobotMetric<IDownt
         }
       })
       .filter(r => r.value > 0)
+  }
+
+  private changeHashCode(range: IMetricRange): IMetricRange {
+    range.start.toString = () => String(range.start.getTime());
+    range.end.toString = () => String(range.end.getTime());
+
+    return range;
   }
 }

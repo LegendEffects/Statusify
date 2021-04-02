@@ -5,29 +5,13 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 import useSeverityColor from "../../../hooks/useSeverityColor";
 import useSeverity from "../../../hooks/useSeverity";
 import useUptimePercentage from "../../../hooks/useUptimePercentage";
-import React from "react";
-import dayjs from "dayjs";
-
-const TICK_VIEWBOXES = [
-  {width: 1200, box: "0 0 448 40", days: 90},
-  {width: 900, box: "0 0 298 40", days: 60},
-  {width: 0, box: "0 0 148 40", days: 30}
-];
+import useMetricRange from "../../../hooks/useMetricRange";
 
 export default function ComponentHeader() {
   const component = useComponent();
   const severity = useSeverity(component);
   const severityColor = useSeverityColor(severity);
-
-  const [ viewbox, setViewbox ] = React.useState(TICK_VIEWBOXES[0]);
-
-  const range = React.useMemo(() => {
-    return {
-      start: dayjs().subtract(viewbox.days, 'days').startOf('day').toDate(),
-      end: new Date()
-    }
-  }, [ viewbox ]);
-
+  const range = useMetricRange();
   const uptimePercentage = useUptimePercentage(range, component);
 
   return (

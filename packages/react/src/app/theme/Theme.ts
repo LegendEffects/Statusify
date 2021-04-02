@@ -5,6 +5,12 @@ const theme: LaminarThemeOptions = {
     initialColorMode: 'dark',
     useSystemColorMode: true
   },
+
+  viewboxes: [
+    {width: 1200, box: "0 0 448 40", days: 90},
+    {width: 900, box: "0 0 298 40", days: 60},
+    {width: 0, box: "0 0 148 40", days: 30}
+  ],
   
   severityColors: {
     operational: 'green',

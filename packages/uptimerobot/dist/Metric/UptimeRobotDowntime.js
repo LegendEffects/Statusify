@@ -11,10 +11,14 @@ class UptimeRobotDowntime extends GenericUptimeRobotMetric_1.GenericUptimeRobotM
         this.getDowntimes = UseCache_1.default(constants_1.CACHE_LIFETIME * 1000, this.pullNewData.bind(this))[0];
     }
     getPeriod(range) {
-        return this.getDowntimes(range);
+        return this.getDowntimes(this.changeHashCode(range));
     }
-    getAverage(range) {
-        throw new Error("Method not implemented.");
+    async getAverage(range) {
+        const downtimes = await this.getDowntimes(this.changeHashCode(range));
+        return {
+            time: range.start,
+            value: downtimes.map(v => v.value).reduce((a, b) => a + b) / downtimes.length
+        };
     }
     async pullNewData(range) {
         const days = Math.round(moment.duration(moment(range.end).diff(moment(range.start))).asDays());
@@ -36,6 +40,11 @@ class UptimeRobotDowntime extends GenericUptimeRobotMetric_1.GenericUptimeRobotM
             };
         })
             .filter(r => r.value > 0);
+    }
+    changeHashCode(range) {
+        range.start.toString = () => String(range.start.getTime());
+        range.end.toString = () => String(range.end.getTime());
+        return range;
     }
 }
 exports.default = UptimeRobotDowntime;

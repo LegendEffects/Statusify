@@ -27,7 +27,7 @@ export default function ComponentTickChartTooltip({ tick, reference, ...props }:
     name: 'offset',
     options: {
       offset: (o) => {
-        return [0, o.reference.y - reference.parentElement.getBoundingClientRect().y]
+        return [0, o.reference.y - (reference.parentElement ? reference.parentElement.getBoundingClientRect().y : 0)]
       }
     }
   }), [ reference ]);
@@ -40,7 +40,7 @@ export default function ComponentTickChartTooltip({ tick, reference, ...props }:
   });
 
   return (
-    <Box ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+    <Box zIndex="tooltip" ref={setPopperElement} style={styles.popper} {...attributes.popper}>
       <div ref={setArrowElement} style={styles.arrow} />
       <Box bg="gray.800" shadow="md" px={6} py={4} textAlign="left">
         <Text mb={2}>{dayjs(tick.date).format(t('components.metrics.tickChart.dateFormat'))}</Text>

@@ -16,12 +16,21 @@
     },
 
     "components": {
+      "group": {
+        "overallStatusTooltip": "Groups take on the status of their most degraded child component. Click to see the status of individual children."
+      },
+
       "metrics": {
         "tickChart": {
           "dateFormat": "ll",
           "noIncidents": "No incidents reported on this day.",
           "noDowntime": "No downtime reported on this day.",
           "downtime": "{{duration}} of downtime."
+        },
+        "latency": {
+          "seriesName": "Latency (ms)",
+          "title": "Service Latency",
+          "average": "Averaging: {{average}}ms"
         }
       }
     }

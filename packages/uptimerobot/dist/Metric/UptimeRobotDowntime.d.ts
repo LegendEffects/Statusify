@@ -8,4 +8,5 @@ export default class UptimeRobotDowntime extends GenericUptimeRobotMetric<IDownt
     getPeriod(range: IMetricRange): Promise<IDowntimeMetricRecord[]>;
     getAverage(range: IMetricRange): Promise<IDowntimeMetricRecord>;
     private pullNewData;
+    private changeHashCode;
 }

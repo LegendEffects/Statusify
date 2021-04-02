@@ -46,7 +46,7 @@ const built = new Builder()
         runnableSeverity('operational')
             .name('Operational')
             .runnable(async (component) => {
-                return false
+                return true
             }),
 
         runnableSeverity('partial')
@@ -58,7 +58,7 @@ const built = new Builder()
         runnableSeverity('minor')
             .name('Minor')
             .runnable(async (component) => {
-                return true
+                return false
             }),
         
         runnableSeverity('major')

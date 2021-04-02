@@ -1,16 +1,11 @@
 import { Box, BoxProps } from "@chakra-ui/layout";
 import React from "react";
-import dayjs from "dayjs";
 import useSeverityTicks from "../../../../../hooks/useSeverityTicks";
 import { useLaminar } from "../../../../../contexts/LaminarContext";
 import ComponentTickChartTooltip from "./ComponentTickChartTooltip";
 import ISeverityTick from "../../../../../interfaces/ISeverityTick";
-
-const TICK_VIEWBOXES = [
-  {width: 1200, box: "0 0 448 40", days: 90},
-  {width: 900, box: "0 0 298 40", days: 60},
-  {width: 0, box: "0 0 148 40", days: 30}
-];
+import useMetricRange from "../../../../../hooks/useMetricRange";
+import { useResponsiveViewbox } from "../../../../../contexts/ResponsiveViewboxContext";
 
 const TickRectStyle: BoxProps['sx'] = {
   height: '20px',
@@ -35,19 +30,13 @@ interface ICurrentTick extends ISeverityTick {
 }
 
 export default function ComponentTickChart() {
-  const { severityColors } = useLaminar();
-  const [ viewbox, setViewbox ] = React.useState(TICK_VIEWBOXES[0]);
   const [ isFocused, setIsFocused ] = React.useState(false);
   const [ currentTick, setCurrentTick ] = React.useState<ICurrentTick | undefined>(undefined);
   const svgContainerRef = React.createRef<HTMLDivElement>();
 
-  const range = React.useMemo(() => {
-    return {
-      start: dayjs().subtract(viewbox.days, 'days').startOf('day').toDate(),
-      end: new Date()
-    }
-  }, [ viewbox ]);
-
+  const { severityColors } = useLaminar();
+  const viewbox = useResponsiveViewbox();
+  const range = useMetricRange();
   const ticks = useSeverityTicks(range);
 
   // Hover Effect
@@ -77,16 +66,6 @@ export default function ComponentTickChart() {
       element: event.currentTarget as unknown as HTMLElement
     });
   }
-  
-  // Handle Resizing
-  React.useEffect(() => {
-    const handleResize = () => {
-      setViewbox(TICK_VIEWBOXES.find(v => window.innerWidth >= v.width) || TICK_VIEWBOXES[0]);
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize);
-  }, [])
 
   // Clear Effects on Unfocus
   React.useEffect(() => {

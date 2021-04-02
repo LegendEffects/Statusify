@@ -26,12 +26,15 @@ export default class UptimeRobotLatency extends GenericUptimeRobotMetric<ILatenc
    * @inheritdoc
    */
   async getPeriod(range: IMetricRange): Promise<ILatencyMetricRecord[]> {
-    // Enforce range limit
+    let computedRange = range;
+
+    // Enforce range limit to change range to latest
     if(moment.duration(moment(range.end).diff(moment(range.start))).asDays() > 7) {
-      throw new Error("Range cannot go past 7 days.")
+      console.warn("Range cannot go past 7 days.")
+      computedRange.start = moment(range.end).startOf('day').subtract(7, 'days').toDate();
     }
 
-    return this.getLatency(range)
+    return this.getLatency(computedRange);
   }
 
   /**

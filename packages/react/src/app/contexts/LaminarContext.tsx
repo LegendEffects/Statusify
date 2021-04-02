@@ -1,6 +1,7 @@
 import { ChakraProvider, ColorModeScript, extendTheme } from "@chakra-ui/react";
 import * as React from "react";
 import LaminarThemeOptions from "../theme/LaminarThemeOptions";
+import { ResponsiveViewboxProvider } from "./ResponsiveViewboxContext";
 
 const LaminarContext = React.createContext<LaminarThemeOptions>(null as any);
 
@@ -14,7 +15,9 @@ export function LaminarProvider({ children, theme }: { children?: React.ReactNod
       <ColorModeScript initialColorMode={chakraTheme.config.initialColorMode} />
       <ChakraProvider theme={chakraTheme}>
         <LaminarContext.Provider value={theme}>
-          {children}
+          <ResponsiveViewboxProvider viewboxes={theme.viewboxes}>
+            {children}
+          </ResponsiveViewboxProvider>
         </LaminarContext.Provider>
       </ChakraProvider>
     </>

@@ -11,10 +11,12 @@ class UptimeRobotLatency extends GenericUptimeRobotMetric_1.GenericUptimeRobotMe
         this.getLatency = UseCache_1.default(constants_1.CACHE_LIFETIME * 1000, this.pullNewData.bind(this))[0];
     }
     async getPeriod(range) {
+        let computedRange = range;
         if (moment.duration(moment(range.end).diff(moment(range.start))).asDays() > 7) {
-            throw new Error("Range cannot go past 7 days.");
+            console.warn("Range cannot go past 7 days.");
+            computedRange.start = moment(range.end).startOf('day').subtract(7, 'days').toDate();
         }
-        return this.getLatency(range);
+        return this.getLatency(computedRange);
     }
     async getAverage(range) {
         const dataPoints = await this.getPeriod(range);

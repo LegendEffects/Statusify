@@ -6,8 +6,10 @@ import { SlideFade } from "@chakra-ui/transition";
 import ComponentGroupHeaderToggleIndicator from "./ComponentGroupHeaderToggleIndicator";
 import useSeverity from "../../../hooks/useSeverity";
 import useSeverityColor from "../../../hooks/useSeverityColor";
+import { useTranslation } from "react-i18next";
 
 export default function ComponentGroupHeader() {
+  const { t } = useTranslation(); 
   const [{ group, collapsed }, dispatch] = useComponentGroup();
   const severity = useSeverity(group);
   const severityColor = useSeverityColor(severity);
@@ -38,9 +40,11 @@ export default function ComponentGroupHeader() {
       <Flex align="center">
         <SlideFade in={collapsed}>
           {severity && (
-            <Text color={`${severityColor}.400`}>
-              {severity.name}
-            </Text>
+            <Tooltip label={t('components.group.overallStatusTooltip')}>
+              <Text color={`${severityColor}.400`}>
+                {severity.name}
+              </Text>
+            </Tooltip>
           )}
         </SlideFade>
 
