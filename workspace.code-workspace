@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"name": "core",
+			"path": "packages\\core"
+		},
+		{
+			"name": "uptimerobot",
+			"path": "packages\\uptimerobot"
+		},
+		{
+			"name": "loki",
+			"path": "packages\\loki"
+		},
+		{
+			"name": "example",
+			"path": "example"
+		},
+		{
+			"path": "packages\\react"
+		}
+	],
+	"settings": {}
+}
