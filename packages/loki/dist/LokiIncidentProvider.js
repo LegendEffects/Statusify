@@ -19,13 +19,19 @@ class LokiIncidentProvider {
         }
     }
     async getIncidents(statusify, query = {}) {
-        return Promise.all(this.incidents
+        return Promise.all(this.incidents.chain()
             .find(this.buildQuery(query))
+            .limit(query.limit)
+            .offset(query.offset)
+            .data()
             .map(i => this.parseIncident(i, statusify)));
     }
     async getIncidentsFor(statusify, component, query) {
-        return Promise.all(this.incidents
-            .find(Object.assign(Object.assign({}, this.buildQuery(query)), { components: { $contains: component.id } }))
+        return Promise.all(this.incidents.chain()
+            .find({ ...this.buildQuery(query), components: { $contains: component.id } })
+            .limit(query.limit)
+            .offset(query.offset)
+            .data()
             .map(i => this.parseIncident(i, statusify)));
     }
     async getIncident(statusify, id) {

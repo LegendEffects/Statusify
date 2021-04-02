@@ -9,6 +9,8 @@ export declare type IncidentsQuery = {
     createdAt?: DateQuery;
     updatedAt?: DateQuery;
     resolvedAt?: DateQuery | null;
+    limit?: number;
+    offset?: number;
     id?: string;
 };
 export default interface IProvidesIncidents {

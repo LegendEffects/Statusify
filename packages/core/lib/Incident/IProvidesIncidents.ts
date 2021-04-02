@@ -12,6 +12,9 @@ export type IncidentsQuery = {
   updatedAt?: DateQuery,
   resolvedAt?: DateQuery | null,
 
+  limit?: number,
+  offset?: number,
+
   id?: string
 }
 

@@ -44,8 +44,11 @@ export default class LokiIncidentProvider implements IProvidesIncidents {
    */
   async getIncidents(statusify: Statusify, query: IncidentsQuery = {}): Promise<IIncident[]> {
     return Promise.all(
-      this.incidents
+      this.incidents.chain()
         .find(this.buildQuery(query))
+        .limit(query.limit)
+        .offset(query.offset)
+        .data()
         .map(i => this.parseIncident(i, statusify))
     )
   }
@@ -57,8 +60,11 @@ export default class LokiIncidentProvider implements IProvidesIncidents {
    */
   async getIncidentsFor(statusify: Statusify, component: Component, query: IncidentsQuery): Promise<IIncident[]> {
     return Promise.all(
-      this.incidents
+      this.incidents.chain()
         .find({...this.buildQuery(query), components: {$contains: component.id} })
+        .limit(query.limit)
+        .offset(query.offset)
+        .data()
         .map(i => this.parseIncident(i, statusify))
     )
   }
