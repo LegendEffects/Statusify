@@ -34,7 +34,8 @@ class UptimeRobotDowntime extends GenericUptimeRobotMetric_1.GenericUptimeRobotM
                 time: moment(range.end).subtract(i, 'days').toDate(),
                 value: constants_1.MILLISECONDS_IN_DAY - (constants_1.MILLISECONDS_IN_DAY * (parseFloat(pr) / 100))
             };
-        });
+        })
+            .filter(r => r.value > 0);
     }
 }
 exports.default = UptimeRobotDowntime;

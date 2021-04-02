@@ -1,8 +1,10 @@
 import { Box, BoxProps } from "@chakra-ui/layout";
-import React, { useEffect } from "react";
+import React from "react";
 import dayjs from "dayjs";
 import useSeverityTicks from "../../../../../hooks/useSeverityTicks";
 import { useLaminar } from "../../../../../contexts/LaminarContext";
+import ComponentTickChartTooltip from "./ComponentTickChartTooltip";
+import ISeverityTick from "../../../../../interfaces/ISeverityTick";
 
 const TICK_VIEWBOXES = [
   {width: 1200, box: "0 0 448 40", days: 90},
@@ -28,8 +30,7 @@ const TickRectStyle: BoxProps['sx'] = {
   },
 };
 
-interface CurrentTick {
-  index: number;
+interface ICurrentTick extends ISeverityTick {
   element: HTMLElement;
 }
 
@@ -37,7 +38,7 @@ export default function ComponentTickChart() {
   const { severityColors } = useLaminar();
   const [ viewbox, setViewbox ] = React.useState(TICK_VIEWBOXES[0]);
   const [ isFocused, setIsFocused ] = React.useState(false);
-  const [ currentTick, setCurrentTick ] = React.useState<CurrentTick | undefined>(undefined);
+  const [ currentTick, setCurrentTick ] = React.useState<ICurrentTick | undefined>(undefined);
   const svgContainerRef = React.createRef<HTMLDivElement>();
 
   const range = React.useMemo(() => {
@@ -72,7 +73,7 @@ export default function ComponentTickChart() {
 
     // Set as last tick
     setCurrentTick({
-      index: i,
+      ...ticks[i],
       element: event.currentTarget as unknown as HTMLElement
     });
   }
@@ -129,6 +130,7 @@ export default function ComponentTickChart() {
             ))
           }
       </Box>
+      {isFocused && currentTick !== undefined && <ComponentTickChartTooltip tick={currentTick} reference={currentTick.element} />}
     </Box>
   )
 }

@@ -13,6 +13,17 @@
       "partial": "Partial Outages",
       "minor": "Minor Outages",
       "major": "Major Outages"
+    },
+
+    "components": {
+      "metrics": {
+        "tickChart": {
+          "dateFormat": "ll",
+          "noIncidents": "No incidents reported on this day.",
+          "noDowntime": "No downtime reported on this day.",
+          "downtime": "{{duration}} of downtime."
+        }
+      }
     }
   }
 }

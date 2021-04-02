@@ -7,23 +7,17 @@ import { MetricType } from "@statusify/core/dist/Metric/Metric";
 import { useComponent } from "../contexts/ComponentContext";
 import { useStatusify } from "../contexts/StatusifyContext";
 import Severity from "@statusify/core/dist/Severity/Severity";
-import IIncident from "@statusify/core/dist/Incident/IIncident";
 import WorstSeverity from "@statusify/core/dist/Util/WorstSeverity";
 import { useLaminar } from "../contexts/LaminarContext";
+import ISeverityTick from "../interfaces/ISeverityTick";
 
 dayjs.extend(IsBetweenPlugin)
-
-export interface SeverityTick {
-  severity: Severity;
-  relatedIncidents: IIncident[];
-  relatedDowntimes: IDowntimeMetricRecord[];
-}
 
 export default function useSeverityTicks(range: IMetricRange) {
   const statusify = useStatusify();
   const component = useComponent();
   const { downtimeSeverities } = useLaminar();
-  const [ ticks, setTicks ] = React.useState<SeverityTick[]>([]);
+  const [ ticks, setTicks ] = React.useState<ISeverityTick[]>([]);
 
   React.useMemo(() => {
     new Promise(async (resolve, _reject) => {
@@ -81,6 +75,7 @@ export default function useSeverityTicks(range: IMetricRange) {
         });
 
         return {
+          date: day.toDate(),
           severity: await WorstSeverity(daySeverities, statusify),
           relatedIncidents: dayIncidents,
           relatedDowntimes: dayDowntimes

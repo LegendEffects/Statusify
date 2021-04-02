@@ -16,7 +16,10 @@ export default class UptimeRobotDowntime extends GenericUptimeRobotMetric<IDownt
   constructor(urc: UptimeRobotCore, params: UptimeRobotGenericMetricCParams) {
     super(MetricType.DOWNTIME, urc, params);
 
-    this.getDowntimes = UseCache<IMetricRange, IDowntimeMetricRecord[]>(CACHE_LIFETIME * 1000, this.pullNewData.bind(this))[0]
+    this.getDowntimes = UseCache<IMetricRange, IDowntimeMetricRecord[]>(
+      CACHE_LIFETIME * 1000,
+      this.pullNewData.bind(this)
+    )[0]
   }
 
   /**
@@ -29,10 +32,15 @@ export default class UptimeRobotDowntime extends GenericUptimeRobotMetric<IDownt
   /**
    * @inheritdoc
    */
-  getAverage(range: IMetricRange): Promise<IDowntimeMetricRecord> {
-    throw new Error("Method not implemented.");
+  async getAverage(range: IMetricRange): Promise<IDowntimeMetricRecord> {
+    const downtimes = await this.getDowntimes(range);
+
+    return {
+      time: range.start,
+      value: downtimes.map(v => v.value).reduce((a, b) => a + b) / downtimes.length
+    }
   }
-  
+
 
   //
   // Private
@@ -60,5 +68,6 @@ export default class UptimeRobotDowntime extends GenericUptimeRobotMetric<IDownt
           value: MILLISECONDS_IN_DAY - (MILLISECONDS_IN_DAY * (parseFloat(pr) / 100))
         }
       })
+      .filter(r => r.value > 0)
   }
 }
