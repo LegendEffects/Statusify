@@ -13,16 +13,6 @@ async function bootstrap() {
     id: 'ur-latency',
     name: 'Latency'
   })
-
-  // const ranges: IMetricRange[] = [...Array(30)].map((_, i) => {
-  //   const m = moment().subtract(i, 'days');
-  //   return {
-  //       start: m.startOf('day').toDate(),
-  //       end: m.endOf('day').toDate()
-  //   }
-  // })
-  // console.log(ranges)
-
   
   const range: IMetricRange = {
     start: moment().subtract(90, 'days').toDate(),

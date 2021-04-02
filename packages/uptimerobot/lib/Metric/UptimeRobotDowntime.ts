@@ -4,12 +4,11 @@ import IMetricRange from "@statusify/core/dist/Metric/IMetricRange";
 import UptimeRobotCore from "..";
 import { GenericUptimeRobotMetric, UptimeRobotGenericMetricCParams } from "./GenericUptimeRobotMetric";
 import * as moment from 'moment'
-import ILatencyMetricRecord from "@statusify/core/dist/Metric/ILatencyMetricRecord";
 import UseCache from "../Util/UseCache";
 import { CACHE_LIFETIME, MILLISECONDS_IN_DAY } from "../constants";
 
 export default class UptimeRobotDowntime extends GenericUptimeRobotMetric<IDowntimeMetricRecord> {
-  private readonly getDowntimes: (key: IMetricRange, ignoreCache?: boolean) => Promise<ILatencyMetricRecord[]>;
+  private readonly getDowntimes: (key: IMetricRange, ignoreCache?: boolean) => Promise<IDowntimeMetricRecord[]>;
 
   //
   // Constructor
@@ -55,6 +54,11 @@ export default class UptimeRobotDowntime extends GenericUptimeRobotMetric<IDownt
 
     return data.monitors[0].custom_uptime_ranges
       .split('-')
-      .map( (pr: string) => MILLISECONDS_IN_DAY - (MILLISECONDS_IN_DAY * (parseFloat(pr) / 100)) )
+      .map((pr: string, i: number): IDowntimeMetricRecord => {
+        return {
+          time: moment(range.end).subtract(i, 'days').toDate(),
+          value: MILLISECONDS_IN_DAY - (MILLISECONDS_IN_DAY * (parseFloat(pr) / 100))
+        }
+      })
   }
 }

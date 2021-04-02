@@ -1,4 +1,4 @@
-import Component from "../component/Component"
+import Component from "../Component/Component"
 import ComponentGroup from "../Component/ComponentGroup"
 import IProvidesComponents from "../Component/IProvidesComponents"
 import Statusify from ".."

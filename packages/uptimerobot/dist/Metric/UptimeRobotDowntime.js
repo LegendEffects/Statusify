@@ -29,7 +29,12 @@ class UptimeRobotDowntime extends GenericUptimeRobotMetric_1.GenericUptimeRobotM
         });
         return data.monitors[0].custom_uptime_ranges
             .split('-')
-            .map((pr) => constants_1.MILLISECONDS_IN_DAY - (constants_1.MILLISECONDS_IN_DAY * (parseFloat(pr) / 100)));
+            .map((pr, i) => {
+            return {
+                time: moment(range.end).subtract(i, 'days').toDate(),
+                value: constants_1.MILLISECONDS_IN_DAY - (constants_1.MILLISECONDS_IN_DAY * (parseFloat(pr) / 100))
+            };
+        });
     }
 }
 exports.default = UptimeRobotDowntime;

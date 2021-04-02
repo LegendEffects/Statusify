@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.component = exports.ComponentBuilder = exports.group = exports.ComponentGroupBuilder = exports.ComponentBuilderMixin = void 0;
-const Component_1 = require("../component/Component");
+const Component_1 = require("../Component/Component");
 const ComponentGroup_1 = require("../Component/ComponentGroup");
 class ComponentBuilderMixin {
     constructor() {
