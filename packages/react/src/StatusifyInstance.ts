@@ -16,18 +16,20 @@ const uptimeRobotCore = new UptimeRobotCore('ur488195-bd46852677deb5ca10988538')
 const built = new Builder()
     .groups([
         group()
-            .name('Test Group')
-            .description('Test Groups Description')
+            .name('Servers')
+            .description('Our core services are hosted here.')
             .components([
-                component('component-1')
-                    .name('Test Component 1')
-                    .description('Test Component 1 Description')
-                    .metric(new UptimeRobotLatency(uptimeRobotCore, {name: 'Latency', monitorID: 780071088, id: 'ur-latency-1'}))
-                    .metric(new UptimeRobotDowntime(uptimeRobotCore, {name: 'Downtime', monitorID: 780071088, id: 'ur-downtime-1'})),
+                component('vps')
+                    .name('VPS')
+                    .description('The core of our services.')
+                    .metric(new UptimeRobotLatency(uptimeRobotCore, {name: 'Latency', monitorID: 780071088, id: 'vps-latency'}))
+                    .metric(new UptimeRobotDowntime(uptimeRobotCore, {name: 'Downtime', monitorID: 780071088, id: 'vps-downtime'})),
                     
                     
-                component('component-2')
-                    .name('Test Component 2')
+                component('demo-pages')
+                    .name('Demo Pages')
+                    .metric(new UptimeRobotLatency(uptimeRobotCore, {name: 'Latency', monitorID: 779382341, id: 'demo-pages-latency'}))
+                    .metric(new UptimeRobotDowntime(uptimeRobotCore, {name: 'Latency', monitorID: 779382341, id: 'demo-pages-downtime'}))
             ]),
 
         group()

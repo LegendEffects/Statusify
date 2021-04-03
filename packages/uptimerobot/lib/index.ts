@@ -15,6 +15,11 @@ export default class UptimeRobotCore {
     public readonly getDowntimeRes: (key: IMetricRange, ignoreCache?: boolean) => Promise<IUptimeRobotMonitorResponse>;
     public readonly getLatencyRes: (key: IMetricRange, ignoreCache?: boolean) => Promise<IUptimeRobotMonitorResponse>;
 
+    // Somewhat singletons: A way to prevent unnecessary overlapping requests for the same information.
+    // Someone please turn this into a mixin somehow (looking at you future me.)
+    private downtimeRequest: Promise<IUptimeRobotMonitorResponse> = undefined;
+    private latencyRequest: Promise<IUptimeRobotMonitorResponse> = undefined;
+
     // Stores monitor IDs that are in use so that they can all be done in 1 request
     private monitorIds: {[index in MetricType]: number[]} = {
         downtime: [],
@@ -66,32 +71,48 @@ export default class UptimeRobotCore {
     // Private
     //
     private async getDowntimes(range: IMetricRange) {
-        // Get range in days
-        const days = Math.round(dayjs(range.end).diff(dayjs(range.start), 'days'));
+        if(this.downtimeRequest !== undefined) {
+            return this.downtimeRequest;
+        }
 
-        const ranges = [...Array(days)].map((_, i) => {
-            const d = dayjs().subtract(i, 'days');
-            return `${d.startOf('day').unix()}_${d.endOf('day').unix()}`
-        }).join('-');
+        this.downtimeRequest = new Promise(async (resolve) => {
+            // Get range in days
+            const days = Math.round(dayjs(range.end).diff(dayjs(range.start), 'days'));
+    
+            const ranges = [...Array(days)].map((_, i) => {
+                const d = dayjs().subtract(i, 'days');
+                return `${d.startOf('day').unix()}_${d.endOf('day').unix()}`
+            }).join('-');
+    
+    
+            const { data } = await this.axios.post('getMonitors', {
+                monitors: this.monitorIds.downtime.join('-'),
+                custom_uptime_ranges: ranges,
+                custom_down_durations: 1
+            });
+    
+            return resolve(data as IUptimeRobotMonitorResponse);
+        }).then(this.downtimeRequest = undefined);
 
-
-        const { data } = await this.axios.post('getMonitors', {
-            monitors: this.monitorIds.downtime.join('-'),
-            custom_uptime_ranges: ranges,
-            custom_down_durations: 1
-        });
-
-        return data as IUptimeRobotMonitorResponse;
+        return this.downtimeRequest;
     }
 
     private async getLatencies(range: IMetricRange) {
-        const { data } = await this.axios.post('getMonitors', {
-            monitors: this.monitorIds.latency.join('-'),
-            response_times: 1,
-            response_times_start_date: (range.start.getTime() / 1000),
-            response_times_end_date: (range.end.getTime() / 1000)
-        });
+        if(this.latencyRequest !== undefined) {
+            return this.latencyRequest;
+        }
 
-        return data as IUptimeRobotMonitorResponse;
+        this.latencyRequest = new Promise(async (resolve) => {
+            const { data } = await this.axios.post('getMonitors', {
+                monitors: this.monitorIds.latency.join('-'),
+                response_times: 1,
+                response_times_start_date: (range.start.getTime() / 1000),
+                response_times_end_date: (range.end.getTime() / 1000)
+            });
+    
+            return resolve(data as IUptimeRobotMonitorResponse);
+        }).then(this.latencyRequest = undefined);
+
+        return this.latencyRequest;
     }
 }

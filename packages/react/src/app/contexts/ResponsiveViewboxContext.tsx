@@ -15,7 +15,7 @@ export interface ResponsiveViewboxProviderProps {
 const ResponsiveViewboxContext = React.createContext<ViewboxEntry>(undefined);
 
 export function ResponsiveViewboxProvider({ children, viewboxes }: ResponsiveViewboxProviderProps) {
-  const [ viewbox, setViewbox ] = React.useState<ViewboxEntry>(viewboxes[0]);
+  const [ viewbox, setViewbox ] = React.useState<ViewboxEntry>();
   
   useEffect(() => {
     const handleResize = () => {

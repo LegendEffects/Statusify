@@ -7,6 +7,8 @@ export default class UptimeRobotCore {
     readonly axios: AxiosInstance;
     readonly getDowntimeRes: (key: IMetricRange, ignoreCache?: boolean) => Promise<IUptimeRobotMonitorResponse>;
     readonly getLatencyRes: (key: IMetricRange, ignoreCache?: boolean) => Promise<IUptimeRobotMonitorResponse>;
+    private downtimeRequest;
+    private latencyRequest;
     private monitorIds;
     constructor(apiKey: string, cacheLifetime?: number);
     useMonitor(id: number, type: MetricType): void;

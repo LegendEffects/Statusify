@@ -10,6 +10,8 @@ const dayjs_1 = __importDefault(require("dayjs"));
 const useCache_1 = __importDefault(require("./Util/useCache"));
 class UptimeRobotCore {
     constructor(apiKey, cacheLifetime = constants_1.CACHE_LIFETIME) {
+        this.downtimeRequest = undefined;
+        this.latencyRequest = undefined;
         this.monitorIds = {
             downtime: [],
             latency: [],
@@ -43,26 +45,38 @@ class UptimeRobotCore {
         return res.monitors.find(m => m.id === id);
     }
     async getDowntimes(range) {
-        const days = Math.round(dayjs_1.default(range.end).diff(dayjs_1.default(range.start), 'days'));
-        const ranges = [...Array(days)].map((_, i) => {
-            const d = dayjs_1.default().subtract(i, 'days');
-            return `${d.startOf('day').unix()}_${d.endOf('day').unix()}`;
-        }).join('-');
-        const { data } = await this.axios.post('getMonitors', {
-            monitors: this.monitorIds.downtime.join('-'),
-            custom_uptime_ranges: ranges,
-            custom_down_durations: 1
+        if (this.downtimeRequest !== undefined) {
+            return this.downtimeRequest;
+        }
+        this.downtimeRequest = new Promise(async (resolve) => {
+            const days = Math.round(dayjs_1.default(range.end).diff(dayjs_1.default(range.start), 'days'));
+            const ranges = [...Array(days)].map((_, i) => {
+                const d = dayjs_1.default().subtract(i, 'days');
+                return `${d.startOf('day').unix()}_${d.endOf('day').unix()}`;
+            }).join('-');
+            const { data } = await this.axios.post('getMonitors', {
+                monitors: this.monitorIds.downtime.join('-'),
+                custom_uptime_ranges: ranges,
+                custom_down_durations: 1
+            });
+            return resolve(data);
         });
-        return data;
+        return this.downtimeRequest;
     }
     async getLatencies(range) {
-        const { data } = await this.axios.post('getMonitors', {
-            monitors: this.monitorIds.latency.join('-'),
-            response_times: 1,
-            response_times_start_date: (range.start.getTime() / 1000),
-            response_times_end_date: (range.end.getTime() / 1000)
-        });
-        return data;
+        if (this.latencyRequest !== undefined) {
+            return this.latencyRequest;
+        }
+        this.latencyRequest = new Promise(async (resolve) => {
+            const { data } = await this.axios.post('getMonitors', {
+                monitors: this.monitorIds.latency.join('-'),
+                response_times: 1,
+                response_times_start_date: (range.start.getTime() / 1000),
+                response_times_end_date: (range.end.getTime() / 1000)
+            });
+            return resolve(data);
+        }).then(this.latencyRequest = undefined);
+        return this.latencyRequest;
     }
 }
 exports.default = UptimeRobotCore;
