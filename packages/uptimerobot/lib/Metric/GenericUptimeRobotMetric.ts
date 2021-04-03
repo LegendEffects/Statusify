@@ -12,7 +12,7 @@ export abstract class GenericUptimeRobotMetric<T extends MetricRecord> extends M
 
   constructor(type: MetricType, urc: UptimeRobotCore, { monitorID, ...inherited }: UptimeRobotGenericMetricCParams) {
     super({type, ...inherited});
-
+    
     this.urc = urc;
     this.monitorID = monitorID;
   }

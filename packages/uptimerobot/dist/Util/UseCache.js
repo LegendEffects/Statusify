@@ -9,7 +9,7 @@ function objKeyComparison(map, key) {
     }
     return false;
 }
-function UseCache(lifetime, fetcher) {
+function useCache(lifetime, fetcher) {
     const cache = new Map();
     const fetch = async (key, ignoreCache) => {
         const cacheKey = ignoreCache === true ? false : objKeyComparison(cache, key);
@@ -30,5 +30,5 @@ function UseCache(lifetime, fetcher) {
     };
     return [fetch];
 }
-exports.default = UseCache;
-//# sourceMappingURL=UseCache.js.map
+exports.default = useCache;
+//# sourceMappingURL=useCache.js.map

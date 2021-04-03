@@ -29,7 +29,7 @@
         },
         "latency": {
           "seriesName": "Latency (ms)",
-          "title": "Service Latency",
+          "title": "Latency",
           "average": "Averaging: {{average}}ms"
         }
       }

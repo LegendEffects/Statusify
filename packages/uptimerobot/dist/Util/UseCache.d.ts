@@ -1,1 +1,1 @@
-export default function UseCache<K extends Object, V>(lifetime: number, fetcher: (key: K) => Promise<V>): ((key: K, ignoreCache?: boolean) => Promise<V>)[];
+export default function useCache<K extends Object, V>(lifetime: number, fetcher: (key: K) => Promise<V>): ((key: K, ignoreCache?: boolean) => Promise<V>)[];

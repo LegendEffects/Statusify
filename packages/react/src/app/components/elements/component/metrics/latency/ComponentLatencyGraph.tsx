@@ -51,9 +51,10 @@ export default function ComponentLatencyGraph() {
           download: false,
         }
       },
+      foreColor: theme.colors.gray[500],
     },
     colors: [
-      theme.colors.gray[400],
+      theme.colors.gray[500],
     ],
     dataLabels: {
       enabled: false
@@ -68,7 +69,7 @@ export default function ComponentLatencyGraph() {
       type: "gradient",
       gradient: {
         shadeIntensity: 0,
-        opacityFrom: .4,
+        opacityFrom: .6,
         opacityTo: 1,
         type: 'vertical'
       }

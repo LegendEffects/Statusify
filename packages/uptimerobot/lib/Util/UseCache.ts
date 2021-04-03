@@ -16,7 +16,7 @@ function objKeyComparison<K, V>(map: Map<K, V>, key: K): K | false {
  * @param lifetime Lifetime of the cache in MS
  * @param fetcher Function to retrieve new elements
  */
-export default function UseCache<K extends Object, V>(lifetime: number, fetcher: (key: K) => Promise<V>) {
+export default function useCache<K extends Object, V>(lifetime: number, fetcher: (key: K) => Promise<V>) {
   const cache: Map<K, CachedEntry<V>> = new Map();
 
   /**
