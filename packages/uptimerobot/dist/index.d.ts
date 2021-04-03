@@ -1,5 +1,5 @@
-import { AxiosInstance } from "axios";
 import { MetricType } from "@statusify/core/dist/Metric/Metric";
+import { AxiosInstance } from "axios";
 import IMetricRange from "@statusify/core/dist/Metric/IMetricRange";
 import IUptimeRobotMonitorResponse from "./Types/IUptimeRobotMonitorResponse";
 export default class UptimeRobotCore {
@@ -7,8 +7,6 @@ export default class UptimeRobotCore {
     readonly axios: AxiosInstance;
     readonly getDowntimeRes: (key: IMetricRange, ignoreCache?: boolean) => Promise<IUptimeRobotMonitorResponse>;
     readonly getLatencyRes: (key: IMetricRange, ignoreCache?: boolean) => Promise<IUptimeRobotMonitorResponse>;
-    private downtimeRequest;
-    private latencyRequest;
     private monitorIds;
     constructor(apiKey: string, cacheLifetime?: number);
     useMonitor(id: number, type: MetricType): void;

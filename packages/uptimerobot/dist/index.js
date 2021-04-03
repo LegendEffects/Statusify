@@ -3,15 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const axios_1 = __importDefault(require("axios"));
 const Metric_1 = require("@statusify/core/dist/Metric/Metric");
+const axios_1 = __importDefault(require("axios"));
 const constants_1 = require("./constants");
 const dayjs_1 = __importDefault(require("dayjs"));
 const useCache_1 = __importDefault(require("./Util/useCache"));
+const useSomewhatSingleton_1 = __importDefault(require("./Util/useSomewhatSingleton"));
 class UptimeRobotCore {
     constructor(apiKey, cacheLifetime = constants_1.CACHE_LIFETIME) {
-        this.downtimeRequest = undefined;
-        this.latencyRequest = undefined;
         this.monitorIds = {
             downtime: [],
             latency: [],
@@ -24,8 +23,8 @@ class UptimeRobotCore {
                 format: 'json'
             }
         });
-        this.getDowntimeRes = useCache_1.default(cacheLifetime * 1000, this.getDowntimes.bind(this))[0];
-        this.getLatencyRes = useCache_1.default(cacheLifetime * 1000, this.getLatencies.bind(this))[0];
+        this.getDowntimeRes = useSomewhatSingleton_1.default(useCache_1.default(cacheLifetime * 1000, this.getDowntimes.bind(this))[0]);
+        this.getLatencyRes = useSomewhatSingleton_1.default(useCache_1.default(cacheLifetime * 1000, this.getLatencies.bind(this))[0]);
     }
     useMonitor(id, type) {
         this.monitorIds[type].push(id);
@@ -45,38 +44,26 @@ class UptimeRobotCore {
         return res.monitors.find(m => m.id === id);
     }
     async getDowntimes(range) {
-        if (this.downtimeRequest !== undefined) {
-            return this.downtimeRequest;
-        }
-        this.downtimeRequest = new Promise(async (resolve) => {
-            const days = Math.round(dayjs_1.default(range.end).diff(dayjs_1.default(range.start), 'days'));
-            const ranges = [...Array(days)].map((_, i) => {
-                const d = dayjs_1.default().subtract(i, 'days');
-                return `${d.startOf('day').unix()}_${d.endOf('day').unix()}`;
-            }).join('-');
-            const { data } = await this.axios.post('getMonitors', {
-                monitors: this.monitorIds.downtime.join('-'),
-                custom_uptime_ranges: ranges,
-                custom_down_durations: 1
-            });
-            return resolve(data);
+        const days = Math.round(dayjs_1.default(range.end).diff(dayjs_1.default(range.start), 'days'));
+        const ranges = [...Array(days)].map((_, i) => {
+            const d = dayjs_1.default().subtract(i, 'days');
+            return `${d.startOf('day').unix()}_${d.endOf('day').unix()}`;
+        }).join('-');
+        const { data } = await this.axios.post('getMonitors', {
+            monitors: this.monitorIds.downtime.join('-'),
+            custom_uptime_ranges: ranges,
+            custom_down_durations: 1
         });
-        return this.downtimeRequest;
+        return data;
     }
     async getLatencies(range) {
-        if (this.latencyRequest !== undefined) {
-            return this.latencyRequest;
-        }
-        this.latencyRequest = new Promise(async (resolve) => {
-            const { data } = await this.axios.post('getMonitors', {
-                monitors: this.monitorIds.latency.join('-'),
-                response_times: 1,
-                response_times_start_date: (range.start.getTime() / 1000),
-                response_times_end_date: (range.end.getTime() / 1000)
-            });
-            return resolve(data);
-        }).then(this.latencyRequest = undefined);
-        return this.latencyRequest;
+        const { data } = await this.axios.post('getMonitors', {
+            monitors: this.monitorIds.latency.join('-'),
+            response_times: 1,
+            response_times_start_date: (range.start.getTime() / 1000),
+            response_times_end_date: (range.end.getTime() / 1000)
+        });
+        return data;
     }
 }
 exports.default = UptimeRobotCore;
