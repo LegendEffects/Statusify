@@ -1,11 +1,14 @@
+import AttributeStorage, { AttributeStorageType } from "../Util/AttributeStorage";
+
 import Component from "./Component"
 
 export interface ComponentGroupCParams {
   name?: string;
   description?: string;
+  attributes?: AttributeStorageType;
 }
 
-export default class ComponentGroup {
+export default class ComponentGroup extends AttributeStorage {
   /**
    * Name of the group
    */
@@ -24,7 +27,9 @@ export default class ComponentGroup {
   //
   // Constructor
   //
-  constructor({ name, description }: ComponentGroupCParams) {
+  constructor({ name, description, attributes }: ComponentGroupCParams) {
+    super(attributes);
+
     this.name = name;
     this.description = description;
   }

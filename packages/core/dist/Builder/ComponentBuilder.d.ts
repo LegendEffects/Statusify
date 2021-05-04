@@ -1,9 +1,10 @@
+import AttributeStorageBuilder from "./AttributeStorageBuilder";
 import Component from "../Component/Component";
 import ComponentGroup from "../Component/ComponentGroup";
 import IProvidesComponents from "../Component/IProvidesComponents";
-import Statusify from "..";
-import MetricRecord from "../Metric/MetricRecord";
 import Metric from "../Metric/Metric";
+import MetricRecord from "../Metric/MetricRecord";
+import Statusify from "..";
 export declare class ComponentBuilderMixin implements IProvidesComponents {
     _groups: ComponentGroupBuilder[];
     groups(builders: ComponentGroupBuilder[]): this;
@@ -11,7 +12,7 @@ export declare class ComponentBuilderMixin implements IProvidesComponents {
     getComponents(statusify: Statusify): Promise<Component[]>;
     getComponent(statusify: Statusify, id: string): Promise<Component>;
 }
-export declare class ComponentGroupBuilder {
+export declare class ComponentGroupBuilder extends AttributeStorageBuilder {
     protected _name?: string;
     protected _description?: string;
     protected _components: ComponentBuilder[];

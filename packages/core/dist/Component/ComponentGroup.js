@@ -1,7 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-class ComponentGroup {
-    constructor({ name, description }) {
+const AttributeStorage_1 = __importDefault(require("../Util/AttributeStorage"));
+class ComponentGroup extends AttributeStorage_1.default {
+    constructor({ name, description, attributes }) {
+        super(attributes);
         this.components = [];
         this.name = name;
         this.description = description;

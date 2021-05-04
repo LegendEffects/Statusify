@@ -1,9 +1,10 @@
+import AttributeStorageBuilder from "./AttributeStorageBuilder"
 import Component from "../Component/Component"
 import ComponentGroup from "../Component/ComponentGroup"
 import IProvidesComponents from "../Component/IProvidesComponents"
-import Statusify from ".."
-import MetricRecord from "../Metric/MetricRecord"
 import Metric from "../Metric/Metric"
+import MetricRecord from "../Metric/MetricRecord"
+import Statusify from ".."
 
 export class ComponentBuilderMixin implements IProvidesComponents {
   _groups: ComponentGroupBuilder[] = []
@@ -49,7 +50,7 @@ export class ComponentBuilderMixin implements IProvidesComponents {
 /**
  * Group Builder
  */
-export class ComponentGroupBuilder {
+export class ComponentGroupBuilder extends AttributeStorageBuilder {
   protected _name?: string
   protected _description?: string
   protected _components: ComponentBuilder[] = []
@@ -90,13 +91,14 @@ export function group() {
 /**
  * Component Builder
  */
-export class ComponentBuilder {
+export class ComponentBuilder extends AttributeStorageBuilder {
   protected _id: string
   protected _name: string
   protected _description?: string
   protected _metrics?: Metric<MetricRecord>[] 
 
   constructor(id: string) {
+    super();
     this._id = id
   }
 

@@ -1,3 +1,5 @@
+import AttributeStorage, { AttributeStorageType } from "../Util/AttributeStorage";
+
 import Metric from "../Metric/Metric";
 import MetricRecord from "../Metric/MetricRecord";
 
@@ -6,9 +8,10 @@ export interface ComponentCParams {
   name: string
   description?: string
   metrics?: Metric<MetricRecord>[];
+  attributes?: AttributeStorageType;
 }
 
-export default class Component {
+export default class Component extends AttributeStorage {
   /**
    * ID of the component
    */
@@ -33,10 +36,12 @@ export default class Component {
   //
   // Constructor
   //
-  constructor({ id, name, description, metrics }: ComponentCParams) {
-    this.id = id
-    this.name = name
-    this.description = description
+  constructor({ id, name, description, metrics, attributes }: ComponentCParams) {
+    super(attributes);
+
+    this.id = id;
+    this.name = name;
+    this.description = description;
     this.metrics = metrics;
   }
 }

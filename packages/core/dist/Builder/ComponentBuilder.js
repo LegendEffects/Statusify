@@ -1,8 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.component = exports.ComponentBuilder = exports.group = exports.ComponentGroupBuilder = exports.ComponentBuilderMixin = void 0;
-const Component_1 = require("../Component/Component");
-const ComponentGroup_1 = require("../Component/ComponentGroup");
+const AttributeStorageBuilder_1 = __importDefault(require("./AttributeStorageBuilder"));
+const Component_1 = __importDefault(require("../Component/Component"));
+const ComponentGroup_1 = __importDefault(require("../Component/ComponentGroup"));
 class ComponentBuilderMixin {
     constructor() {
         this._groups = [];
@@ -27,8 +31,9 @@ class ComponentBuilderMixin {
     }
 }
 exports.ComponentBuilderMixin = ComponentBuilderMixin;
-class ComponentGroupBuilder {
+class ComponentGroupBuilder extends AttributeStorageBuilder_1.default {
     constructor() {
+        super(...arguments);
         this._components = [];
     }
     name(name) {
