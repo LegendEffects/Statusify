@@ -1,15 +1,15 @@
-import React from "react";
 import IDowntimeMetricRecord from "@statusify/core/dist/Metric/IDowntimeMetricRecord";
 import IMetricRange from "@statusify/core/dist/Metric/IMetricRange";
-import dayjs from "dayjs"
+import ISeverityTick from "../interfaces/ISeverityTick";
 import IsBetweenPlugin from "dayjs/plugin/isBetween"
 import { MetricType } from "@statusify/core/dist/Metric/Metric";
-import { useComponent } from "../contexts/ComponentContext";
-import { useStatusify } from "../contexts/StatusifyContext";
+import React from "react";
 import Severity from "@statusify/core/dist/Severity/Severity";
 import WorstSeverity from "@statusify/core/dist/Util/WorstSeverity";
+import dayjs from "dayjs"
+import { useComponent } from "../contexts/ComponentContext";
 import { useLaminar } from "../contexts/LaminarContext";
-import ISeverityTick from "../interfaces/ISeverityTick";
+import { useStatusify } from "../contexts/StatusifyContext";
 
 dayjs.extend(IsBetweenPlugin)
 
@@ -40,7 +40,7 @@ export default function useSeverityTicks(range: IMetricRange) {
       
       // Work on each day to find its tick
       const dayTicks = [...Array(daysBetween)].map(async (_, i) => {
-        const day = dayjs(nStart).add(i, 'days').startOf('day');
+        const day = dayjs(nStart).add(i + 1, 'days').startOf('day');
         const daySeverities: Severity[] = [];
 
         const dayIncidents = incidents
