@@ -1,3 +1,4 @@
+import AttributeStorageBuilder from "./AttributeStorageBuilder"
 import IProvidesSeverities from "../Severity/IProvidesSeverities"
 import Severity from "../Severity/Severity"
 import Statusify from ".."
@@ -20,11 +21,12 @@ export class SeverityBuilderMixin implements IProvidesSeverities {
   }
 }
 
-export abstract class SeverityBuilder {
+export abstract class SeverityBuilder extends AttributeStorageBuilder {
   protected _name: string
   protected _id: string
 
   constructor(id: string) {
+    super();
     this._id = id
   }
 

@@ -1,11 +1,14 @@
+import AttributeStorage, { AttributeStorageType } from "../Util/AttributeStorage";
+
 import Component from "../Component/Component"
 
 export interface SeverityCParams {
   id: string;
   name: string;
+  attributes?: AttributeStorageType;
 }
 
-export default abstract class Severity {
+export default abstract class Severity extends AttributeStorage {
   /**
    * ID of the severity (For Lookups and Reference)
    */
@@ -19,7 +22,8 @@ export default abstract class Severity {
   //
   // Constructor
   //
-  constructor({ id, name }: SeverityCParams) {
+  constructor({ id, name, attributes }: SeverityCParams) {
+    super(attributes);
     this.id = id;
     this.name = name;
   }

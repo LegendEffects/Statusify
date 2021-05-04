@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SeverityBuilder = exports.SeverityBuilderMixin = void 0;
+const AttributeStorageBuilder_1 = __importDefault(require("./AttributeStorageBuilder"));
 class SeverityBuilderMixin {
     constructor() {
         this._severities = [];
@@ -18,8 +22,9 @@ class SeverityBuilderMixin {
     }
 }
 exports.SeverityBuilderMixin = SeverityBuilderMixin;
-class SeverityBuilder {
+class SeverityBuilder extends AttributeStorageBuilder_1.default {
     constructor(id) {
+        super();
         this._id = id;
     }
     name(name) {

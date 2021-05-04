@@ -1,3 +1,4 @@
+import AttributeStorageBuilder from "./AttributeStorageBuilder";
 import IProvidesSeverities from "../Severity/IProvidesSeverities";
 import Severity from "../Severity/Severity";
 import Statusify from "..";
@@ -7,7 +8,7 @@ export declare class SeverityBuilderMixin implements IProvidesSeverities {
     getSeverities(statusify: Statusify): Promise<Severity[]>;
     getSeverity(statusify: Statusify, id: string): Promise<Severity>;
 }
-export declare abstract class SeverityBuilder {
+export declare abstract class SeverityBuilder extends AttributeStorageBuilder {
     protected _name: string;
     protected _id: string;
     constructor(id: string);

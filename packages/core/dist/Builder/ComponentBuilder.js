@@ -62,8 +62,9 @@ function group() {
     return new ComponentGroupBuilder();
 }
 exports.group = group;
-class ComponentBuilder {
+class ComponentBuilder extends AttributeStorageBuilder_1.default {
     constructor(id) {
+        super();
         this._id = id;
     }
     name(name) {

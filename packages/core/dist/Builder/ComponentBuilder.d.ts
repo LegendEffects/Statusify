@@ -22,7 +22,7 @@ export declare class ComponentGroupBuilder extends AttributeStorageBuilder {
     build(): ComponentGroup;
 }
 export declare function group(): ComponentGroupBuilder;
-export declare class ComponentBuilder {
+export declare class ComponentBuilder extends AttributeStorageBuilder {
     protected _id: string;
     protected _name: string;
     protected _description?: string;

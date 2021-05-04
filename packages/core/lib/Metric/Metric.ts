@@ -1,3 +1,5 @@
+import AttributeStorage, { AttributeStorageType } from "../Util/AttributeStorage";
+
 import IMetricRange from "./IMetricRange";
 import MetricRecord from "./MetricRecord";
 
@@ -12,9 +14,10 @@ export interface MetricCParams {
   id: string
   name: string
   description?: string
+  attributes?: AttributeStorageType
 }
 
-export abstract class Metric<T extends MetricRecord> {
+export abstract class Metric<T extends MetricRecord> extends AttributeStorage {
   /**
    * Type of Metric
    */
@@ -38,7 +41,9 @@ export abstract class Metric<T extends MetricRecord> {
   //
   // Constructor
   //
-  constructor({ type, id, name, description }: MetricCParams) {
+  constructor({ type, id, name, description, attributes }: MetricCParams) {
+    super(attributes);
+
     this.type = type;
     this.id = id;
     this.name = name;
