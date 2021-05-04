@@ -17,8 +17,8 @@ export default class AttributeStorage {
     this.attributes[key] = value;
   }
 
-  async getAttribute(key: string) {
-    return this.attributes[key];
+  async getAttribute(key: string, def?: any) {
+    return this.attributes[key] ?? def;
   }
 
   async removeAttribute(key: string) {

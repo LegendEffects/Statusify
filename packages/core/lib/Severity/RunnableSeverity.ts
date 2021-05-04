@@ -1,6 +1,7 @@
-import { SeverityBuilder } from "../Builder";
-import Component from "../component/Component";
 import Severity, { SeverityCParams } from "./Severity";
+
+import Component from "../component/Component";
+import { SeverityBuilder } from "../Builder";
 
 export type SeverityRunnable = (component: Component) => Promise<Boolean>
 
@@ -29,7 +30,8 @@ export class RunnableSeverityBuilder extends SeverityBuilder {
     return new RunnableSeverity({
       id: this._id,
       name: this._name,
-      runnable: this._runnable
+      attributes: this._attributes,
+      runnable: this._runnable,
     })
   }
 }

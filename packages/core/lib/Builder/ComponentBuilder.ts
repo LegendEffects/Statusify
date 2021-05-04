@@ -7,11 +7,11 @@ import MetricRecord from "../Metric/MetricRecord"
 import Statusify from ".."
 
 export class ComponentBuilderMixin implements IProvidesComponents {
-  _groups: ComponentGroupBuilder[] = []
+  _groups: ComponentGroupBuilder[] = [];
   
   groups(builders: ComponentGroupBuilder[]) {
-    this._groups = builders
-    return this
+    this._groups = builders;
+    return this;
   }
 
   /**
@@ -19,7 +19,7 @@ export class ComponentBuilderMixin implements IProvidesComponents {
    * @param statusify Statusify core
    */
   async getComponentGroups(_statusify: Statusify): Promise<ComponentGroup[]> {
-    return this._groups.map(g => g.build())
+    return this._groups.map(g => g.build());
   }
 
   /**
@@ -30,7 +30,7 @@ export class ComponentBuilderMixin implements IProvidesComponents {
     const components = [];
 
     (await this.getComponentGroups(statusify)).forEach(async (group) => {
-      components.push(...(await group.getComponents())) 
+      components.push(...(await group.getComponents()));
     })
 
     return components
@@ -42,8 +42,8 @@ export class ComponentBuilderMixin implements IProvidesComponents {
    * @param id Component ID
    */
   async getComponent(statusify: Statusify, id: string): Promise<Component> {
-    const found = (await this.getComponents(statusify)).find(c => c.id === id)
-    return (found === undefined) ? null : found
+    const found = (await this.getComponents(statusify)).find(c => c.id === id);
+    return (found === undefined) ? null : found;
   }
 }
 
@@ -56,18 +56,18 @@ export class ComponentGroupBuilder extends AttributeStorageBuilder {
   protected _components: ComponentBuilder[] = []
 
   public name(name: string) {
-    this._name = name
-    return this
+    this._name = name;
+    return this;
   }
 
   public description(description: string) {
-    this._description = description
-    return this
+    this._description = description;
+    return this;
   }
 
   public components(builders: ComponentBuilder[]) {
-    this._components = builders
-    return this
+    this._components = builders;
+    return this;
   }
 
   /**
@@ -76,16 +76,17 @@ export class ComponentGroupBuilder extends AttributeStorageBuilder {
   public build() {
     const group = new ComponentGroup({
       name: this._name,
-      description: this._description
+      description: this._description,
+      attributes: this._attributes,
     })
 
-    group.addComponents(this._components.map(c => c.build()))
-    return group
+    group.addComponents(this._components.map(c => c.build()));
+    return group;
   }
 }
 
 export function group() {
-  return new ComponentGroupBuilder()
+  return new ComponentGroupBuilder();
 }
 
 /**
@@ -99,22 +100,22 @@ export class ComponentBuilder extends AttributeStorageBuilder {
 
   constructor(id: string) {
     super();
-    this._id = id
+    this._id = id;
   }
 
   public name(name: string) {
-    this._name = name
-    return this
+    this._name = name;
+    return this;
   }
 
   public description(description: string) {
-    this._description = description
-    return this
+    this._description = description;
+    return this;
   }
 
   public metric(metric: Metric<MetricRecord>) {
-    if(this._metrics === undefined) this._metrics = []
-    this._metrics.push(metric)
+    if(this._metrics === undefined) this._metrics = [];
+    this._metrics.push(metric);
     return this;
   }
 
@@ -126,7 +127,8 @@ export class ComponentBuilder extends AttributeStorageBuilder {
       id: this._id,
       name: this._name,
       description: this._description,
-      metrics: this._metrics
+      metrics: this._metrics,
+      attributes: this._attributes,
     });
   }
 }

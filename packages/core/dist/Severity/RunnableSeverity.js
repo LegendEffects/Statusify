@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.runnableSeverity = exports.RunnableSeverityBuilder = exports.RunnableSeverity = void 0;
-const Builder_1 = require("../Builder");
 const Severity_1 = __importDefault(require("./Severity"));
+const Builder_1 = require("../Builder");
 class RunnableSeverity extends Severity_1.default {
     constructor({ id, name, runnable }) {
         super({ id, name });
@@ -25,7 +25,8 @@ class RunnableSeverityBuilder extends Builder_1.SeverityBuilder {
         return new RunnableSeverity({
             id: this._id,
             name: this._name,
-            runnable: this._runnable
+            attributes: this._attributes,
+            runnable: this._runnable,
         });
     }
 }

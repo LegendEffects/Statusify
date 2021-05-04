@@ -51,7 +51,8 @@ class ComponentGroupBuilder extends AttributeStorageBuilder_1.default {
     build() {
         const group = new ComponentGroup_1.default({
             name: this._name,
-            description: this._description
+            description: this._description,
+            attributes: this._attributes,
         });
         group.addComponents(this._components.map(c => c.build()));
         return group;
@@ -86,7 +87,8 @@ class ComponentBuilder extends AttributeStorageBuilder_1.default {
             id: this._id,
             name: this._name,
             description: this._description,
-            metrics: this._metrics
+            metrics: this._metrics,
+            attributes: this._attributes,
         });
     }
 }

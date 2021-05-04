@@ -7,8 +7,9 @@ class AttributeStorage {
     async setAttribute(key, value) {
         this.attributes[key] = value;
     }
-    async getAttribute(key) {
-        return this.attributes[key];
+    async getAttribute(key, def) {
+        var _a;
+        return (_a = this.attributes[key]) !== null && _a !== void 0 ? _a : def;
     }
     async removeAttribute(key) {
         delete this.attributes[key];

@@ -5,7 +5,7 @@ export default class AttributeStorage {
     readonly attributes: AttributeStorageType;
     constructor(attributes?: AttributeStorageType);
     setAttribute(key: string, value: any): Promise<void>;
-    getAttribute(key: string): Promise<any>;
+    getAttribute(key: string, def?: any): Promise<any>;
     removeAttribute(key: string): Promise<void>;
     getAttributes(): Promise<AttributeStorageType>;
 }
