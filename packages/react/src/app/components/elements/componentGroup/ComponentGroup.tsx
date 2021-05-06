@@ -1,8 +1,9 @@
 import { Box, BoxProps } from "@chakra-ui/layout";
-import StatusifyComponentGroup from "@statusify/core/dist/Component/ComponentGroup";
-import { ComponentGroupProvider } from "../../../contexts/ComponentGroupContext";
+
 import ComponentGroupBody from "./ComponentGroupBody";
 import ComponentGroupHeader from "./ComponentGroupHeader";
+import { ComponentGroupProvider } from "../../../contexts/ComponentGroupContext";
+import StatusifyComponentGroup from "@statusify/core/dist/Component/ComponentGroup";
 
 export interface ComponentGroupProps extends BoxProps {
   group: StatusifyComponentGroup

@@ -1,14 +1,14 @@
-import { Stack } from "@chakra-ui/layout";
 import { Collapse } from "@chakra-ui/transition";
-import { useComponentGroup } from "../../../contexts/ComponentGroupContext"
 import Component from "../component/Component";
+import { Stack } from "@chakra-ui/layout";
+import { useComponentGroup } from "../../../contexts/ComponentGroupContext"
 
 export default function ComponentGroupBody() {
-  const [ { group, collapsed } ] = useComponentGroup();
+  const [ { group, isAnonymous, isCollapsible, collapsed } ] = useComponentGroup();
 
   return (
-    <Collapse in={!collapsed}>
-      <Stack padding={4} pt={2} spacing={4}>
+    <Collapse in={!isCollapsible || !collapsed}>
+      <Stack padding={4} pt={(!isAnonymous || isCollapsible) ? 2 : undefined} spacing={4}>
         { group.components.map((component, i) => <Component key={i} component={component} />) }
       </Stack>
     </Collapse>
