@@ -33,6 +33,13 @@
           "average": "Averaging: {{average}}ms"
         }
       }
+    },
+
+    "incidents": {
+      "banner": {
+        "timeFormat": "HH:mm",
+        "dateFormat": "MMM DD"
+      }
     }
   }
 }

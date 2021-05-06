@@ -1,15 +1,15 @@
-import Statusify from '@statusify/core/dist'
-import { Builder, group, component } from '@statusify/core/dist/Builder'
-import { runnableSeverity } from '@statusify/core/dist/Severity/RunnableSeverity'
-import IncidentSeverityCalculator from '@statusify/core/dist/Severity/IncidentSeverityCalculator'
+import { ANONYMOUS, COLLAPSED, COLLAPSIBLE } from './app/constants/FrontendOptions'
+import { Builder, component, group } from '@statusify/core/dist/Builder'
+
 import AchievedSeverityCalculator from '@statusify/core/dist/Severity/AchievedSeverityCalculator'
-import SeverityMultiplexer from '@statusify/core/dist/Severity/SeverityMultiplexer'
 import ArrayIncidentProvider from '@statusify/core/dist/Incident/ArrayIncidentProvider'
-
+import IncidentSeverityCalculator from '@statusify/core/dist/Severity/IncidentSeverityCalculator'
+import SeverityMultiplexer from '@statusify/core/dist/Severity/SeverityMultiplexer'
+import Statusify from '@statusify/core/dist'
 import UptimeRobotCore from '@statusify/uptimerobot/dist'
-import UptimeRobotLatency from '@statusify/uptimerobot/dist/Metric/UptimeRobotLatency'
 import UptimeRobotDowntime from '@statusify/uptimerobot/dist/Metric/UptimeRobotDowntime'
-
+import UptimeRobotLatency from '@statusify/uptimerobot/dist/Metric/UptimeRobotLatency'
+import { runnableSeverity } from '@statusify/core/dist/Severity/RunnableSeverity'
 
 const uptimeRobotCore = new UptimeRobotCore('ur488195-bd46852677deb5ca10988538');
 
@@ -18,6 +18,7 @@ const built = new Builder()
         group()
             .name('Servers')
             .description('Our core services are hosted here.')
+            .attribute(COLLAPSED, false) // Make the group expanded automatically
             .components([
                 component('vps')
                     .name('VPS')
@@ -34,6 +35,9 @@ const built = new Builder()
 
         group()
             .name('Test Group 2')
+            // If a group is both noncollapsible and anonymous then the header is hidden
+            .attribute(COLLAPSIBLE, false) // An noncollapsible group is automatically expanded
+            .attribute(ANONYMOUS, true) // Anonymous groups are automatically expanded
             .components([
                 component('component-3')
                     .name('Test Component 3')
@@ -71,14 +75,50 @@ const built = new Builder()
     ])
 ;
 
+const incidentProvider = new ArrayIncidentProvider();
+
 export const statusify = new Statusify({
     componentProvider: built,
     severityProvider: built,
-    incidentProvider: new ArrayIncidentProvider(),
+    incidentProvider: incidentProvider,
     severityCalculator: new SeverityMultiplexer([
         new IncidentSeverityCalculator(),
         new AchievedSeverityCalculator()
     ])
 });
+
+async function bootstrapDependencies() {
+    incidentProvider.incidents.push({
+        id: 'test-incident',
+        name: 'Test Incident',
+        body: 'This is the test of an incident, this has no resolved time and is therefore unresolved.',
+        bodyStatus: 'Partial',
+        updates: [
+            {
+                body: 'This is an update for the incident to make it operational',
+                bodyStatus: 'Operational',
+                severity: await statusify.getSeverity('operational'),
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                body: 'This is an update for the incident to make it major',
+                bodyStatus: 'Major',
+                severity: await statusify.getSeverity('major'),
+                createdAt: new Date(1258182395),
+                updatedAt: new Date(),
+            },
+        ],
+        resolvedAt: null,
+        severity: await statusify.getSeverity('partial'),
+        components: [
+            await statusify.getComponent('vps')
+        ],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    });
+}
+
+bootstrapDependencies();
 
 export default statusify;
