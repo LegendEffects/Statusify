@@ -1,11 +1,12 @@
 import { Box, BoxProps } from "@chakra-ui/layout";
-import React from "react";
-import useSeverityTicks from "../../../../../hooks/useSeverityTicks";
-import { useLaminar } from "../../../../../contexts/LaminarContext";
+
 import ComponentTickChartTooltip from "./ComponentTickChartTooltip";
 import ISeverityTick from "../../../../../interfaces/ISeverityTick";
+import React from "react";
+import { useLaminar } from "../../../../../contexts/LaminarContext";
 import useMetricRange from "../../../../../hooks/useMetricRange";
 import { useResponsiveViewbox } from "../../../../../contexts/ResponsiveViewboxContext";
+import useSeverityTicks from "../../../../../hooks/useSeverityTicks";
 
 const TickRectStyle: BoxProps['sx'] = {
   height: '20px',
@@ -82,7 +83,7 @@ export default function ComponentTickChart() {
       h="40px"
       viewBox={viewbox.box}
       onMouseEnter={() => { setIsFocused(true)  }}
-      onMouseLeave={() => { setIsFocused(false) }}
+      onMouseLeave={() => { setIsFocused(false); setCurrentTick(undefined) }}
       ref={svgContainerRef}
     >
       <Box 
