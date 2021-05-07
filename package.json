@@ -1,7 +1,27 @@
 {
-  "name": "root",
+  "name": "statusify",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "LegendEffects",
+    "url": "https://github.com/legendeffects"
+  },
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/legendeffects/statusify"
+  },
+  "scripts": {
+    "clean:build": "rimraf packages/**/dist packages/**/tsconfig.tsbuildinfo",
+    "clean:install": "lerna clean && rimraf node_modules",
+    "bootstrap": "lerna bootstrap",
+    "build": "yarn clean:build && tsc -b packages/core packages/loki packages/uptimerobot",
+    "dev": "yarn clean:build && tsc --watch -b packages/core packages/loki packages/uptimerobot",
+    "publish": "yarn build && lerna publish --force-publish"
+  },
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "lerna": "^3.22.1",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2"
   }
 }

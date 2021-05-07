@@ -1,10 +1,11 @@
+import IProvidesIncidents, { IncidentsQuery } from './Incident/IProvidesIncidents'
+
+import Component from "./component/Component"
+import ComponentGroup from "./Component/ComponentGroup"
+import { EventEmitter } from 'events'
+import ICalculatesSeverities from "./Severity/ICalculatesSeverities"
 import IProvidesComponents from "./Component/IProvidesComponents"
 import IProvidesSeverities from "./Severity/IProvidesSeverities"
-import IProvidesIncidents, { IncidentsQuery } from './Incident/IProvidesIncidents'
-import { EventEmitter } from 'events'
-import Component from "./component/Component"
-import ICalculatesSeverities from "./Severity/ICalculatesSeverities"
-import ComponentGroup from "./Component/ComponentGroup"
 
 export interface StatusifyOptions {
   componentProvider: IProvidesComponents
@@ -32,14 +33,14 @@ export default class Statusify extends EventEmitter {
   // Components
   //
   /**
-   * Get all of the component groups
+   * Gets all component groups
    */
   async getComponentGroups() {
     return this.componentProvider.getComponentGroups(this)
   }
 
   /**
-   * Get all of the components from the component groups
+   * Gets all components from component groups
    */
   async getComponents(): Promise<Component[]> {
     return this.componentProvider.getComponents(this)
@@ -57,37 +58,76 @@ export default class Statusify extends EventEmitter {
   //
   // Incidents
   //
+  /**
+   * Gets a specific incident
+   * @param id  ID of the incident
+   * @returns Incident if found, otherwise null
+   */
   async getIncident(id: string) {
     return this.incidentProvider.getIncident(this, id)
   }
 
+  /**
+   * Gets all incidents or incidents matching the query
+   * @param query Optional query to match incidents to
+   * @returns Array of incidents
+   */
   async getIncidents(query?: IncidentsQuery) {
     return this.incidentProvider.getIncidents(this, query)
   }
 
-  async getIncidentsFor(component: Component, query: IncidentsQuery) {
+  /**
+   * Gets all incidents for a specific component
+   * @param component Component to get incidents for
+   * @param query Optional query to match incidents to
+   * @returns Array of incidents
+   */
+  async getIncidentsFor(component: Component, query?: IncidentsQuery) {
     return this.incidentProvider.getIncidentsFor(this, component, query)
   }
 
   //
   // Severities
   //
+  /**
+   * Gets all severities
+   * @returns Array of severities
+   */
   async getSeverities() {
     return this.severityProvider.getSeverities(this)
   }
 
+  /**
+   * Gets a specific severity
+   * @param id ID of the severity
+   * @returns Severity if found, otherwise null
+   */
   async getSeverity(id: string) {
     return this.severityProvider.getSeverity(this, id)
   }
   
+  /**
+   * Gets the current severity for a component
+   * @param component Component to get the severity for
+   * @returns Severity of the component
+   */
   async getSeverityForComponent(component: Component) {
     return this.severityCalculator.getSeverityForComponent(component, this)
   }
   
+  /**
+   * Gets the current severity for a group
+   * @param group Component group to get the severity for
+   * @returns Severity of the component group
+   */
   async getSeverityForGroup(group: ComponentGroup) {
     return this.severityCalculator.getSeverityForGroup(group, this)
   }
 
+  /**
+   * Gets the global severity
+   * @returns Global severity
+   */
   async getGlobalSeverity() {
     return this.severityCalculator.getGlobalSeverity(this)
   }

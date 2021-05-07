@@ -11,7 +11,7 @@ export class SeverityBuilderMixin implements IProvidesSeverities {
     return this
   }
   
-  async getSeverities(statusify: Statusify): Promise<Severity[]> {
+  async getSeverities(_statusify: Statusify): Promise<Severity[]> {
     return this._severities.map(s => s.build())
   }
 
