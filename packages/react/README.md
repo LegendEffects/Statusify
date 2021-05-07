@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img align="center" height="100" src="../../.github/react-preview.png"/>
+  <img align="center" src="../../.github/react-preview.png"/>
 </p>
 
 <br/>

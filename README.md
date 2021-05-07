@@ -12,8 +12,6 @@
   TODO: Insert Badges
 </p>
 
-<br/>
-
 <h3 align="center">
   <a href="./CONTRIBUTING.md">Contribute</a>
   <span>·</span>
