@@ -52,6 +52,10 @@ $ lerna bootstrap
 ```
 
 Then follow individual package documentation.
+
+## Contributing
+Read through our [contributing guidelines](./CONTRIBUTING.md) to learn about the contribution process and style guides.
+
 ## Configuration
 Configuration is currently mainly supported through a builder pattern; however, this is not enforced.
 ```ts
