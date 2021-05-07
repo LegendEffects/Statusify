@@ -30,7 +30,7 @@ const built = new Builder()
                 component('demo-pages')
                     .name('Demo Pages')
                     .metric(new UptimeRobotLatency(uptimeRobotCore, {name: 'Latency', monitorID: 779382341, id: 'demo-pages-latency'}))
-                    .metric(new UptimeRobotDowntime(uptimeRobotCore, {name: 'Latency', monitorID: 779382341, id: 'demo-pages-downtime'}))
+                    .metric(new UptimeRobotDowntime(uptimeRobotCore, {name: 'Downtime', monitorID: 779382341, id: 'demo-pages-downtime'}))
             ]),
 
         group()
@@ -90,22 +90,22 @@ export const statusify = new Statusify({
 async function bootstrapDependencies() {
     incidentProvider.incidents.push({
         id: 'test-incident',
-        name: 'Test Incident',
-        body: 'This is the test of an incident, this has no resolved time and is therefore unresolved.',
+        name: 'Incident on Cluster SBG-1',
+        body: 'We are encountering a partial outage that impacts some API calls.',
         bodyStatus: 'Partial',
         updates: [
             {
-                body: 'This is an update for the incident to make it operational',
+                body: 'The incident has been resolved.',
                 bodyStatus: 'Operational',
                 severity: await statusify.getSeverity('operational'),
-                createdAt: new Date(),
+                createdAt: new Date(1620405538852),
                 updatedAt: new Date(),
             },
             {
-                body: 'This is an update for the incident to make it major',
+                body: 'All API calls are now impacted, our teams are working hard to get everything back on track.',
                 bodyStatus: 'Major',
                 severity: await statusify.getSeverity('major'),
-                createdAt: new Date(1258182395),
+                createdAt: new Date(1620403538852),
                 updatedAt: new Date(),
             },
         ],
@@ -114,7 +114,7 @@ async function bootstrapDependencies() {
         components: [
             await statusify.getComponent('vps')
         ],
-        createdAt: new Date(),
+        createdAt: new Date(1620403138852),
         updatedAt: new Date(),
     });
 }
