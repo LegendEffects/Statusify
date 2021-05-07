@@ -22,7 +22,10 @@
 ---
 
 ## Status of This Project
-This branch of the project is currently under construction, production usage isn't recommended but possible with some work. Contributions are Welcome.
+This branch of the project is currently under construction, production usage isn't recommended but possible with some work. Contributions are welcome.
+
+## Here for a Status Page?
+If you're here for a status page then you'll want to look at our [React Frontend](./packages/react)
 
 ## Structure
 This project uses a Monorepo structure managed with [LernaJS](https://lerna.js.org/)
@@ -38,10 +41,10 @@ This project uses a Monorepo structure managed with [LernaJS](https://lerna.js.o
 
 ## Features
 - Platform Agnostic Structure
-- Combine Multiple Providers
-- Focus on Serverless Hosting Structure
-- Clean Built-in Frontend
-- Built for Flexibility
+- Incident Reporting
+- Component Grouping
+- Support for Downtime, Latency, and Custom Metrics
+- Support for Custom Attributes
 
 ## Installation
 ```bash

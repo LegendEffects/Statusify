@@ -12,8 +12,6 @@
   <img align="center" src="../../.github/react-preview.png"/>
 </p>
 
-<br/>
-
 <h3 align="center">
   <a href="#getting-started">Getting Started</a>
 </h3>
