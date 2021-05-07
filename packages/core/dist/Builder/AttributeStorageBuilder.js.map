@@ -1,1 +1,0 @@
-{"version":3,"file":"AttributeStorageBuilder.js","sourceRoot":"","sources":["../../lib/Builder/AttributeStorageBuilder.ts"],"names":[],"mappings":";;AAEA,MAAqB,uBAAuB;IAA5C;QACY,gBAAW,GAAyB,EAAE,CAAC;IAMnD,CAAC;IAJQ,SAAS,CAAC,GAAW,EAAE,KAAU;QACtC,IAAI,CAAC,WAAW,CAAC,GAAG,CAAC,GAAG,KAAK,CAAC;QAC9B,OAAO,IAAI,CAAC;IACd,CAAC;CACF;AAPD,0CAOC"}

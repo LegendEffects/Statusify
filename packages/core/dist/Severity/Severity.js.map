@@ -1,1 +1,0 @@
-{"version":3,"file":"Severity.js","sourceRoot":"","sources":["../../lib/Severity/Severity.ts"],"names":[],"mappings":";;;;;AAAA,gFAAkF;AAUlF,MAA8B,QAAS,SAAQ,0BAAgB;IAc7D,YAAY,EAAE,EAAE,EAAE,IAAI,EAAE,UAAU,EAAmB;QACnD,KAAK,CAAC,UAAU,CAAC,CAAC;QAClB,IAAI,CAAC,EAAE,GAAG,EAAE,CAAC;QACb,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;IACnB,CAAC;CAMF;AAxBD,2BAwBC"}
