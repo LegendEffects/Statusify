@@ -1,0 +1,12 @@
+version: '3.6'
+
+services:
+
+  front-end:
+    image: statusify
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    build:
+      context: ./
+      dockerfile: ./packages/react/Dockerfile
