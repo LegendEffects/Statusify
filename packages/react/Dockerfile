@@ -7,7 +7,8 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY . ./
 
 RUN yarn global add lerna
-RUN lerna bootstrap
+RUN yarn bootstrap
+RUN yarn build
 
 WORKDIR /app/packages/react
 RUN yarn build

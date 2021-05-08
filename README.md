@@ -48,7 +48,8 @@ This project uses a Monorepo structure managed with [LernaJS](https://lerna.js.o
 
 ## Installation
 ```bash
-$ lerna bootstrap
+$ yarn bootstrap
+$ yarn build
 ```
 
 Then follow individual package documentation.
