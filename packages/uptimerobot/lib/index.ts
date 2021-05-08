@@ -1,11 +1,12 @@
-import { MetricType } from "@statusify/core/dist/Metric/Metric";
 import axios, { AxiosInstance } from "axios";
+
 import { CACHE_LIFETIME } from "./constants";
+import IMetricRange from "@statusify/core/dist/Metric/IMetricRange";
+import IUptimeRobotMonitorResponse from "./Types/IUptimeRobotMonitorResponse";
+import { MetricType } from "@statusify/core/dist/Metric/Metric";
 import dayjs from "dayjs";
 import useCache from "./Util/useCache";
 import useSomewhatSingleton from "./Util/useSomewhatSingleton";
-import IMetricRange from "@statusify/core/dist/Metric/IMetricRange";
-import IUptimeRobotMonitorResponse from "./Types/IUptimeRobotMonitorResponse";
 
 export default class UptimeRobotCore {
     // Constants

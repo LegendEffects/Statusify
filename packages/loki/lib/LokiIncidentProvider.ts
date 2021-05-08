@@ -1,10 +1,12 @@
 const path = require('path')
 const fs = require('fs')
 const loki = require('lokijs')
+
+import IProvidesIncidents, { DateQuery, IncidentsQuery } from "@statusify/core/dist/Incident/IProvidesIncidents";
+
 import Component from "@statusify/core/dist/Component/Component";
 import IIncident from "@statusify/core/dist/Incident/IIncident";
 import IIncidentUpdate from "@statusify/core/dist/Incident/IIncidentUpdate";
-import IProvidesIncidents, { DateQuery, IncidentsQuery } from "@statusify/core/dist/Incident/IProvidesIncidents";
 import Statusify from "@statusify/core/dist";
 
 export interface LokiIncidentProviderOptions {
@@ -43,14 +45,18 @@ export default class LokiIncidentProvider implements IProvidesIncidents {
    * @param query Query
    */
   async getIncidents(statusify: Statusify, query: IncidentsQuery = {}): Promise<IIncident[]> {
-    return Promise.all(
-      this.incidents.chain()
-        .find(this.buildQuery(query))
-        .limit(query.limit)
-        .offset(query.offset)
-        .data()
-        .map(i => this.parseIncident(i, statusify))
-    )
+    const chain = this.incidents.chain()
+      .find(this.buildQuery(query));
+      
+    if(query.limit) {
+      chain.limit(query.limit);
+    }
+    
+    if(query.offset) {
+      chain.offset(query.offset);
+    }
+
+    return Promise.all(chain.data().map(i => this.parseIncident(i, statusify)))
   }
   
   /**
@@ -58,15 +64,19 @@ export default class LokiIncidentProvider implements IProvidesIncidents {
    * @param statusify Statusify Instance
    * @param query Query
    */
-  async getIncidentsFor(statusify: Statusify, component: Component, query: IncidentsQuery): Promise<IIncident[]> {
-    return Promise.all(
-      this.incidents.chain()
-        .find({...this.buildQuery(query), components: {$contains: component.id} })
-        .limit(query.limit)
-        .offset(query.offset)
-        .data()
-        .map(i => this.parseIncident(i, statusify))
-    )
+  async getIncidentsFor(statusify: Statusify, component: Component, query: IncidentsQuery = {}): Promise<IIncident[]> {
+    const chain = this.incidents.chain()
+      .find({...this.buildQuery(query), components: {$contains: component.id} });
+
+    if(query.limit) {
+      chain.limit(query.limit);
+    }
+    
+    if(query.offset) {
+      chain.offset(query.offset);
+    }
+
+    return Promise.all(chain.data().map(i => this.parseIncident(i, statusify)));  
   }
 
   /**
@@ -85,9 +95,14 @@ export default class LokiIncidentProvider implements IProvidesIncidents {
    * @param statusify 
    */
   private async parseIncident(incident: any, statusify: Statusify): Promise<IIncident> {
-    const updates = incident.updates.map(async (u) => {
+    const updates = incident.updates.map(async (u: any) => {
+      const severity = await statusify.getSeverity(u.severity);
+      if(!severity) {
+        throw new Error(`LokiIncidentProvider: Incident "${incident.name}", update "${u.name}" references unknown severity "${u.severity}"`);
+      }
+
       const update: IIncidentUpdate = {
-        severity: await statusify.getSeverity(u.severity),
+        severity,
         body: u.body,
         bodyStatus: u.body_status,
         createdAt: new Date(u.created_at),
@@ -96,6 +111,11 @@ export default class LokiIncidentProvider implements IProvidesIncidents {
       return update
     }) as IIncidentUpdate[]
 
+    const severity = await statusify.getSeverity(incident.severity);
+    if(!severity) {
+      throw new Error(`LokiIncidentProvider: Incident "${incident.name}" references unknown severity "${incident.severity}"`);
+    }
+
     const parsed: IIncident = {
       id: incident.id,
       name: incident.name,
@@ -103,7 +123,7 @@ export default class LokiIncidentProvider implements IProvidesIncidents {
       body: incident.body,
       bodyStatus: incident.body_status,
       
-      severity: await statusify.getSeverity(incident.severity),
+      severity,
       components: (await statusify.getComponents()).filter(c => incident.components.includes(c.id)),
       updates: await Promise.all(updates),
 
@@ -123,7 +143,7 @@ export default class LokiIncidentProvider implements IProvidesIncidents {
    * @param query 
    */
   private buildQuery(query: IncidentsQuery): any {
-    const qComp = {}
+    const qComp: any = {}
 
     if(query.createdAt !== undefined) {
       qComp['created_at'] = this.buildDateQuery(query.createdAt)
@@ -144,8 +164,8 @@ export default class LokiIncidentProvider implements IProvidesIncidents {
     return qComp
   }
 
-  private buildDateQuery(query: DateQuery): any {
-    const qComp = {}
+  private buildDateQuery(query?: DateQuery): any {
+    const qComp: any = {}
 
     if(query === undefined || query === null) {
       return undefined

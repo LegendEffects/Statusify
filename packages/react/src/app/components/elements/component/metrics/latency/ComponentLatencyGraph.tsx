@@ -1,13 +1,14 @@
+import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
+import { Box, Flex, Text } from "@chakra-ui/layout";
+
+import Chart from "react-apexcharts";
+import { Collapse } from "@chakra-ui/transition";
 import ILatencyMetricRecord from "@statusify/core/dist/Metric/ILatencyMetricRecord"
+import { IconButton } from "@chakra-ui/button";
+import { MetricType } from "@statusify/core/dist/Metric/Metric"
 import React from "react";
 import useComponentMetric from "../../../../../hooks/useComponentMetric"
 import useMetricRange from "../../../../../hooks/useMetricRange";
-import { Box, Flex, Text } from "@chakra-ui/layout";
-import { IconButton } from "@chakra-ui/button";
-import { Collapse } from "@chakra-ui/transition";
-import { MetricType } from "@statusify/core/dist/Metric/Metric"
-import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
-import Chart from "react-apexcharts";
 import { useTheme } from "@chakra-ui/system";
 import { useTranslation } from "react-i18next";
 

@@ -36,7 +36,7 @@ export abstract class Metric<T extends MetricRecord> extends AttributeStorage {
   /**
    * Description of the Metric
    */
-  public readonly description: string;
+  public readonly description?: string;
 
   //
   // Constructor

@@ -1,13 +1,14 @@
-import { Flex, Container, Button, Stack } from '@chakra-ui/react'
-import ComponentGroup from '@statusify/core/dist/Component/ComponentGroup';
-import Severity from '@statusify/core/dist/Severity/Severity';
-import SComponentGroup from '../components/component/SComponentGroup'
+import { Button, Container, Flex, Stack } from '@chakra-ui/react'
 import { useContext, useEffect, useState } from 'react';
+
 import { AiOutlineFullscreen } from 'react-icons/ai'
+import ComponentGroup from '@statusify/core/dist/Component/ComponentGroup';
+import PageHeader from '../components/PageHeader';
+import SComponentGroup from '../components/component/SComponentGroup'
+import Severity from '@statusify/core/dist/Severity/Severity';
+import { StatusBanner } from '../components/StatusBanner';
 import StatusifyContext from '../StatusifyContext';
 import { useTranslation } from 'react-i18next';
-import PageHeader from '../components/PageHeader';
-import { StatusBanner } from '../components/StatusBanner';
 
 const pageWidth = '1140px';
 

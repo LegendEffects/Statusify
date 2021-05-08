@@ -7,7 +7,7 @@
     "platform",
     "agnostic"
   ],
-  "author": "Legend <evaninho94@gmail.com>",
+  "author": "Legend <evan@legendeffects.co.uk>",
   "homepage": "https://github.com/LegendEffects/Statusify#readme",
   "license": "ISC",
   "main": "dist/index.js",
@@ -16,7 +16,7 @@
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
@@ -47,6 +47,6 @@
     "@babel/preset-typescript": "^7.12.7",
     "@types/jest": "^26.0.20",
     "babel-jest": "^26.6.3",
-    "jest": "^26.6.3"
+    "jest": "^26.6.0"
   }
 }

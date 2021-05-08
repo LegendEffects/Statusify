@@ -15,15 +15,15 @@ export class SeverityBuilderMixin implements IProvidesSeverities {
     return this._severities.map(s => s.build())
   }
 
-  async getSeverity(statusify: Statusify, id: string): Promise<Severity> {
+  async getSeverity(statusify: Statusify, id: string): Promise<Severity | null> {
     const found = (await this.getSeverities(statusify)).find(s => s.id === id)
     return (found === undefined) ? null : found
   }
 }
 
 export abstract class SeverityBuilder extends AttributeStorageBuilder {
-  protected _name: string
-  protected _id: string
+  protected _name: string = '';
+  protected _id: string;
 
   constructor(id: string) {
     super();

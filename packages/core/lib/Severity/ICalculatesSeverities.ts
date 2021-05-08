@@ -1,7 +1,7 @@
-import Component from "../component/Component";
+import Component from "../Component/Component";
 import ComponentGroup from "../Component/ComponentGroup";
-import Statusify from "..";
 import Severity from "./Severity";
+import Statusify from "..";
 
 export default interface ICalculatesSeverities {
   /**

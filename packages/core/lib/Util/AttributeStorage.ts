@@ -7,7 +7,7 @@ export default class AttributeStorage {
   public readonly attributes: AttributeStorageType
 
   constructor(attributes?: AttributeStorageType) {
-    this.attributes = attributes ?? {};
+    this.attributes = attributes || {};
   }
 
   //
@@ -18,7 +18,7 @@ export default class AttributeStorage {
   }
 
   async getAttribute(key: string, def?: any) {
-    return this.attributes[key] ?? def;
+    return this.attributes[key] || def;
   }
 
   async removeAttribute(key: string) {

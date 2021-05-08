@@ -1,9 +1,10 @@
+import { GenericUptimeRobotMetric, UptimeRobotGenericMetricCParams } from './GenericUptimeRobotMetric';
+
 import ILatencyMetricRecord from '@statusify/core/dist/Metric/ILatencyMetricRecord';
 import IMetricRange from '@statusify/core/dist/Metric/IMetricRange';
+import { MetricType } from '@statusify/core/dist/Metric/Metric'
 import UptimeRobotCore from '..';
 import dayjs from 'dayjs';
-import { MetricType } from '@statusify/core/dist/Metric/Metric'
-import { GenericUptimeRobotMetric, UptimeRobotGenericMetricCParams } from './GenericUptimeRobotMetric';
 
 interface UptimeRobotResponseTime {
   datetime: number,
@@ -22,7 +23,11 @@ export default class UptimeRobotLatency extends GenericUptimeRobotMetric<ILatenc
   async getPeriod(range: IMetricRange): Promise<ILatencyMetricRecord[]> {
     const data = await this.fetchData(range);
 
-    return data.response_times.map((t: UptimeRobotResponseTime) => ({
+    if(!data) {
+      return [];
+    }
+
+    return (data.response_times as UptimeRobotResponseTime[]).map((t) => ({
       time: new Date(t.datetime * 1000),
       value: t.value
     }));
@@ -35,9 +40,13 @@ export default class UptimeRobotLatency extends GenericUptimeRobotMetric<ILatenc
   async getAverage(range: IMetricRange): Promise<ILatencyMetricRecord> {
     const data = await this.urc.getMonitor(range, this.monitorID, MetricType.LATENCY);
 
+    if(!data) {
+      throw new Error('UptimeRobotLatency: Unable to fetch average response time.')
+    }
+
     return {
       time: new Date(),
-      value: parseFloat(data.average_response_time)
+      value: parseFloat(data.average_response_time as string)
     };
   }
 

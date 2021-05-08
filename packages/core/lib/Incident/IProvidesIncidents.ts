@@ -1,8 +1,8 @@
-import Component from "../component/Component";
-import Statusify from "..";
+import Component from "../Component/Component";
 import IIncident from "./IIncident";
+import Statusify from "..";
 
-export type DateQuery = {
+export type DateQuery = null | {
   after?: Date
   before?: Date
 }

@@ -1,6 +1,6 @@
 import Severity, { SeverityCParams } from "./Severity";
 
-import Component from "../component/Component";
+import Component from "../Component/Component";
 import { SeverityBuilder } from "../Builder";
 
 export type SeverityRunnable = (component: Component) => Promise<Boolean>
@@ -19,7 +19,7 @@ export class RunnableSeverity extends Severity {
 }
 
 export class RunnableSeverityBuilder extends SeverityBuilder {
-  private _runnable: SeverityRunnable
+  private _runnable!: SeverityRunnable;
 
   public runnable(runnable: SeverityRunnable) {
     this._runnable = runnable
@@ -27,6 +27,10 @@ export class RunnableSeverityBuilder extends SeverityBuilder {
   }
 
   public build(): Severity {
+    if(this.runnable === undefined) {
+      throw new Error('RunnableSeverity: No runnable provided.');
+    }
+
     return new RunnableSeverity({
       id: this._id,
       name: this._name,

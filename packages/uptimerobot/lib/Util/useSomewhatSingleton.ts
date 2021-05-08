@@ -1,7 +1,7 @@
-export default function useSomewhatSingleton<T>(resolver: (...args: unknown[]) => Promise<T>) {
-  let currentPromise = undefined;
+export default function useSomewhatSingleton<T>(resolver: (...args: any[]) => Promise<T>) {
+  let currentPromise: Promise<any> | undefined = undefined;
 
-  const fetch = (...args) => {
+  const fetch = (...args: any[]) => {
     // Check if there is a current promise being processed
     if(currentPromise !== undefined) {
       return currentPromise;

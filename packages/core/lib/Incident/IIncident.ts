@@ -1,6 +1,6 @@
-import Component from "../component/Component";
-import Severity from "../Severity/Severity";
+import Component from "../Component/Component";
 import IIncidentUpdate from "./IIncidentUpdate";
+import Severity from "../Severity/Severity";
 
 export default interface IIncident {
   /**
@@ -34,9 +34,9 @@ export default interface IIncident {
   severity: Severity
 
   /**
-   * When the incident was resolved (Null if unresolved)
+   * When the incident was resolved (undefined if unresolved)
    */
-  resolvedAt: Date
+  resolvedAt?: Date
 
   /**
    * Components that are affected by the incident

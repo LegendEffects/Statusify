@@ -1,6 +1,6 @@
 import IProvidesIncidents, { IncidentsQuery } from './Incident/IProvidesIncidents'
 
-import Component from "./component/Component"
+import Component from "./Component/Component"
 import ComponentGroup from "./Component/ComponentGroup"
 import { EventEmitter } from 'events'
 import ICalculatesSeverities from "./Severity/ICalculatesSeverities"

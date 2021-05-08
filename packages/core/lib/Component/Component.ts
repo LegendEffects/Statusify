@@ -5,7 +5,7 @@ import MetricRecord from "../Metric/MetricRecord";
 
 export interface ComponentCParams {
   id: string
-  name: string
+  name?: string
   description?: string
   metrics?: Metric<MetricRecord>[];
   attributes?: AttributeStorageType;
@@ -20,7 +20,7 @@ export default class Component extends AttributeStorage {
   /**
    * Name of the component
    */
-  public readonly name: string;
+  public readonly name?: string;
 
   /**
    * Description of the component

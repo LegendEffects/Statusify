@@ -29,13 +29,17 @@ export default function useCache<K extends Object, V>(lifetime: number, fetcher:
 
     if(cacheKey) {
       const cacheEntry = cache.get(cacheKey);
-      
-      if(Date.now() - cacheEntry.time.getTime() > lifetime) {
-        // Entry has expired, delete it
-        cache.delete(key)
-      } else {
-        // Entry is valid, send it off
-        return cacheEntry.entry
+
+      if(cacheEntry) {
+
+        if(Date.now() - cacheEntry.time.getTime() > lifetime) {
+          // Entry has expired, delete it
+          cache.delete(key)
+        } else {
+          // Entry is valid, send it off
+          return cacheEntry.entry
+        }
+
       }
     }
     

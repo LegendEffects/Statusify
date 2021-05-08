@@ -27,13 +27,13 @@ export class ComponentBuilderMixin implements IProvidesComponents {
    * @param statusify Statusify core
    */
   async getComponents(statusify: Statusify): Promise<Component[]> {
-    const components = [];
+    const components: Component[] = [];
 
     (await this.getComponentGroups(statusify)).forEach(async (group) => {
       components.push(...(await group.getComponents()));
     })
 
-    return components
+    return components;
   }
 
   /**
@@ -41,7 +41,7 @@ export class ComponentBuilderMixin implements IProvidesComponents {
    * @param statusify Statusify core
    * @param id Component ID
    */
-  async getComponent(statusify: Statusify, id: string): Promise<Component> {
+  async getComponent(statusify: Statusify, id: string): Promise<Component | null> {
     const found = (await this.getComponents(statusify)).find(c => c.id === id);
     return (found === undefined) ? null : found;
   }
@@ -94,7 +94,7 @@ export function group() {
  */
 export class ComponentBuilder extends AttributeStorageBuilder {
   protected _id: string
-  protected _name: string
+  protected _name?: string
   protected _description?: string
   protected _metrics?: Metric<MetricRecord>[] 
 

@@ -1,9 +1,10 @@
-import { MetricType } from "@statusify/core/dist/Metric/Metric";
+import { GenericUptimeRobotMetric, UptimeRobotGenericMetricCParams } from "./GenericUptimeRobotMetric";
+
 import IDowntimeMetricRecord from "@statusify/core/dist/Metric/IDowntimeMetricRecord"
 import IMetricRange from "@statusify/core/dist/Metric/IMetricRange";
-import UptimeRobotCore from "..";
-import { GenericUptimeRobotMetric, UptimeRobotGenericMetricCParams } from "./GenericUptimeRobotMetric";
 import { MILLISECONDS_IN_DAY } from "../constants";
+import { MetricType } from "@statusify/core/dist/Metric/Metric";
+import UptimeRobotCore from "..";
 import dayjs from "dayjs";
 
 export default class UptimeRobotDowntime extends GenericUptimeRobotMetric<IDowntimeMetricRecord> {
@@ -41,7 +42,11 @@ export default class UptimeRobotDowntime extends GenericUptimeRobotMetric<IDownt
   private async fetchData(range: IMetricRange) {
     const data = await this.urc.getMonitor(range, this.monitorID, MetricType.DOWNTIME);
 
-    return data.custom_uptime_ranges.split('-')
+    if(!data) {
+      return [];
+    }
+
+    return (data.custom_uptime_ranges as string).split('-')
       .map((pr: string, i: number): IDowntimeMetricRecord => {
         return {
           time: dayjs(range.end).subtract(i, 'days').toDate(),

@@ -1,8 +1,8 @@
-import Component from "../component/Component";
+import Component from "../Component/Component";
 import ComponentGroup from "../Component/ComponentGroup";
-import Statusify from "..";
 import ICalculatesSeverities from "./ICalculatesSeverities";
 import Severity from "./Severity";
+import Statusify from "..";
 import WorstSeverity from "../Util/WorstSeverity";
 
 /**

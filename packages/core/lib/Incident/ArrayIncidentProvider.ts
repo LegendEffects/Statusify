@@ -1,7 +1,8 @@
-import lib from "..";
+import IProvidesIncidents, { DateQuery, IncidentsQuery } from "./IProvidesIncidents";
+
 import Component from "../Component/Component";
 import IIncident from "./IIncident";
-import IProvidesIncidents, { DateQuery, IncidentsQuery } from "./IProvidesIncidents";
+import lib from "..";
 
 export default class ArrayIncidentProviders implements IProvidesIncidents {
   public incidents: IIncident[] = []
@@ -9,7 +10,7 @@ export default class ArrayIncidentProviders implements IProvidesIncidents {
   /**
    * @inheritdoc
    */
-  async getIncidents(_statusify: lib, query?: IncidentsQuery): Promise<IIncident[]> {
+  async getIncidents(_statusify: lib, query: IncidentsQuery = {}): Promise<IIncident[]> {
     return this.filterThroughQuery(this.incidents, query)
   }
   
@@ -23,8 +24,8 @@ export default class ArrayIncidentProviders implements IProvidesIncidents {
   /**
    * @inheritdoc
    */
-  async getIncident(_statusify: lib, id: string): Promise<IIncident> {
-    return this.incidents.find((i) => i.id === id)
+  async getIncident(_statusify: lib, id: string): Promise<IIncident | null> {
+    return this.incidents.find((i) => i.id === id) || null;
   }
 
   //
@@ -32,10 +33,14 @@ export default class ArrayIncidentProviders implements IProvidesIncidents {
   //
   private filterThroughQuery(incidents: IIncident[], query: IncidentsQuery): IIncident[] {
     const qDate = (value: Date, query: DateQuery) => {
+      if(query === null) {
+        return value === null;
+      }
+
       if(query.before && !(value.getTime() < query.before.getTime()) ) {
         return false;
       }
-      if(query.after && !(value.getTime() > query.before.getTime()) ) {
+      if(query.after && !(value.getTime() > query.after.getTime()) ) {
         return false;
       }
     }

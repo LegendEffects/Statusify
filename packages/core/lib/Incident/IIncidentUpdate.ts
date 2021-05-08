@@ -1,6 +1,6 @@
 import Severity from "../Severity/Severity"
 
-export default class IIncidentUpdate {
+export default interface IIncidentUpdate {
   /**
    * The severity this update makes the incident
    */
