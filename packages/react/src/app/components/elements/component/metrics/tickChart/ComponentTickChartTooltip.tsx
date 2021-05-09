@@ -1,12 +1,12 @@
 import { Box, Text } from "@chakra-ui/layout";
-import { usePopper } from "react-popper";
-import dayjs from "dayjs";
-import LocalizedFormat from "dayjs/plugin/localizedFormat";
-import RelativeTime from "dayjs/plugin/relativeTime";
-import Duration from "dayjs/plugin/duration";
 
+import Duration from "dayjs/plugin/duration";
 import ISeverityTick from "../../../../../interfaces/ISeverityTick";
+import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import React from "react";
+import RelativeTime from "dayjs/plugin/relativeTime";
+import dayjs from "dayjs";
+import { usePopper } from "react-popper";
 import { useTranslation } from "react-i18next";
 
 dayjs.extend(LocalizedFormat);
@@ -27,7 +27,7 @@ export default function ComponentTickChartTooltip({ tick, reference, ...props }:
     name: 'offset',
     options: {
       offset: (o) => {
-        return [0, o.reference.y - (reference.parentElement ? reference.parentElement.getBoundingClientRect().y : 0)]
+        return [0, (o.reference.y - document.scrollingElement.scrollTop) - (reference.parentElement ? reference.parentElement.getBoundingClientRect().y : 0)];
       }
     }
   }), [ reference ]);
