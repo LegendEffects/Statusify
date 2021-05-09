@@ -9,7 +9,6 @@ import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import Severity from "@statusify/core/dist/Severity/Severity";
 import dayjs from "dayjs";
 import useSeverityColor from "../../../hooks/useSeverityColor";
-import { useTranslation } from "react-i18next";
 
 dayjs.extend(LocalizedFormat);
 
@@ -18,8 +17,6 @@ export interface InterfaceBannerProps {
 }
 
 const IncidentBanner: React.FC<InterfaceBannerProps> = ({ incident }) => {
-  const { t } = useTranslation();
-  
   const [ lastSeverity, setLastSeverity ] = React.useState<Severity>();
   const severityColor = useSeverityColor(lastSeverity, 'gray');
 

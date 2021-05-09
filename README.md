@@ -27,6 +27,10 @@ This branch of the project is currently under construction, production usage isn
 ## Here for a Status Page?
 If you're here for a status page then you'll want to look at our [React Frontend](./packages/react)
 
+<p align="center">
+  <img align="center" src="./.github/react-preview.png"/>
+</p>
+
 ## Structure
 This project uses a Monorepo structure managed with [LernaJS](https://lerna.js.org/)
 

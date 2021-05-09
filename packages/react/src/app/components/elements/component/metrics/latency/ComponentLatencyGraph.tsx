@@ -86,7 +86,7 @@ export default function ComponentLatencyGraph() {
       name: t('components.metrics.latency.seriesName'),
       data: datapoints.map(point => ({x: point.time.getTime(), y: point.value }))
     }]
-  }, [ datapoints ])
+  }, [ datapoints, t ])
 
 
   return (

@@ -41,14 +41,14 @@ export default function ComponentTickChart() {
   const ticks = useSeverityTicks(range);
 
   // Hover Effect
-  const clearHoverEffect = () => {
+  const clearHoverEffect = React.useCallback(() => {
     if(!svgContainerRef) return;
     const svgRef = svgContainerRef.current?.firstChild as HTMLElement;
 
     for(let i = 0; i < svgRef?.children.length; i++) {
       svgRef.children[i].classList.remove('hvr-1', 'hvr-2', 'hvr-3');     
     }
-  }
+  }, [ svgContainerRef ]);
 
   const mouseEnter = (event: React.MouseEvent<SVGRectElement, MouseEvent>, i: number) => {
     clearHoverEffect();
@@ -73,7 +73,7 @@ export default function ComponentTickChart() {
     if(isFocused === false) {
       clearHoverEffect();
     }
-  }, [ isFocused ]);
+  }, [ isFocused, clearHoverEffect ]);
 
   return (
     <Box
