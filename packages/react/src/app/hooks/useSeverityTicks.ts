@@ -39,7 +39,7 @@ export default function useSeverityTicks(range: IMetricRange) {
       const daysBetween = nEnd.diff(nStart, 'days');
       
       // Work on each day to find its tick
-      const dayTicks = [...Array(daysBetween)].map(async (_, i) => {
+      const dayTicks = [ ...Array(daysBetween) ].map(async (_, i) => {
         const day = dayjs(nStart).add(i + 1, 'days').startOf('day');
         const daySeverities: Severity[] = [];
 
@@ -85,7 +85,7 @@ export default function useSeverityTicks(range: IMetricRange) {
       // Do everything, set the ticks and resolve for some reason
       Promise.all(dayTicks).then(setTicks).then(resolve);
     })
-  }, [component, downtimeSeverities, range, statusify]);
+  }, [ component, downtimeSeverities, range, statusify ]);
 
   return ticks;
 }

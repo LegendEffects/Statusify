@@ -1,10 +1,10 @@
-import { Collapse } from "@chakra-ui/transition";
 import Component from "../component/Component";
+import { Collapse } from "@chakra-ui/transition";
 import { Stack } from "@chakra-ui/layout";
 import { useComponentGroup } from "../../../contexts/ComponentGroupContext"
 
 export default function ComponentGroupBody() {
-  const [ { group, isAnonymous, isCollapsible, collapsed } ] = useComponentGroup();
+  const [{ group, isAnonymous, isCollapsible, collapsed }] = useComponentGroup();
 
   return (
     <Collapse in={!isCollapsible || !collapsed}>

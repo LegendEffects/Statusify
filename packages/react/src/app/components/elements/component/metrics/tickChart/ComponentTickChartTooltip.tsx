@@ -20,7 +20,7 @@ export default function ComponentTickChartTooltip({ tick, reference, ...props }:
     name: 'offset',
     options: {
       offset: (o) => {
-        return [0, (o.reference.y - document.scrollingElement.scrollTop) - (reference.parentElement ? reference.parentElement.getBoundingClientRect().y : 0)];
+        return [ 0, (o.reference.y - document.scrollingElement.scrollTop) - (reference.parentElement ? reference.parentElement.getBoundingClientRect().y : 0) ];
       }
     }
   }), [ reference ]);

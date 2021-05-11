@@ -24,7 +24,7 @@ export default function Component({ component }: ComponentProps) {
           <Flex
             direction="row"
             align="center"
-            flexWrap={['wrap', 'nowrap']}
+            flexWrap={[ 'wrap', 'nowrap' ]}
             padding={4}
             >
               <ComponentHeader />

@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 export default function ComponentGroupHeader() {
   const { t } = useTranslation(); 
-  const [{ group, collapsed, isAnonymous, isCollapsible }, dispatch] = useComponentGroup();
+  const [{ group, collapsed, isAnonymous, isCollapsible }, dispatch ] = useComponentGroup();
   const severity = useSeverity(group);
   const severityColor = useSeverityColor(severity);
 

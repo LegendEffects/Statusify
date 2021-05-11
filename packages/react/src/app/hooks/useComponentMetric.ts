@@ -12,5 +12,7 @@ export default function useComponentMetric<T extends MetricRecord>(type: MetricT
     }
 
     return component.metrics.find(m => m.type === type) as Metric<T>;
+  // There's an error where eslint expects T to be provided? Unable to find another solution currently.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ component, type ]);
 }

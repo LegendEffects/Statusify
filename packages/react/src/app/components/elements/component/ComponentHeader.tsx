@@ -17,10 +17,10 @@ export default function ComponentHeader() {
   return (
     <Flex 
       direction="row"
-      minW={[null, '250px']}
-      width={['full', 'auto']}
-      justify={['space-between', 'flex-start']}
-      mr={[null, 8]}
+      minW={[ null, '250px' ]}
+      width={[ 'full', 'auto' ]}
+      justify={[ 'space-between', 'flex-start' ]}
+      mr={[ null, 8 ]}
       >
         <Flex direction="row" align="center" mr={4} minW="180px">
           <Text wordBreak="keep-all" whiteSpace="nowrap" mr={2} minW="150px">

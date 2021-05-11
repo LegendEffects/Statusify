@@ -12,13 +12,13 @@ import { useStatusify } from "../app/contexts/StatusifyContext";
 const activeIncidentsQuery: IncidentsQuery = { resolvedAt: null }
 
 export default function Home() {
-  const [groups, setGroups] = React.useState<StatusifyComponentGroup[]>([]);
+  const [ groups, setGroups ] = React.useState<StatusifyComponentGroup[]>([]);
   const statusify = useStatusify();
   const incidents = useIncidents(activeIncidentsQuery);
 
   React.useEffect(() => {
     statusify.getComponentGroups().then(setGroups);
-  }, [statusify]);
+  }, [ statusify ]);
 
   return (
     <DefaultLayout>

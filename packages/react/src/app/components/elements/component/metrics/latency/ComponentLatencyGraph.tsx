@@ -42,7 +42,7 @@ export default function ComponentLatencyGraph() {
           setAverage(Math.round(r.value * 100) / 100)
         });
       });
-  }, [range, latencyMetric, visible, lastUpdated]);
+  }, [ range, latencyMetric, visible, lastUpdated ]);
 
   const chartOptions = React.useMemo(() => ({
     chart: {

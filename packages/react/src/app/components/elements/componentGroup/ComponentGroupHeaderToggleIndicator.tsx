@@ -1,5 +1,5 @@
-import Icon, { IconProps } from "@chakra-ui/icon"
 import { AiOutlineClose, AiOutlinePlus } from "react-icons/ai"
+import Icon, { IconProps } from "@chakra-ui/icon"
 
 interface ComponentGroupHeaderToggleIndicatorProps extends IconProps {
   collapsed: boolean;

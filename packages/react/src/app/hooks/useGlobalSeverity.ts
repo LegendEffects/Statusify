@@ -1,6 +1,6 @@
-import Severity from "@statusify/core/dist/Severity/Severity";
-import React from "react";
-import { useStatusify } from "../contexts/StatusifyContext";
+import React from 'react';
+import Severity from '@statusify/core/dist/Severity/Severity';
+import { useStatusify } from '../contexts/StatusifyContext';
 
 export default function useGlobalSeverity() {
   const [ severity, setSeverity ] = React.useState<Severity>();
