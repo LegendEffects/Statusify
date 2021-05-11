@@ -1,17 +1,10 @@
 import { Box, Text } from "@chakra-ui/layout";
 
-import Duration from "dayjs/plugin/duration";
 import ISeverityTick from "../../../../../interfaces/ISeverityTick";
-import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import React from "react";
-import RelativeTime from "dayjs/plugin/relativeTime";
-import dayjs from "dayjs";
+import dayjs from "../../../../../utils/dayjs";
 import { usePopper } from "react-popper";
 import { useTranslation } from "react-i18next";
-
-dayjs.extend(LocalizedFormat);
-dayjs.extend(RelativeTime);
-dayjs.extend(Duration);
 
 export interface ComponentTickChartTooltipProps {
   reference: HTMLElement;

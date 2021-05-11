@@ -5,12 +5,8 @@ import { Badge, Box, Flex, Heading, Stack } from "@chakra-ui/layout";
 import IIncident from "@statusify/core/dist/Incident/IIncident";
 import IncidentBannerUpdate from "./IncidentBannerUpdate";
 import { Link } from "react-router-dom";
-import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import Severity from "@statusify/core/dist/Severity/Severity";
-import dayjs from "dayjs";
 import useSeverityColor from "../../../hooks/useSeverityColor";
-
-dayjs.extend(LocalizedFormat);
 
 export interface InterfaceBannerProps {
   incident: IIncident;

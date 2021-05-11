@@ -1,8 +1,8 @@
-import { MetricType } from "@statusify/core/dist/Metric/Metric";
 import Component from "@statusify/core/dist/Component/Component";
 import IMetricRange from "@statusify/core/dist/Metric/IMetricRange";
-import dayjs from "dayjs";
+import { MetricType } from "@statusify/core/dist/Metric/Metric";
 import React from "react";
+import dayjs from "../utils/dayjs";
 
 export default function useUptimePercentage(range: IMetricRange, component: Component) {
   const [ percent, setPercent ] = React.useState<number>(1);

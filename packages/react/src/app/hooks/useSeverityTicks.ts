@@ -6,7 +6,7 @@ import { MetricType } from "@statusify/core/dist/Metric/Metric";
 import React from "react";
 import Severity from "@statusify/core/dist/Severity/Severity";
 import WorstSeverity from "@statusify/core/dist/Util/WorstSeverity";
-import dayjs from "dayjs"
+import dayjs from "../utils/dayjs";
 import { useComponent } from "../contexts/ComponentContext";
 import { useLaminar } from "../contexts/LaminarContext";
 import { useStatusify } from "../contexts/StatusifyContext";

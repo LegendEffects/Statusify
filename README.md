@@ -72,7 +72,7 @@ const builder = new Builder()
             .components([
                 component('component-1')
                     .name('Component 1')
-                    .description('Component 1 Description')
+                    .description('Component 1 Description'),
                 component('component-2')
                     .name('Component 2')
             ]),

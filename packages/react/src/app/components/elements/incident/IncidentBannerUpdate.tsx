@@ -1,14 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { Box, Circle, Flex, Grid } from '@chakra-ui/layout';
+import { Box, Circle, Flex, Grid } from "@chakra-ui/layout";
 
-import IIncidentUpdate from '@statusify/core/dist/Incident/IIncidentUpdate';
-import LocalizedFormat from "dayjs/plugin/localizedFormat";
-import dayjs from "dayjs";
-import { useLaminar } from '../../../contexts/LaminarContext';
-import { useTranslation } from 'react-i18next';
-
-dayjs.extend(LocalizedFormat);
+import IIncidentUpdate from "@statusify/core/dist/Incident/IIncidentUpdate";
+import dayjs from "../../../utils/dayjs";
+import { useLaminar } from "../../../contexts/LaminarContext";
+import { useTranslation } from "react-i18next";
 
 interface IncidentBannerUpdateProps {
   update: IIncidentUpdate;
