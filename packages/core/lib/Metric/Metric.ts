@@ -50,6 +50,17 @@ export abstract class Metric<T extends MetricRecord> extends AttributeStorage {
     this.description = description;
   }
 
+  //
+  // Public
+  //
+  public attribute(key: string, value: any) {
+    this.setAttribute(key, value);
+    return this;
+  }
+
+  //
+  // Public:Abstract
+  //
   abstract getPeriod(range: IMetricRange): Promise<T[]>;
 
   abstract getAverage(range: IMetricRange): Promise<T>
