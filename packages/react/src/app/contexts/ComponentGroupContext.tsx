@@ -58,18 +58,24 @@ export function ComponentGroupProvider({ group, children }: {group: ComponentGro
   });
 
   React.useEffect(() => {
-    const initAttributes = async function () {
-      // Fetch all of the attributes for the group and cache them for faster access
-      const attributes = await group.getAttributes();
+    let isMounted = true;
+
+    group.getAttributes().then((attributes) => {
+      if(!isMounted) {
+        return;
+      }
+
       dispatch({ type: 'setAttributes', value: attributes });
 
       // Set the collapsed flag since we know we've just loaded it
       if(attributes[COLLAPSED] !== undefined) {
         dispatch({ type: 'setCollapsed', value: attributes[COLLAPSED] });
       }
-    }
+    })
 
-    initAttributes();
+    return () => {
+      isMounted = false;
+    }
   }, [ group ]);
 
   return (

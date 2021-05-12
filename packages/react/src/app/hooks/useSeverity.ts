@@ -5,13 +5,24 @@ import React from "react";
 import { useStatusify } from "../contexts/StatusifyContext";
 
 export default function useSeverity(target: Component | ComponentGroup){
+  
   const statusify = useStatusify();
   const [ severity, setSeverity ] = React.useState<Severity>();
-
+  
   React.useEffect(() => {
+    let isMounted = true;
+
     const promise = (target instanceof Component) ? statusify.getSeverityForComponent(target) : statusify.getSeverityForGroup(target);
 
-    promise.then(setSeverity)
+    promise.then((severity) => {
+      if(isMounted) {
+        setSeverity(severity);
+      }
+    })
+
+    return () => {
+      isMounted = false;
+    };
   }, [ target, statusify ]);
 
   return severity;

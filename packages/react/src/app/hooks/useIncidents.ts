@@ -8,7 +8,18 @@ export default function useIncidents(query?: IncidentsQuery) {
   const [ incidents, setIncidents ] = React.useState<IIncident[]>([]);
 
   React.useEffect(() => {
-    statusify.getIncidents(query).then(setIncidents);
+    let isMounted = true;
+
+    statusify.getIncidents(query).then((incidents) => {
+      if(isMounted) {
+        setIncidents(incidents);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+    
   }, [ query, statusify ]);
 
   return incidents;

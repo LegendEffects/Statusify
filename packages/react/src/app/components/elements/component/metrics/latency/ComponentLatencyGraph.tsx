@@ -20,7 +20,7 @@ export default function ComponentLatencyGraph() {
   const [ average, setAverage ] = React.useState<number>(0);
   
   const { t } = useTranslation();
-  const latencyMetric = useComponentMetric<ILatencyMetricRecord>(MetricType.LATENCY);
+  const [ latencyMetric, latencyMetricAttributes ] = useComponentMetric<ILatencyMetricRecord>(MetricType.LATENCY);
   const range = useMetricRange();
   const theme = useTheme();
   

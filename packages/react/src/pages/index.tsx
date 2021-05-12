@@ -17,7 +17,17 @@ export default function Home() {
   const incidents = useIncidents(activeIncidentsQuery);
 
   React.useEffect(() => {
-    statusify.getComponentGroups().then(setGroups);
+    let isMounted = true;
+
+    statusify.getComponentGroups().then((groups) => {
+      if(isMounted) {
+        setGroups(groups);
+      }
+    });
+
+    return () => { 
+      isMounted = false;
+    }
   }, [ statusify ]);
 
   return (
@@ -30,7 +40,7 @@ export default function Home() {
           </Stack>
 
           <Stack spacing={4}>
-            {groups.map((group, i) => <ComponentGroup key={i} group={group} />)}
+            {groups.map((group, i) => <ComponentGroup key={`${i}.${group.name}`} group={group} />)}
           </Stack>
 
         </Stack>

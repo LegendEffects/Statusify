@@ -1,7 +1,7 @@
 import Statusify from "@statusify/core";
 import React from "react";
 
-const StatusifyContext = React.createContext<Statusify>(null as any);
+const StatusifyContext = React.createContext<Statusify>(null);
 
 export function StatusifyProvider({ children, statusify }: { children?: React.ReactNode, statusify: Statusify}) {
   const computedStatusify = React.useMemo(() => {
