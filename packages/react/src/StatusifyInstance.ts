@@ -1,4 +1,4 @@
-import { ANONYMOUS, COLLAPSED, COLLAPSIBLE } from './app/constants/FrontendOptions'
+import { ANONYMOUS, CHART_AVERAGE, CHART_SERIES_NAME, CHART_TITLE, COLLAPSED, COLLAPSIBLE } from './app/constants/FrontendOptions'
 import { Builder, component, group } from '@statusify/core/dist/Builder'
 
 import AchievedSeverityCalculator from '@statusify/core/dist/Severity/AchievedSeverityCalculator'
@@ -23,7 +23,12 @@ const built = new Builder()
                 component('vps')
                     .name('VPS')
                     .description('The core of our services.')
-                    .metric(new UptimeRobotLatency(uptimeRobotCore, {name: 'Latency', monitorID: 780071088, id: 'vps-latency'}))
+                    .metric(
+                        new UptimeRobotLatency(uptimeRobotCore, {name: 'Latency', monitorID: 780071088, id: 'vps-latency'})
+                            .attribute(CHART_TITLE, 'Latency')
+                            .attribute(CHART_SERIES_NAME, 'Latency (ms)')
+                            .attribute(CHART_AVERAGE, 'Averaging {{average}}ms')
+                    )
                     .metric(new UptimeRobotDowntime(uptimeRobotCore, {name: 'Downtime', monitorID: 780071088, id: 'vps-downtime'})),
                     
                     

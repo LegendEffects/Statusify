@@ -15,11 +15,6 @@ export default function ComponentGroupHeader() {
   const severity = useSeverity(group);
   const severityColor = useSeverityColor(severity);
 
-  // Don't render anything if the group is anonymous and can't be collapsed
-  if(!isCollapsible && isAnonymous) {
-    return <> </>;
-  }
-
   return (
     <Flex
       justify="space-between"

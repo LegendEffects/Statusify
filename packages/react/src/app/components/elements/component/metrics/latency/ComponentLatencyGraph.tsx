@@ -11,6 +11,8 @@ import useComponentMetric from "../../../../../hooks/useComponentMetric"
 import useMetricRange from "../../../../../hooks/useMetricRange";
 import { useTheme } from "@chakra-ui/system";
 import { useTranslation } from "react-i18next";
+import { ApexOptions } from "apexcharts";
+import { CHART_AVERAGE, CHART_SERIES_NAME, CHART_TITLE } from "../../../../../constants/FrontendOptions";
 
 export default function ComponentLatencyGraph() {
   const [ lastUpdated, setLastUpdated ] = React.useState(undefined);
@@ -83,10 +85,10 @@ export default function ComponentLatencyGraph() {
   
   const series = React.useMemo(() => {
     return [{
-      name: t('components.metrics.latency.seriesName'),
+      name: latencyMetricAttributes[CHART_SERIES_NAME] ?? t('components.metrics.latency.seriesName'),
       data: datapoints.map(point => ({x: point.time.getTime(), y: point.value }))
     }]
-  }, [ datapoints, t ])
+  }, [ datapoints, latencyMetricAttributes, t ])
 
 
   return (
@@ -95,14 +97,14 @@ export default function ComponentLatencyGraph() {
         <Box bg="blackAlpha.200" p={4}>
           <Flex justify="space-between" mb={4}>
             <Text>
-              {t('components.metrics.latency.title')}
+              {latencyMetricAttributes[CHART_TITLE] ?? t('components.metrics.latency.title')}
             </Text>
             <Text color="whiteAlpha.700">
-              {t('components.metrics.latency.average', { average })}
+              {latencyMetricAttributes[CHART_AVERAGE] ? latencyMetricAttributes[CHART_AVERAGE].replaceAll('{{average}}', average) : t('components.metrics.latency.average', { average })}
             </Text>
           </Flex>
 
-          <Chart type="area" height={200} options={chartOptions} series={series} />
+          <Chart type="area" height={200} options={chartOptions as ApexOptions} series={series} />
         </Box>
       </Collapse>
 
