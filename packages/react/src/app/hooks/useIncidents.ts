@@ -2,6 +2,7 @@ import IIncident from "@statusify/core/dist/Incident/IIncident";
 import { IncidentsQuery } from "@statusify/core/dist/Incident/IProvidesIncidents";
 import React from "react";
 import { useStatusify } from "../contexts/StatusifyContext";
+import useStatusifyEvent from "./useStatusifyEvent";
 
 export default function useIncidents(query?: IncidentsQuery) {
   const statusify = useStatusify();
@@ -21,6 +22,10 @@ export default function useIncidents(query?: IncidentsQuery) {
     };
     
   }, [ query, statusify ]);
+
+  useStatusifyEvent('incidents::updated', (incidents) => {
+    setIncidents(incidents);
+  })
 
   return incidents;
 }
