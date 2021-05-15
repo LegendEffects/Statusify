@@ -6,6 +6,8 @@ import ICalculatesSeverities from "./Severity/ICalculatesSeverities";
 import IProvidesComponents from "./Component/IProvidesComponents";
 import IProvidesSeverities from "./Severity/IProvidesSeverities";
 import IInjectStatusify from "./Util/IInjectStatusify";
+import StatusifyEvents from "./Util/StatusifyEvents";
+import { TypedEmitter } from "tiny-typed-emitter";
 
 export interface StatusifyOptions {
   componentProvider: IProvidesComponents;
@@ -14,7 +16,7 @@ export interface StatusifyOptions {
   severityCalculator: ICalculatesSeverities;
 }
 
-export default class Statusify extends EventEmitter {
+export default class Statusify extends TypedEmitter<StatusifyEvents> {
   private componentProvider: IProvidesComponents;
   private incidentProvider: IProvidesIncidents;
   private severityProvider: IProvidesSeverities;

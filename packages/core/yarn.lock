@@ -4057,6 +4057,11 @@ throat@^5.0.0:
   resolved "https://registry.yarnpkg.com/throat/-/throat-5.0.0.tgz#c5199235803aad18754a667d659b5e72ce16764b"
   integrity sha512-fcwX4mndzpLQKBS1DVYhGAcYaYt7vsHNIvQV+WXMvnow5cgjPphq5CaayLaGsjRdSCKZFNGt7/GYAuXaNOiYCA==
 
+tiny-typed-emitter@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/tiny-typed-emitter/-/tiny-typed-emitter-2.0.3.tgz#4335e3a75127ae7faba91b02e91615d97dc8db7d"
+  integrity sha512-MaCqhHlp6EAWN25yqBlajgd4scxxI2eJr7+EgoUAOV9UkMU3us/yp2bEnc2yOvyeDF8TUWuaz3zZCPGTKFJIpA==
+
 tmpl@1.0.x:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.4.tgz#23640dd7b42d00433911140820e5cf440e521dd1"

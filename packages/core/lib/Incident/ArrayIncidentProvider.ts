@@ -3,9 +3,27 @@ import IProvidesIncidents, { DateQuery, IncidentsQuery } from "./IProvidesIncide
 import Component from "../Component/Component";
 import IIncident from "./IIncident";
 import lib from "..";
+import IInjectStatusify from "../Util/IInjectStatusify";
+import Statusify from "..";
 
-export default class ArrayIncidentProviders implements IProvidesIncidents {
-  public incidents: IIncident[] = []
+export default class ArrayIncidentProviders implements IProvidesIncidents, IInjectStatusify {
+  private statusify!: Statusify;
+
+  public incidents: IIncident[] = new Proxy([], {
+    set: (target: IIncident[], prop, value, _receiver) => {
+      if(prop === 'length') {
+        return true;
+      }
+
+      target[prop as unknown as number] = value;
+      this.statusify.emit('incidents::updated', target);
+      return true;
+    }
+  })
+
+  inject(statusify: lib): void {
+    this.statusify = statusify;
+  }
 
   /**
    * @inheritdoc

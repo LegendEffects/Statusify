@@ -39,7 +39,8 @@
     "events": "^3.2.0",
     "moment": "^2.29.1",
     "react-icons": "^4.1.0",
-    "react-popper": "^2.2.4"
+    "react-popper": "^2.2.4",
+    "tiny-typed-emitter": "^2.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
