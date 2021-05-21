@@ -52,10 +52,10 @@ export default function useSeverityTicks(range: IMetricRange) {
             return v;
           });
 
-        const dayDowntimes = (downtimes === undefined) ? [] : downtimes.filter((downtime) => {
+        const dayDowntimes: IDowntimeMetricRecord[] = (downtimes === undefined) ? [] : downtimes.filter((downtime) => {
           const startedAt = dayjs(downtime.time);
           const endedAt = startedAt.add(downtime.value, 'millisecond');
-          return day.isBetween(startedAt, endedAt, 'day', '[]')
+          return day.isBetween(startedAt, endedAt, 'day', '(]')
         }).map((v) => {
           // Add to the severities based upon the config
           const index = Number(Object.keys(downtimeSeverities).reduce((a, b) => {
