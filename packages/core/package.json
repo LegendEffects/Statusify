@@ -1,0 +1,53 @@
+{
+  "name": "@statusify/core",
+  "version": "1.0.0",
+  "description": "The core of Statusify",
+  "keywords": [
+    "status",
+    "platform",
+    "agnostic"
+  ],
+  "author": "Legend <evan@legendeffects.co.uk>",
+  "homepage": "https://github.com/LegendEffects/Statusify#readme",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LegendEffects/Statusify.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "main": "ts-node lib/index.ts"
+  },
+  "bugs": {
+    "url": "https://github.com/LegendEffects/Statusify/issues"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.6.0",
+    "@types/events": "^3.0.0",
+    "axios": "^0.21.1",
+    "events": "^3.2.0",
+    "moment": "^2.29.1",
+    "react-icons": "^4.1.0",
+    "react-popper": "^2.2.4",
+    "tiny-typed-emitter": "^2.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
+    "@types/jest": "^26.0.20",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.0"
+  }
+}

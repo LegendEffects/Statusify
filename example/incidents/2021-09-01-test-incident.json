@@ -1,0 +1,34 @@
+{
+  "id": "test-incident",
+  "name": "Test Incident",
+
+  "severity": "major",
+  "components": [
+    "component-1", 
+    "component-3"
+  ],
+
+  "body": "We have identified an issue with one of our upstream providers. A loss of power at a datacenter is causing a disruption with our external media proxies. External images are not loading at this time.",
+  "body_status": "Investigating",
+  
+  "updates": [
+    {
+      "severity": "minor",
+      "body_status": "Monitoring",
+      "body": "We've restored functionality to all connected bots, and will continue to monitor.",
+      "created_at": "2021-01-09T02:44:02.163Z",
+      "updated_at": "2021-01-09T02:44:02.163Z"
+    },
+
+    {
+      "severity": "operational",
+      "body_status": "Resolved",
+      "body": "This incident has been resolved.",
+      "created_at": "2021-01-09T03:03:19.639Z",
+      "updated_at": "2021-01-09T03:03:19.639Z"
+    }
+  ],
+
+  "created_at": "2021-01-09T02:29:04.153Z",
+  "updated_at": "2021-01-09T02:29:04.153Z"
+}

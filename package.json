@@ -1,0 +1,30 @@
+{
+  "name": "statusify",
+  "description": "A library connecting status platforms into a single glorious integration",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "LegendEffects",
+    "url": "https://github.com/legendeffects"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LegendEffects/Statusify.git"
+  },
+  "scripts": {
+    "clean:build": "rimraf packages/*/dist packages/**/tsconfig.tsbuildinfo",
+    "clean:install": "lerna clean --ci && rimraf node_modules",
+    "bootstrap": "yarn install --production=false && lerna bootstrap",
+    "setup:react": "yarn build && (cd packages/core && yarn link) && (cd ../../packages/uptimerobot && yarn link @statusify/core && yarn link) && (cd ../../packages/react && yarn link @statusify/core && yarn link @statusify/uptimerobot)",
+    "build": "yarn clean:build && tsc -b packages/core packages/loki packages/uptimerobot",
+    "dev": "yarn clean:build && tsc --watch -b packages/core packages/loki packages/uptimerobot",
+    "release": "yarn build && lerna publish --force-publish"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.2.4"
+  }
+}

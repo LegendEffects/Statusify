@@ -1,0 +1,54 @@
+{
+  "translation": {
+    "polling": "Fetching...",
+
+    "header": {
+      "title": "Status Page",
+      "status": "Service Status",
+      "lastUpdated": "Last Updated: {{date, time-medium}}"
+    },
+
+    "statusBanner": {
+      "operational": "All Services Operational",
+      "partial": "Partial Outages",
+      "minor": "Minor Outages",
+      "major": "Major Outages"
+    },
+
+    "components": {
+      "group": {
+        "overallStatusTooltip": "Groups take on the status of their most degraded child component. Click to see the status of individual children."
+      },
+
+      "metrics": {
+        "tickChart": {
+          "dateFormat": "ll",
+          "noIncidents": "No incidents reported on this day.",
+          "noDowntime": "No downtime reported on this day.",
+          "downtime": "{{duration}} of downtime."
+        },
+        "latency": {
+          "seriesName": "Latency (ms)",
+          "title": "Latency",
+          "average": "Averaging: {{average}}ms"
+        }
+      }
+    },
+
+    "incidents": {
+      "banner": {
+        "timeFormat": "HH:mm",
+        "dateFormat": "MMM DD"
+      },
+
+      "overallFormat": "LLL",
+      "updateFormat": "LLL",
+      "resolvedAfter": "Resolved after {{duration}} of downtime.",
+
+      "badge": {
+        "open": "Unresolved",
+        "closed": "Resolved"
+      }
+    }
+  }
+}

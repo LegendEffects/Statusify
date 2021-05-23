@@ -1,6 +1,14 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
 
-api/config\.php
-api/config.php
-src/node_modules
-api
-src/package-lock\.json
+# Dependencies
+node_modules
+
+# Builds
+dist
+.tsbuildinfo
