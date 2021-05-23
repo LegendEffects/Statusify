@@ -114,7 +114,7 @@ async function bootstrapDependencies() {
                 updatedAt: new Date(),
             },
         ],
-        resolvedAt: null,
+        resolvedAt: new Date(1620405538852),
         severity: await statusify.getSeverity('partial'),
         components: [
             await statusify.getComponent('vps')
@@ -122,6 +122,7 @@ async function bootstrapDependencies() {
         createdAt: new Date(1620403138852),
         updatedAt: new Date(),
     });
+    console.debug('pushed')
 }
 
 bootstrapDependencies();

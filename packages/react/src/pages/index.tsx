@@ -8,6 +8,7 @@ import React from "react";
 import StatusifyComponentGroup from "@statusify/core/dist/Component/ComponentGroup";
 import useIncidents from "../app/hooks/useIncidents";
 import { useStatusify } from "../app/contexts/StatusifyContext";
+import StatusBanner from "../app/components/elements/global/StatusBanner";
 
 const activeIncidentsQuery: IncidentsQuery = { resolvedAt: null }
 
@@ -32,6 +33,10 @@ export default function Home() {
 
   return (
     <DefaultLayout>
+      <Container maxW="container.xl">
+        <StatusBanner mt={-8} />
+      </Container>
+
       <Container maxW="container.xl" mt={8}>
         <Stack spacing={16}>
           

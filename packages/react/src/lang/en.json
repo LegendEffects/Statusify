@@ -39,6 +39,15 @@
       "banner": {
         "timeFormat": "HH:mm",
         "dateFormat": "MMM DD"
+      },
+
+      "overallFormat": "LLL",
+      "updateFormat": "LLL",
+      "resolvedAfter": "Resolved after {{duration}} of downtime.",
+
+      "badge": {
+        "open": "Unresolved",
+        "closed": "Resolved"
       }
     }
   }

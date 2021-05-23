@@ -8,6 +8,7 @@ import Home from ".";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { LaminarProvider } from "../app/contexts/LaminarContext";
 import { StatusifyProvider } from "../app/contexts/StatusifyContext";
+import IncidentPage from "./IncidentPage";
 
 export default function App() {
   return (
@@ -20,6 +21,9 @@ export default function App() {
             <Switch>
               <Route exact path="/">
                 <Home />
+              </Route>
+              <Route path="/incidents/:id">
+                <IncidentPage />
               </Route>
             </Switch>
           </HashRouter>

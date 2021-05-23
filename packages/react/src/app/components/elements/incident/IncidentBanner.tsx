@@ -41,7 +41,7 @@ const IncidentBanner: React.FC<InterfaceBannerProps> = ({ incident }) => {
           </div>
 
           <Heading size="lg" fontWeight="normal" ml={3}>
-            <Link to="#">{incident.name}</Link>
+            <Link to={`/incidents/${incident.id}`}>{incident.name}</Link>
           </Heading>
         </Flex>
 
