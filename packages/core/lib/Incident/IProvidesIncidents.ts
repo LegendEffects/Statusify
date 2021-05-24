@@ -14,6 +14,7 @@ export type IncidentsQuery = {
 
   limit?: number,
   offset?: number,
+  component?: string,
 
   id?: string
 }
