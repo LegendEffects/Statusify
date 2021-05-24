@@ -18,7 +18,7 @@
     "bootstrap": "yarn install --production=false && lerna bootstrap",
     "setup:react": "yarn build && (cd packages/core && yarn link) && (cd ../../packages/uptimerobot && yarn link @statusify/core && yarn link) && (cd ../../packages/react && yarn link @statusify/core && yarn link @statusify/uptimerobot)",
     "build": "yarn clean:build && tsc -b packages/core packages/loki packages/uptimerobot",
-    "dev": "yarn clean:build && tsc --watch -b packages/core packages/loki packages/uptimerobot",
+    "dev": "yarn clean:build && tsc -b packages/core packages/loki packages/uptimerobot --watch",
     "release": "yarn build && lerna publish --force-publish"
   },
   "devDependencies": {
