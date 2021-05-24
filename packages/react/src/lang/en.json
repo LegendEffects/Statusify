@@ -1,11 +1,10 @@
 {
   "translation": {
-    "polling": "Fetching...",
-
     "header": {
       "title": "Status Page",
       "status": "Service Status",
-      "lastUpdated": "Last Updated: {{date, time-medium}}"
+      "polling": "Fetching...",
+      "lastUpdated": "Last Updated: {{date, LLL}}"
     },
 
     "statusBanner": {

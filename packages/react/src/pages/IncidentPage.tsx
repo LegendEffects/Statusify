@@ -98,8 +98,17 @@ const IncidentPage: React.FC = () => {
                 {incident.components
                   .filter((component) => component.name !== undefined)
                   .map((component) => (
-                    <Link as={RouterLink} to={`/components/${component.id}`} px={4} py={2} bg="blackAlpha.600" color="white" rounded="lg">
-                      {component.name}
+                    <Link 
+                      key={`l-${component.id}`}
+                      as={RouterLink}
+                      to={`/components/${component.id}`}
+                      px={4}
+                      py={2}
+                      bg="blackAlpha.600"
+                      color="white"
+                      rounded="lg"
+                      >
+                        {component.name}
                     </Link>
                 ))}
               </Flex>

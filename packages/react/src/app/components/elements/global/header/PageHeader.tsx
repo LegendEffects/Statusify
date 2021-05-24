@@ -1,5 +1,6 @@
 import { Box, Container, Flex, Heading, Text } from "@chakra-ui/layout";
 import { useTranslation } from "react-i18next";
+import { useAutoRefresh } from "../../../../contexts/AutoRefreshContext";
 
 export interface PageHeaderProps {
   lastUpdated: Date
@@ -7,6 +8,7 @@ export interface PageHeaderProps {
 
 export default function PageHeader() {
   const { t } = useTranslation();
+  const [{ lastUpdate }] = useAutoRefresh();
 
   return (
     <Box
@@ -27,7 +29,7 @@ export default function PageHeader() {
             textAlign="right"
           >
             <Text color="gray.500">
-              {t('polling')}
+              {t((lastUpdate === null) ? 'header.polling' : 'header.lastUpdated', { date: lastUpdate })}
             </Text>
           </Flex>
         </Flex>
