@@ -80,20 +80,8 @@ const built = new Builder()
     ])
 ;
 
-const incidentProvider = new ArrayIncidentProvider();
-
-export const statusify = new Statusify({
-    componentProvider: built,
-    severityProvider: built,
-    incidentProvider: incidentProvider,
-    severityCalculator: new SeverityMultiplexer([
-        new IncidentSeverityCalculator(),
-        new AchievedSeverityCalculator()
-    ])
-});
-
-async function bootstrapDependencies() {
-    incidentProvider.incidents.push({
+const incidentProvider = new ArrayIncidentProvider(async (statusify) => [
+    {
         id: 'test-incident',
         name: 'Incident on Cluster SBG-1',
         body: 'We are encountering a partial outage that impacts some API calls.',
@@ -121,10 +109,17 @@ async function bootstrapDependencies() {
         ],
         createdAt: new Date(1620403138852),
         updatedAt: new Date(),
-    });
-    console.debug('pushed')
-}
+    }
+]);
 
-bootstrapDependencies();
+export const statusify = new Statusify({
+    componentProvider: built,
+    severityProvider: built,
+    incidentProvider: incidentProvider,
+    severityCalculator: new SeverityMultiplexer([
+        new IncidentSeverityCalculator(),
+        new AchievedSeverityCalculator()
+    ])
+});
 
 export default statusify;

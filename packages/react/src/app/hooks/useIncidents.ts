@@ -23,8 +23,8 @@ export default function useIncidents(query?: IncidentsQuery) {
     
   }, [ query, statusify ]);
 
-  useStatusifyEvent('incidents::updated', (incidents) => {
-    setIncidents(incidents);
+  useStatusifyEvent('incidents::updated', () => {
+    statusify.getIncidents(query).then(setIncidents);
   })
 
   return incidents;

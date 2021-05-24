@@ -1,7 +1,6 @@
 import IDowntimeMetricRecord from "@statusify/core/dist/Metric/IDowntimeMetricRecord";
 import IMetricRange from "@statusify/core/dist/Metric/IMetricRange";
 import ISeverityTick from "../interfaces/ISeverityTick";
-import IsBetweenPlugin from "dayjs/plugin/isBetween"
 import { MetricType } from "@statusify/core/dist/Metric/Metric";
 import React from "react";
 import Severity from "@statusify/core/dist/Severity/Severity";
@@ -10,8 +9,8 @@ import dayjs from "../utils/dayjs";
 import { useComponent } from "../contexts/ComponentContext";
 import { useLaminar } from "../contexts/LaminarContext";
 import { useStatusify } from "../contexts/StatusifyContext";
-
-dayjs.extend(IsBetweenPlugin)
+import useIncidents from "./useIncidents";
+import { IncidentsQuery } from "@statusify/core/dist/Incident/IProvidesIncidents";
 
 export default function useSeverityTicks(range: IMetricRange) {
   const statusify = useStatusify();
@@ -19,15 +18,20 @@ export default function useSeverityTicks(range: IMetricRange) {
   const { downtimeSeverities } = useLaminar();
   const [ ticks, setTicks ] = React.useState<ISeverityTick[]>([]);
 
+  const incidentsQuery = React.useMemo((): IncidentsQuery => {
+    return {
+      component: component.id,
+      createdAt: {
+        after: range.start,
+        before: range.end
+      },
+    }
+  }, [ range, component ]);
+
+  const incidents = useIncidents(incidentsQuery);
+
   React.useMemo(() => {
     new Promise(async (resolve, _reject) => {
-      const incidents = await statusify.getIncidentsFor(component, {
-        createdAt: {
-          after: range.start,
-          before: range.end,
-        }
-      });
-
       // Find a downtime metric
       const downtimeMetric = component.metrics?.find(m => m.type === MetricType.DOWNTIME);
       const downtimes: IDowntimeMetricRecord[] = (downtimeMetric) ? await downtimeMetric.getPeriod(range) : [];
@@ -85,7 +89,7 @@ export default function useSeverityTicks(range: IMetricRange) {
       // Do everything, set the ticks and resolve for some reason
       Promise.all(dayTicks).then(setTicks).then(resolve);
     })
-  }, [ component, downtimeSeverities, range, statusify ]);
+  }, [ component, incidents, downtimeSeverities, range, statusify ]);
 
   return ticks;
 }

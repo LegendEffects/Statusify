@@ -1,7 +1,8 @@
-import { Box, Text } from "@chakra-ui/layout";
+import { Box, Link, Text } from "@chakra-ui/layout";
 
 import ISeverityTick from "../../../../../interfaces/ISeverityTick";
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 import dayjs from "../../../../../utils/dayjs";
 import { usePopper } from "react-popper";
 import { useTranslation } from "react-i18next";
@@ -53,10 +54,16 @@ export default function ComponentTickChartTooltip({ tick, reference, ...props }:
         
 
         {/* Incidents */}
-        {tick.relatedIncidents.length === 0 && (
+        {tick.relatedIncidents.length === 0 ?(
           <Text color="whiteAlpha.700">
             {t('components.metrics.tickChart.noIncidents')}
           </Text>
+        ) : (
+          tick.relatedIncidents.map((incident, i) => (
+            <Link as={RouterLink} to={`/incidents/${incident.id}`} color="red.400" key={i}>
+              {incident.name}
+            </Link>
+          ))
         )}
       </Box>
     </Box>

@@ -1,6 +1,6 @@
 {
   "name": "@statusify/uptimerobot",
-  "version": "1.0.0",
+  "version": "1.1.1-alpha.0",
   "description": "UptimeRobot Statusify Integration",
   "author": "Legend <evan@legendeffects.co.uk>",
   "homepage": "https://github.com/LegendEffects/Statusify#readme",
@@ -27,7 +27,7 @@
     "url": "https://github.com/LegendEffects/Statusify/issues"
   },
   "dependencies": {
-    "@statusify/core": "^1.0.0",
+    "@statusify/core": "^1.1.1-alpha.0",
     "axios": "^0.21.1",
     "dayjs": "^1.10.4"
   },
